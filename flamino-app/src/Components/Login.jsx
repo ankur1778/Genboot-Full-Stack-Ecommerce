@@ -40,7 +40,7 @@ const Login = () => {
   };
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-gray-100 ">
-      <div className="px-12 py-4 shadow-lg rounded-lg justify-center border-2 max-w-[1000px] bg-white">
+      <div className="px-12 py-4 shadow-lg rounded-md justify-center border-2 max-w-[1000px] bg-white">
         <h1 className="font-bold text-2xl text-center mt-2 mb-4">Login</h1>
         <Formik
           initialValues={{ email: '', password: '' }}
@@ -55,7 +55,7 @@ const Login = () => {
               <div className="mb-4">
                 <label className="block font-medium text-gray-700">Email</label>
                 <Field
-                  className="mt-2 flex border-2 border-gray-300 rounded-2xl items-center p-2 h-10 w-60"
+                  className="mt-2 flex border-2 border-gray-300 rounded-md items-center p-2 h-10 w-60"
                   name="email"
                   required
                   placeholder="Enter email"
@@ -69,7 +69,7 @@ const Login = () => {
               <div className="mb-4">
                 <label className="block font-medium text-gray-700">Password</label>
                 <Field
-                  className="mt-2 flex border-2 border-gray-300 rounded-2xl items-center p-2 h-10 w-60"
+                  className="mt-2 flex border-2 border-gray-300 rounded-md items-center p-2 h-10 w-60"
                   name="password"
                   required
                   placeholder="Enter Password"

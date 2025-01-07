@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { Formik, Field, Form } from 'formik';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const handleLogin = async (values, { setSubmitting }) => {
     try {
       const payload = {
@@ -28,7 +28,7 @@ const Login = () => {
       console.log(data, 'Login Success');
       if (data.token) {
         localStorage.setItem('token', data.token);
-        // navigate("/")
+        navigate("/")
       } else {
         console.log("Errors");
       }

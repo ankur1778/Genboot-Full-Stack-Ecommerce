@@ -16,7 +16,7 @@ export const loginFail =(error) =>({
  
 export const loginUser =(values) =>{   
     return async(dispatch)=>{
-        dispatch(loginRequest)
+        dispatch(loginRequest())
         try {
             const response = await fetch("https://cd5c-2405-201-5023-4855-988f-9067-2c7b-c77d.ngrok-free.app/auth/login",{
                 method: 'POST',
@@ -32,7 +32,7 @@ export const loginUser =(values) =>{
                 throw new Error('Login Failed')
             }
             console.log(response)
-            const data = response.json;
+            const data = await response.json();
             dispatch(loginSuccess(data))
             console.log(data, "loginSuccess")
             if(data){
@@ -40,7 +40,7 @@ export const loginUser =(values) =>{
             }
             return true
         } catch (error) {
-            dispatch(loginFail);
+            dispatch(loginFail());
             console.log(error, "errors");
             return false;
         }

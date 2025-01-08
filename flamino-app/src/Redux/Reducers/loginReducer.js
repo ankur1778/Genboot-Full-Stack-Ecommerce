@@ -1,8 +1,9 @@
 import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL} from "../Actions/LoginActions/loginactionType";
+import Cookies from 'js-cookie'
 
 const initialState = {
   userData: {},
-  loggedIn: !!localStorage.getItem('token'),
+  loggedIn: !!Cookies.get('token'),
 };
 
 export const userReducer = (state = initialState, action) => {

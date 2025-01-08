@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Formik, Field, Form } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../Redux/Actions/LoginActions/loginAction';
+import { LoginUser } from '../Redux/Actions/LoginActions/loginAction';
+import Cookies from 'js-cookie'
 
 const Login = () => {
   const navigate = useNavigate();
@@ -10,7 +11,7 @@ const Login = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const accessToken = localStorage.getItem('token')
+    const accessToken = Cookies.get('token')
     if (accessToken) {
       navigate("/")
     }
@@ -19,7 +20,7 @@ const Login = () => {
   // eslint-disable-next-line no-unused-vars
   const handleLogin = async (values, { setFieldError }) => {
     try {
-      const result = await dispatch(loginUser(values));
+      const result = await dispatch(LoginUser(values));
       if (result) {
         navigate("/");
       } else {

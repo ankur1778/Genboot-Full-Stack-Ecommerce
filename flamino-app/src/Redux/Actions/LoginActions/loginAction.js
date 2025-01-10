@@ -18,7 +18,7 @@ export const LoginUser =(values) =>{
     return async(dispatch)=>{
         dispatch(loginRequest())
         try {
-            const response = await fetch("https://e78f-2401-4900-1c70-2278-6818-4459-158c-79a3.ngrok-free.app/auth/login",{
+            const response = await fetch("https://f917-2401-4900-1c2b-900f-18bf-8416-2cb3-780d.ngrok-free.app/auth/login",{
                 method: 'POST',
                 headers: {
                     'Content-Type' : 'application/json',

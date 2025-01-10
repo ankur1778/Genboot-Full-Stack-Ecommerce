@@ -17,7 +17,6 @@ const Login = () => {
     }
   }, [navigate])
 
-  // eslint-disable-next-line no-unused-vars
   const handleLogin = async (values, { setFieldError }) => {
     try {
       const result = await dispatch(LoginUser(values));

@@ -4,7 +4,7 @@ import filter from "../Images/sort.svg";
 
 const ProductManagement = () => {
   return (
-    <div className="bg-gray-400 border-2 border-neutral-100 h-screen ">
+    <div className="bg-gray-400 h-screen border-2 border-neutral-100">
       <div className="bg-white flex justify-between my-7 shadow-md items-center rounded-md p-1 mx-16">
         <div className="flex">
           <img className="h-20 w-20" src={image} alt="" />

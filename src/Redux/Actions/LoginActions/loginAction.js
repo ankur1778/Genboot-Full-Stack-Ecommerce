@@ -18,7 +18,7 @@ export const LoginUser =(values) =>{
     return async(dispatch)=>{
         dispatch(loginRequest())
         try {
-            const response = await fetch("https://f917-2401-4900-1c2b-900f-18bf-8416-2cb3-780d.ngrok-free.app/auth/login",{
+            const response = await fetch("localhost:3100/auth/login",{
                 method: 'POST',
                 headers: {
                     'Content-Type' : 'application/json',
@@ -31,10 +31,8 @@ export const LoginUser =(values) =>{
             if(!response.ok){
                 throw new Error('Login Failed')
             }
-            console.log(response)
             const data = await response.json();
             dispatch(loginSuccess(data))
-            console.log(data, "loginSuccess")
             if(data){
                 Cookies.set('token',data.token)
                 Cookies.set('Role', data.roleId)

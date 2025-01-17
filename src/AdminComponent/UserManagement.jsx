@@ -1,47 +1,38 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import images from "../Images/usermanagement.svg";
 import { UserAction } from "./ActionsAdmin/userAction";
-import EditModal from "./EditModal";
-import { closeModal, deleteUser, editUser, openModal } from "./ActionsAdmin/EditModalAction";
+import EditModal from "../AdminComponent/EditModal";
+import image from '../Images/usermanagement.svg';
+import EditImage from '../Images/Edit.svg'
 
 const UserManagement = () => {
   const dispatch = useDispatch();
-  const { users, isError, isLoading,  isModalOpen, selectedUser } = useSelector(
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const { users, isError, isLoading } = useSelector(
     (state) => state.getAllUsers
   );
 
-  console.log('isModalopen', isModalOpen);
-  console.log('selecteduser', selectedUser);
-  
-  
- 
   useEffect(() => {
     dispatch(UserAction());
   }, [dispatch]);
 
-  const handleEdit = (user)=>{
-    dispatch(openModal(user))
+  const handleOpenEditModal = () =>{
+    setIsEditModalOpen(true)
   }
 
-  const handleModalClose = () => {
-    dispatch(closeModal());
-  };
+  const handleSave = ()=>{
+    setIsEditModalOpen(false)
+  }
 
-  const handleSave = (userData) => {
-    dispatch(editUser(userData)); 
-    handleModalClose();
-  };
+  const handleClose = ()=>{
+    setIsEditModalOpen(false)
+  }
 
-  const handleDelete = (userId) => {
-    dispatch(deleteUser(userId)); 
-    handleModalClose(); 
-  };
- 
+
   return (
     <div className="bg-[#C1BAA1] h-screen border-2 border-neutral-100">
       <div className="bg-white flex my-7 shadow-md items-center rounded-md p-3 mx-16">
-        <img className="h-16 w-16" src={images} alt="Load" />
+        <img className='h-20 w-20' src={image} alt="load"/>
         <h4 className="font-semibold text-4xl mb-1">User Management</h4>
       </div>
       {isLoading && (
@@ -49,7 +40,7 @@ const UserManagement = () => {
           <div className="spinner-border animate-spin border-t-4 border-blue-600 rounded-full w-8 h-8"></div>
         </div>
       )}
-      {isError && <div className="text-red-500">{isError}</div>}{""}
+      {isError && <div className="text-red-500">{isError}</div>}
       <div className="border-2 border-gray-200 shadow-md rounded-md p-6 bg-white mx-16">
         <input
           type="text"
@@ -70,7 +61,7 @@ const UserManagement = () => {
                   Ph. No.
                 </th>
                 <th scope="col" className="px-20 py-3">
-                  Edit
+                  Action
                 </th>
               </tr>
             </thead>
@@ -82,7 +73,9 @@ const UserManagement = () => {
                     <td className="px-20 py-3">{user?.email}</td>
                     <td className="px-20 py-3">{user?.phNo}</td>
                     <td className="px-20 py-3">
-                    <button onClick={() => handleEdit(user)}>Edit</button>
+                      <button onClick={() => handleOpenEditModal(user)}>
+                      <img src={EditImage} alt="load"/>
+                      </button>
                     </td>
                   </tr>
                 ))
@@ -97,17 +90,14 @@ const UserManagement = () => {
           </table>
         </div>
       </div>
-      {isModalOpen &&  selectedUser && (
-        <EditModal
-          isOpen={isModalOpen}
-          onClose={handleModalClose}
-          user={ selectedUser}
-          onEdit={handleSave}
-          onDelete={handleDelete}
+      {isEditModalOpen && (
+        <EditModal 
+          onClose={handleClose}
+          onSave={handleSave}
         />
       )}
     </div>
   );
 };
- 
+
 export default UserManagement;

@@ -1,12 +1,12 @@
 import './App.css';
-import AdminDashboard from './AdminComponent/AdminDashboard';
-// import Main from './Routes/Main';
+// import AdminDashboard from './AdminComponent/AdminDashboard';
+import Main from './Routes/Main';
 
 function App() {
   return (
     <div>
-      {/* <Main /> */}
-      <AdminDashboard/>
+      <Main />
+      {/* <AdminDashboard/> */}
     </div>
   );
 }

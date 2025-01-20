@@ -7,8 +7,8 @@ const AllProducts = () => {
     const dispatch = useDispatch();
     const {products, isLoading, isError} = useSelector((state)=>state.allProducts)
     
-    useEffect((limit)=>{
-        dispatch(getAllProducts(limit=20))
+    useEffect((limit,page)=>{
+        dispatch(getAllProducts(limit=20, page=1))
     },[dispatch])
   return (
     <>

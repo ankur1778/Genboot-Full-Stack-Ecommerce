@@ -34,7 +34,7 @@ export const getAllProducts = (limit, page) => {
 
     try {
       const res = await axios.get(
-        `http://localhost:3100/products?limit=${limit}&page=${page}`,
+        `http://localhost:3100/products`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -45,6 +45,9 @@ export const getAllProducts = (limit, page) => {
       );
       const products = res.data;
       console.log(products);
+      console.log(token);
+      console.log(roleId);
+      
       
       dispatch(getAllProductsSuccess(products));
       return true;

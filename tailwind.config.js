@@ -4,8 +4,10 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        homeFeaturedImage: "url('../src/Images/HomeBackgroundImage.png')",
-        BackgroundImage: "url('../src/Images/BackgroundImage1.png')",
+        homeFeaturedImage1: "url('../src/Images/homeFeaturedImage1.png')",
+        homeFeaturedImage2: "url('../src/Images/homeFeaturedImage2.png')",
+        homeFeaturedImage3: "url('../src/Images/homeFeaturedImage3.jpg')",
+        homeFeaturedImage4: "url('../src/Images/homeFeaturedImage4.jpg')",
       },
     },
   },

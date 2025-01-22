@@ -48,11 +48,6 @@ const Navbar = () => {
           >
             About
           </Link>
-          {/* <div className="relative group">
-            <h1 className="cursor-pointer hover:border px-4 py-2 rounded-lg border-slate-300">
-              Categories 🔽
-            </h1>
-          </div> */}
           <Link
             to="/cart"
             className="hover:border px-4 py-2 rounded-lg border-slate-300"
@@ -87,11 +82,6 @@ const Navbar = () => {
           >
             About
           </Link>
-          {/* <div className="relative group">
-            <h1 className="cursor-pointer hover:border px-4 py-2 rounded-lg border-slate-300">
-              Categories 🔽
-            </h1>
-          </div> */}
           <Link
             to="/cart"
             className="hover:border px-4 py-2 rounded-lg border-slate-300"

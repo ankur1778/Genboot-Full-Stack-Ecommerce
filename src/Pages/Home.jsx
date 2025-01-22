@@ -9,8 +9,10 @@ import stationeryImage from "../Images/15.jpg";
 import sportsImage from "../Images/13.jpg";
 import shoeImage from "../Images/14.jpg";
 import { Link } from "react-router";
+import { ElectronicsCategoryId, MensFashionCategoryId, ShoesCategoryId, SportsCategoryId, StationaryCategoryId, WomensFashionCategoryId } from "./categoryIds/CategoriesId";
 const Home = () => {
   const [categoryId, setCategoryId] = useState("");
+  
   return (
     <>
       <Navbar />
@@ -55,7 +57,7 @@ const Home = () => {
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 mx-4">
         <div className="border-2 p-2 rounded-lg">
           <img
-            onClick={() => setCategoryId("678648a39120121d022301c2")}
+            onClick={() => setCategoryId(MensFashionCategoryId)}
             src={mensFashionImage}
             alt="Men's Fashion"
             className="h-40 rounded-2xl shadow-xl cursor-pointer w-full object-cover"
@@ -66,7 +68,7 @@ const Home = () => {
         </div>
         <div className="border-2 p-2 rounded-lg">
           <img
-            onClick={() => setCategoryId("678648ac9120121d022301c5")}
+            onClick={() => setCategoryId(WomensFashionCategoryId)}
             src={womensFashionImage}
             alt="Women's Fashion"
             className="h-40 rounded-2xl shadow-xl cursor-pointer w-full object-cover"
@@ -77,7 +79,7 @@ const Home = () => {
         </div>
         <div className="border-2 p-2 rounded-lg">
           <img
-            onClick={() => setCategoryId("678737bc8705db57a979c0a1")}
+            onClick={() => setCategoryId(SportsCategoryId)}
             src={sportsImage}
             alt="Sport Items"
             className="h-40 rounded-2xl shadow-xl cursor-pointer w-full object-cover"
@@ -88,7 +90,7 @@ const Home = () => {
         </div>
         <div className="border-2 p-2 rounded-lg">
           <img
-            onClick={() => setCategoryId("6787446e8705db57a979c0e4")}
+            onClick={() => setCategoryId(ShoesCategoryId)}
             src={shoeImage}
             alt="Shoes"
             className="h-40 rounded-2xl shadow-xl cursor-pointer w-full object-cover"
@@ -99,7 +101,7 @@ const Home = () => {
         </div>
         <div className="border-2 p-2 rounded-lg">
           <img
-            onClick={() => setCategoryId("67873bc18705db57a979c0c2")}
+            onClick={() => setCategoryId(StationaryCategoryId)}
             src={stationeryImage}
             alt="Stattionery Items"
             className="h-40 rounded-2xl shadow-xl cursor-pointer w-full"
@@ -110,7 +112,7 @@ const Home = () => {
         </div>
         <div className="border-2 p-2 rounded-lg">
           <img
-            onClick={() => setCategoryId("678748c08705db57a979c105")}
+            onClick={() => setCategoryId(ElectronicsCategoryId)}
             className="h-40 rounded-2xl shadow-xl cursor-pointer w-full object-cover"
             src={electronicsImage}
             alt="Electronics"

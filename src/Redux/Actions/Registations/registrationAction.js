@@ -1,3 +1,4 @@
+import { registration } from "../../../api/auth";
 import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL } from "./registrationactionType";
 
 export const RegisterRequest = () => ({
@@ -16,20 +17,15 @@ export const RegisterFail = (error) => ({
 
 export const registerUser = (value) => {
   return async (dispatch) => {
-    dispatch(RegisterRequest());
-    try {
-      const res = await fetch("http://localhost:3100/auth/register", {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
+    const payload ={
           name: value.name,
           phNo: value.phNo,
           email: value.email,
           password: value.password
-        }),
-      });
+    }
+    dispatch(RegisterRequest());
+    try {
+      const res = await registration(payload);
       
       console.log({
         name: value.name,

@@ -4,6 +4,7 @@ import Login from "../Pages/Login";
 import Home from "../Pages/Home";
 import Registration from "../Pages/Registration";
 import AllProducts from "../Pages/AllProducts";
+import About from "../Pages/About";
 
 const Main = () => {
   return (
@@ -14,6 +15,8 @@ const Main = () => {
           <Route path="/" element={<Home />} />
           <Route path="/register" element={<Registration />} />
           <Route path="/all-products" element={<AllProducts />} />
+          <Route path="/about" element={<About />} />
+          
         </Routes>
       </BrowserRouter>
     </div>

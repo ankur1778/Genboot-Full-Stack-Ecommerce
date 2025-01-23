@@ -2,7 +2,7 @@ import {
   GET_ALL_PRODUCTS_REQUEST,
   GET_ALL_PRODUCTS_SUCCESS,
   GET_ALL_PRODUCTS_FAILURE,
-} from "./allProductsActionType";
+} from "../ActionTypes/types.js";
 import { allProducts } from "../../../api/Allproducts";
 
 export const getAllProductsRequest = () => ({

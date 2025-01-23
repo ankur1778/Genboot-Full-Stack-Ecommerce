@@ -1,4 +1,4 @@
-import { TOGGLE_HAMBURGER } from "../HamburgerAction/HamburgerActionType"
+import { TOGGLE_HAMBURGER } from "../ActionTypes/types.js"
 
 export const togglehamburger =()=>{
     return{

@@ -1,24 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import Navbar from "../Components/Navbar";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
-import mensFashionImage from "../Images/12.jpeg";
-import womensFashionImage from "../Images/11.jpg";
-import electronicsImage from "../Images/electronics.jpg";
-import stationeryImage from "../Images/15.jpg";
-import sportsImage from "../Images/13.jpg";
-import shoeImage from "../Images/14.jpg";
 import { Link } from "react-router";
-import { ElectronicsCategoryId, MensFashionCategoryId, ShoesCategoryId, SportsCategoryId, StationaryCategoryId, WomensFashionCategoryId } from "./categoryIds/CategoriesId";
 import { getAllCategories } from "../Redux/Actions/CategoriesAction/categoryAction";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import MotionPath from "../Components/loader";
+
 const Home = () => {
-  const [categoryId, setCategoryId] = useState("");
-  const dispatch = useDispatch()
-  console.log(categoryId);
-  useEffect(()=>{
-    dispatch(getAllCategories())
-  },[dispatch])
+  const dispatch = useDispatch();
+  const { loading, error, categories } = useSelector(
+    (state) => state.allCategories
+  );
+  console.log(categories);
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, [dispatch]);
+  if (error) {
+    return (
+      <div>
+        <MotionPath />
+      </div>
+    );
+  }
   return (
     <>
       <Navbar />
@@ -60,74 +64,31 @@ const Home = () => {
           </div>
         </div>
       </Carousel>
+
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-8 mx-4">
-        <div className="border-2 p-2 rounded-lg">
-          <img
-            onClick={() => setCategoryId(MensFashionCategoryId)}
-            src={mensFashionImage}
-            alt="Men's Fashion"
-            className="h-40 rounded-2xl shadow-xl cursor-pointer w-full object-cover"
-          />
-          <p className="flex justify-center font-semibold text-lg font-serif">
-            Men's Fashion
-          </p>
-        </div>
-        <div className="border-2 p-2 rounded-lg">
-          <img
-            onClick={() => setCategoryId(WomensFashionCategoryId)}
-            src={womensFashionImage}
-            alt="Women's Fashion"
-            className="h-40 rounded-2xl shadow-xl cursor-pointer w-full object-cover"
-          />
-          <p className="flex justify-center font-semibold text-lg font-serif">
-            Women's Fashion
-          </p>
-        </div>
-        <div className="border-2 p-2 rounded-lg">
-          <img
-            onClick={() => setCategoryId(SportsCategoryId)}
-            src={sportsImage}
-            alt="Sport Items"
-            className="h-40 rounded-2xl shadow-xl cursor-pointer w-full object-cover"
-          />
-          <p className="flex justify-center font-semibold text-lg font-serif">
-            Sports
-          </p>
-        </div>
-        <div className="border-2 p-2 rounded-lg">
-          <img
-            onClick={() => setCategoryId(ShoesCategoryId)}
-            src={shoeImage}
-            alt="Shoes"
-            className="h-40 rounded-2xl shadow-xl cursor-pointer w-full object-cover"
-          />
-          <p className="flex justify-center font-semibold text-lg font-serif">
-            Shoes
-          </p>
-        </div>
-        <div className="border-2 p-2 rounded-lg">
-          <img
-            onClick={() => setCategoryId(StationaryCategoryId)}
-            src={stationeryImage}
-            alt="Stattionery Items"
-            className="h-40 rounded-2xl shadow-xl cursor-pointer w-full"
-          />
-          <p className="flex justify-center font-semibold text-lg font-serif">
-            Stationery Items
-          </p>
-        </div>
-        <div className="border-2 p-2 rounded-lg">
-          <img
-            onClick={() => setCategoryId(ElectronicsCategoryId)}
-            className="h-40 rounded-2xl shadow-xl cursor-pointer w-full object-cover"
-            src={electronicsImage}
-            alt="Electronics"
-          />
-          <p className="flex justify-center font-semibold text-lg font-serif">
-            Electronics
-          </p>
-        </div>
+        {loading ? (
+          <MotionPath />
+        ) : categories ? (
+          categories.map((category) => (
+            <div key={category?._id}>
+              <Link to={`category/${category._id}`}>
+                <div>
+                  <img
+                    src={category?.image}
+                    alt={category?.name}
+                    className="h-40 rounded-2xl shadow-xl cursor-pointer w-full object-cover"
+                  />
+                </div>
+              </Link>
+            </div>
+          ))
+        ) : (
+          <div className="h-20 items-center flex justify-center">
+            <MotionPath />
+          </div>
+        )}
       </div>
+
       <div className="flex justify-center">
         <Link to="/all-products">
           <button className="mt-8 bg-black text-white px-6 py-3 text-lg lg:text-xl font-semibold rounded-xl hover:bg-opacity-90 transition">

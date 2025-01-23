@@ -3,7 +3,7 @@ import {
   GET_ALL_PRODUCTS_SUCCESS,
   GET_ALL_PRODUCTS_FAILURE,
 } from "./allProductsActionType";
-import { allProducts } from "../../../api/auth";
+import { allProducts } from "../../../api/Allproducts";
 
 export const getAllProductsRequest = () => ({
   type: GET_ALL_PRODUCTS_REQUEST,
@@ -11,7 +11,7 @@ export const getAllProductsRequest = () => ({
 
 export const getAllProductsSuccess = (products) => ({
   type: GET_ALL_PRODUCTS_SUCCESS,
-  payload: { products },
+  payload:  products ,
 });
 
 export const getAllProductsFailure = (error) => ({
@@ -19,19 +19,15 @@ export const getAllProductsFailure = (error) => ({
   payload: error,
 });
 
-export const getAllProducts = (limit, page) => {
+export const getAllProducts = () => {
   return async (dispatch) => {
     dispatch(getAllProductsRequest());
-
     try {
-      const res = await allProducts();
-      const products = res.data;
-      console.log(products);
-      
+      const products = await allProducts();
       dispatch(getAllProductsSuccess(products));
       return true;
     } catch (error) {
-      console.error(error.message);
+      console.error('Error fetching products:', error.message);
       dispatch(getAllProductsFailure(error));
       return false;
     }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
@@ -10,9 +10,15 @@ import sportsImage from "../Images/13.jpg";
 import shoeImage from "../Images/14.jpg";
 import { Link } from "react-router";
 import { ElectronicsCategoryId, MensFashionCategoryId, ShoesCategoryId, SportsCategoryId, StationaryCategoryId, WomensFashionCategoryId } from "./categoryIds/CategoriesId";
+import { getAllCategories } from "../Redux/Actions/CategoriesAction/categoryAction";
+import { useDispatch } from "react-redux";
 const Home = () => {
   const [categoryId, setCategoryId] = useState("");
-  
+  const dispatch = useDispatch()
+  console.log(categoryId);
+  useEffect(()=>{
+    dispatch(getAllCategories())
+  },[dispatch])
   return (
     <>
       <Navbar />

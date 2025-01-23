@@ -1,4 +1,7 @@
-import allProductsRequest, { sendPublicRequest, sendRequest } from "./sendPublicRequest";
+import {
+  sendPublicRequest,
+  sendRequest,
+} from "./sendPublicRequest";
 
 const BASE_PATH = "auth";
 
@@ -7,12 +10,9 @@ export const login = (data) =>
     body: JSON.stringify(data),
   });
 
-export const registration = (data)=>
-  sendRequest(`${BASE_PATH}/register`,{
+export const registration = (data) =>
+  sendRequest(`${BASE_PATH}/register`, {
     body: JSON.stringify(data),
-  })
+  });
 
-export const allProducts = (data)=>
-  allProductsRequest(`/products`, {
-    body: data
-  })
+

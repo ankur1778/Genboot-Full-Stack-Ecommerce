@@ -4,16 +4,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../Redux/Actions/AllProducts/allProductAction";
 
 const AllProducts = () => {
-    const dispatch = useDispatch();
-    const {products, isLoading, isError} = useSelector((state)=>state.allProducts)
+  const dispatch = useDispatch();
+  const { products, isLoading, isError } = useSelector(
+    (state) => state.allProducts
+  );  
+  console.log(products,"sssssssss");
+
+  useEffect(() => {
+   const hello= dispatch(getAllProducts());
+   console.log("ssssslkfhjsdfj",hello);
+  }, [dispatch]);
     
-    useEffect((limit,page)=>{
-        dispatch(getAllProducts(limit=20, page=1))
-    },[dispatch])
   return (
     <>
       <Navbar />
-      <div>All Products</div>
+      <div >All Products</div>
     </>
   );
 };

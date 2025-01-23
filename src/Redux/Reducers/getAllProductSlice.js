@@ -19,10 +19,10 @@ const getAllProductsReducer = (state = initialState, action) => {
         isLoading: true,
         isError: false,
       };
-    case GET_ALL_PRODUCTS_SUCCESS:
+    case GET_ALL_PRODUCTS_SUCCESS: 
       return {
         ...state,
-        products: action.payload.products,
+        products: action.payload,
         isLoading: false,
         isError: false,
       };

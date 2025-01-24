@@ -2,7 +2,7 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
-} from "../Actions/LoginActions/loginactionType";
+} from "../Actions/ActionTypes/types";
 import Cookies from "js-cookie";
 
 const initialState = {

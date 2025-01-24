@@ -1,5 +1,5 @@
 import { login } from "../../../api/auth";
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL } from "./loginactionType";
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL } from "../ActionTypes/types.js";
 import Cookies from "js-cookie";
 export const loginRequest = () => ({
   type: LOGIN_REQUEST,

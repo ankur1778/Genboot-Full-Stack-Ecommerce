@@ -3,7 +3,7 @@ import {
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
   REGISTER_FAIL,
-} from "./registrationactionType";
+} from "../ActionTypes/types.js";
 
 export const RegisterRequest = () => ({
   type: REGISTER_REQUEST,

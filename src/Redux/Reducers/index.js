@@ -5,6 +5,7 @@ import { userReducerAdmin } from "../../AdminComponent/ReducersAdmin/userReducer
 import HamburgerReducer from "./HamburgerReducer";
 import getAllProductsReducer from "./getAllProductSlice";
 import getAllCategoriesReducer from "./categoryIdReducer";
+import getProductsByCategoriesReducer from "./productByCategoriesSlice";
 
 export const rootReducer = combineReducers({
   getAllUsers: userReducerAdmin,
@@ -12,7 +13,8 @@ export const rootReducer = combineReducers({
   registerSlice,
   hamburger: HamburgerReducer,
   allProducts: getAllProductsReducer,
-  allCategories : getAllCategoriesReducer,
+  allCategories: getAllCategoriesReducer,
+  productsByCategory: getProductsByCategoriesReducer,
 });
 
 export default rootReducer;

@@ -2,7 +2,7 @@ import {
   GET_ALL_PRODUCTS_REQUEST,
   GET_ALL_PRODUCTS_SUCCESS,
   GET_ALL_PRODUCTS_FAILURE,
-} from "../Actions/AllProducts/allProductsActionType";
+} from "../Actions/ActionTypes/types";
 
 const initialState = {
   products: [],

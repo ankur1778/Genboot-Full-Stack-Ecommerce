@@ -1,4 +1,4 @@
-import { TOGGLE_HAMBURGER } from "../Actions/HamburgerAction/HamburgerActionType"
+import { TOGGLE_HAMBURGER } from "../Actions/ActionTypes/types"
 
 const initialState = {
     ishamburgerOpen: false,

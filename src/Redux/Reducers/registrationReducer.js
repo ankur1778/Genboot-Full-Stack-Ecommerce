@@ -1,4 +1,4 @@
-import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL } from "../Actions/Registations/registrationactionType";
+import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAIL } from "../Actions/ActionTypes/types";
 
 const initialstate = {
     registeredUser: {},

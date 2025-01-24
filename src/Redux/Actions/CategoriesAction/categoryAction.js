@@ -4,7 +4,7 @@ import {
   GET_ALL_CATEGORIES_REQUEST,
   GET_ALL_CATEGORIES_SUCCESS,
   GET_ALL_CATEGORIES_FAILURE,
-} from "./categoryActionType";
+} from "../ActionTypes/types.js";
 
 export const getAllCategoriesSuccess = (categories) => ({
   type: GET_ALL_CATEGORIES_SUCCESS,
@@ -24,10 +24,8 @@ export const getAllCategories = () => {
   return async (dispatch) => {
     dispatch(getAllCategoriesRequest(true));
     try {
-      const response = await getCategories();
-      const data = await response.json();
-      dispatch(getAllCategoriesSuccess(data));
-      console.log(data);
+      const categories = await getCategories();
+      dispatch(getAllCategoriesSuccess(categories));
       return true;
     } catch (error) {
       dispatch(getAllCategoriesFailure(false));

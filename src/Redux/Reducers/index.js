@@ -10,7 +10,7 @@ import getProductsByCategoriesReducer from "./productByCategoriesSlice";
 export const rootReducer = combineReducers({
   getAllUsers: userReducerAdmin,
   userReducer,
-  registerSlice,
+  register : registerSlice,
   hamburger: HamburgerReducer,
   allProducts: getAllProductsReducer,
   allCategories: getAllCategoriesReducer,

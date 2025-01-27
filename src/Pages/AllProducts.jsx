@@ -18,7 +18,7 @@ const AllProducts = () => {
   return (
     <>
       <Navbar />
-      <Carousel>
+      <Carousel showArrows={true} showThumbs={false}>
         <div className="mx-8 h-[450px] my-4 rounded-3xl bg-cover bg-center bg-ProductFeaturedImage ">
           <div className="flex justify-start">
             <h1 className="font-semibold py-20 text-3xl text-white sm:text-4xl md:text-[48px] font-[italic] sm:mx-8 sm:p-12">

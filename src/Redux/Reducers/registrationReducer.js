@@ -18,7 +18,7 @@ export const registerSlice = (state = initialstate, action) => {
         case REGISTER_SUCCESS:
             return {
                 ...state,
-                registeredUser: action.payload.registeredUser,
+                registeredUser: action.payload,
                 isLoading: false,
                 isError: false
             }

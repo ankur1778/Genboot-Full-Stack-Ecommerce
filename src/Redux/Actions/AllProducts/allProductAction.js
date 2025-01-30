@@ -25,6 +25,8 @@ export const getAllProducts = () => {
     try {
       const products = await allProducts();
       dispatch(getAllProductsSuccess(products));
+      console.log(products);
+      
       return true;
     } catch (error) {
       console.error('Error fetching products:', error.message);

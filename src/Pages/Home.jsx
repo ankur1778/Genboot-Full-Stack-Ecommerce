@@ -12,7 +12,6 @@ const Home = () => {
   const { loading, error, categories } = useSelector(
     (state) => state.allCategories
   );
-  console.log(categories);
   useEffect(() => {
     dispatch(getAllCategories());
   }, [dispatch]);

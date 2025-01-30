@@ -4,7 +4,7 @@ import UserManagement from './UserManagement';
 import ProductManagement from './ProductManagement';
 
 const AdminDashboard = () => {
-    const [activeComponent, setActiveComponent] = useState('userManagement')
+    const [activeComponent, setActiveComponent] = useState('productManagement')
 
     const handleChange = (component) => {
         setActiveComponent(component);

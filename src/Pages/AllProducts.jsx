@@ -9,7 +9,6 @@ const AllProducts = () => {
   const { products, isLoading, isError } = useSelector(
     (state) => state.allProducts
   );
-  console.log(products, "kggs");
 
   useEffect(() => {
     dispatch(getAllProducts());
@@ -57,16 +56,33 @@ const AllProducts = () => {
         ) : isError ? (
           <div style={{ color: "red" }}>Error loading products.</div>
         ) : (
-          <div className="grid grid-cols-4 gap-4">
-            {products?.map((product) => (
-              <div key={product.id} className="px-10">
-                <img 
-                  src={product.image}
-                  alt={product.name}
-                  className="rounded-md relative max-w-sm mx-auto shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 hover:scale-110 p-5 h-72 w-60 "
-                />
-                <h5 className="flex text-lg italic my-2">{product.name}</h5>
-                <p>₹{product.price}</p>
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-10">
+            {products.map((product) => (
+              <div
+                key={product.id}
+                className="bg-white shadow-md rounded-lg px-10 py-10"
+              >
+                <div className="flex justify-center">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 hover:scale-110 rounded-md h-48 delay-700 ease-in"
+                  />
+                </div>
+                <div className="mt-4">
+                  <h1 className="text-sm uppercase font-bold">
+                    {product.name}
+                  </h1>
+                  <p className="mt-2 text-gray-600 text-sm">
+                    {product.description.slice(0, 40)}...
+                  </p>
+                  <p className="mt-2 text-gray-600">₹{product.price}</p>
+                </div>
+                <div className="mt-6 flex justify-between items-center">
+                  <button className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700">
+                    Add to cart
+                  </button>
+                </div>
               </div>
             ))}
           </div>

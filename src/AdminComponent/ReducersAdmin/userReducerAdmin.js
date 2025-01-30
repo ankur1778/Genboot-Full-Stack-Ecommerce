@@ -1,4 +1,5 @@
-import {SHOW_USER_REQUEST, SHOW_USER_SUCCESS, SHOW_USER_FAILURE} from '../ActionsAdmin/userActionType'
+import { SHOW_USER_FAILURE, SHOW_USER_REQUEST, SHOW_USER_SUCCESS } from "../ActionsAdmin/userActionType";
+
 
 const initialState = {
   users : [],

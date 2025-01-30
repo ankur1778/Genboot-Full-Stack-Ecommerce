@@ -1,6 +1,6 @@
 import { getRootUrl } from "../api/getRootUrl";
 
-const getCookie = (name) => {
+export const getCookie = (name) => {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop().split(";").shift();
@@ -62,7 +62,7 @@ export default async function allProductsRequest(path, opts = {}) {
     throw response;
   }
 
-  const data = await response.json();
+  const data = await response.data;
   return data;
 }
 

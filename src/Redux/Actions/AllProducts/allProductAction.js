@@ -11,7 +11,7 @@ export const getAllProductsRequest = () => ({
 
 export const getAllProductsSuccess = (products) => ({
   type: GET_ALL_PRODUCTS_SUCCESS,
-  payload:  products ,
+  payload: products,
 });
 
 export const getAllProductsFailure = (error) => ({
@@ -25,11 +25,9 @@ export const getAllProducts = () => {
     try {
       const products = await allProducts();
       dispatch(getAllProductsSuccess(products));
-      console.log(products);
-      
       return true;
     } catch (error) {
-      console.error('Error fetching products:', error.message);
+      console.error("Error fetching products:", error.message);
       dispatch(getAllProductsFailure(error));
       return false;
     }

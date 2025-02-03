@@ -8,6 +8,7 @@ import About from "../Pages/About";
 import ProductsByCategories from "../Pages/productsByCategories";
 import { PrivateRoute } from "./PrivateRoute";
 import AdminDashboard from "../AdminComponent/AdminDashboard";
+import Cart from "../Pages/Cart";
 
 const Main = () => {
   return (
@@ -19,6 +20,7 @@ const Main = () => {
           <Route path="/" element={<PrivateRoute Component={Home} />} />
           <Route path="/all-products" element={<PrivateRoute Component={AllProducts} />} />
           <Route path="/about" element={<PrivateRoute Component={About} />} />
+          <Route path="/cart" element={<PrivateRoute Component={Cart} />} />
           <Route path="/category/:categoryId" element={<PrivateRoute Component={ProductsByCategories} />} />
           <Route path="/admin-dashboard" element={<PrivateRoute Component={AdminDashboard} />} />
         </Routes>

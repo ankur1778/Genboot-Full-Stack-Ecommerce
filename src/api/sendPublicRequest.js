@@ -126,3 +126,30 @@ export async function productsByCategoryRequest(path, opts = {}) {
     return data
   }
   
+
+  export async function singleProductRequest(path, opts = {}) {
+    // Get authToken from cookies
+    const token = getCookie('token')
+    if (!token) {
+        throw new Error('token not found')
+    }
+    const headers = Object.assign({}, opts.headers || {}, {
+        'Content-type': 'application/json; charset=UTF-8',
+        Authorization: `Bearer ${token}`,
+    })
+  
+    const response = await fetch(
+        `${getRootUrl()}${path}`,
+        Object.assign({ method: 'GET', credentials: 'same-origin' }, opts, {
+            headers,
+        }),
+    )
+    
+    if (response.status !== 200) {
+        throw response
+    }
+  
+    const data = await response.json()
+    return data
+  }
+  

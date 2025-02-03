@@ -46,21 +46,15 @@ const ProductsByCategories = () => {
             </h1>
           </div>
         </div>
-        <div className="mx-8 bg-categoryPageFeaturedImage4 h-[450px] my-4 rounded-3xl  bg-cover bg-center">
-          <div className="flex justify-start ms-20">
-            <h1 className="font-semibold py-20 text-3xl mt-10 sm:text-4xl md:text-5xl font-serif mx-4 sm:mx-8 text-black sm:p-12  ">
-              Shop. Save.
-              <br /> <br />
-              Smile More!
-            </h1>
-          </div>
-        </div>
+        
+        
       </Carousel>
       {isLoading ? (
         <div>
           <MotionPath />
         </div>
-      ) : (
+      ) : isError ? (
+        <div style={{ color: "red" }}>Error loading products.</div>):(
         <>
           <div className="flex justify-center h-20 items-center mt-10">
             <h1 className="text-[60px] font-semibold italic ">

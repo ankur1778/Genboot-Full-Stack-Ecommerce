@@ -3,6 +3,7 @@ import Navbar from "../Components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../Redux/Actions/AllProducts/allProductAction";
 import { Carousel } from "react-responsive-carousel";
+import MotionPath from "../Components/loader";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
@@ -53,17 +54,19 @@ const AllProducts = () => {
       </Carousel>
       <div className="product-list">
         {isLoading ? (
-          <div>Loading...</div>
+          <div>
+            <MotionPath />
+          </div>
         ) : isError ? (
           <div style={{ color: "red" }}>Error loading products.</div>
         ) : (
           <div className="grid grid-cols-4 gap-4">
             {products?.map((product) => (
               <div key={product.id} className="px-10">
-                <img 
+                <img
                   src={product.image}
                   alt={product.name}
-                  className="rounded-md relative max-w-sm mx-auto shadow-none transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 hover:scale-110 p-5 h-72 w-60 "
+                  className="rounded-md relative max-w-sm mx-auto shadow-none transition-shadow cursor-pointer hover:shadow-lg hover:shadow-gray-400 hover:scale-110 p-10 h-72 w-60 "
                 />
                 <h5 className="flex text-lg italic my-2">{product.name}</h5>
                 <p>₹{product.price}</p>

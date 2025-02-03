@@ -6,6 +6,7 @@ import Registration from "../Pages/Registration";
 import AllProducts from "../Pages/AllProducts";
 import About from "../Pages/About";
 import ProductsByCategories from "../Pages/productsByCategories";
+import SingleProductPage from "../Pages/SingleProductPage";
 
 const Main = () => {
   return (
@@ -18,6 +19,7 @@ const Main = () => {
           <Route path="/all-products" element={<AllProducts />} />
           <Route path="/about" element={<About />} />
           <Route path="/category/:categoryId" element={<ProductsByCategories />} />
+          <Route path="/singleproduct/:productId" element={<SingleProductPage />} />
         </Routes>
       </BrowserRouter>
     </div>

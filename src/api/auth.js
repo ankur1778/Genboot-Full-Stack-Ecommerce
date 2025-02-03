@@ -14,5 +14,3 @@ export const registration = (data) =>
   sendRequest(`${BASE_PATH}/register`, {
     body: JSON.stringify(data),
   });
-
-

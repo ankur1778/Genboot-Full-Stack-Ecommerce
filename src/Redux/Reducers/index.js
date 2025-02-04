@@ -9,6 +9,9 @@ import getProductsByCategoriesReducer from "./productByCategoriesSlice";
 import { allProductsReducerAdmin } from "../../AdminComponent/ReducersAdmin/AllProductsSlice";
 import cartSlice from "./CartSlice/CartSlice";
 import getCartSlice from "./CartSlice/getCartSlice";
+import removeItemFromCartSlice from "./CartSlice/removeItemSlice";
+import increaseCartItemQuantitySlice from "./CartSlice/increaseQuantitySlice";
+import decreaseCartItemQuantitySlice from "./CartSlice/decreaseQuantitySlice";
 
 export const rootReducer = combineReducers({
   getAllProducts: allProductsReducerAdmin,
@@ -20,7 +23,10 @@ export const rootReducer = combineReducers({
   allCategories: getAllCategoriesReducer,
   productsByCategory: getProductsByCategoriesReducer,
   cart: cartSlice,
-  getCart : getCartSlice
+  getCart: getCartSlice,
+  removeCartItem: removeItemFromCartSlice,
+  increaseQuantity: increaseCartItemQuantitySlice,
+  decreaseQuantity: decreaseCartItemQuantitySlice,
 });
 
 export default rootReducer;

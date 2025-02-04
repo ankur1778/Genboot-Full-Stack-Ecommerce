@@ -38,7 +38,6 @@ export const RegisterUser = (value) => {
       return true;
     } catch (error) {
       dispatch(RegisterFail(error));
-      console.log(error, "errors");
       return false;
     }
   };

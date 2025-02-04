@@ -1,4 +1,5 @@
 import { productsByCategory } from "../../../api/productByCategory";
+import ToastMessage from "../../../utils/ToastMessage";
 import {
   GET_PRODUCTS_BY_CATEGORIES_REQUEST,
   GET_PRODUCTS_BY_CATEGORIES_FAILURE,
@@ -24,13 +25,11 @@ export const getProductsByCategories = (categoryId) => {
     dispatch(getProductsByCategoriesRequest());
     try {
       const productsByCategories = await productsByCategory(categoryId);
-      console.log(productsByCategories);
-      
       dispatch(getProductsByCategoriesSuccess(productsByCategories));
       return true;
     } catch (error) {
       dispatch(getProductsByCategoriesFailure(error));
-      console.error("Error Fetching Products", error.message);
+      <ToastMessage message={"Error Fetching Products"} />;
       return false;
     }
   };

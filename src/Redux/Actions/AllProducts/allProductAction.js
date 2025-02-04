@@ -4,6 +4,7 @@ import {
   GET_ALL_PRODUCTS_FAILURE,
 } from "../ActionTypes/types.js";
 import { allProducts } from "../../../api/Allproducts";
+import ToastMessage from "../../../utils/ToastMessage.js";
 
 export const getAllProductsRequest = () => ({
   type: GET_ALL_PRODUCTS_REQUEST,
@@ -27,7 +28,7 @@ export const getAllProducts = () => {
       dispatch(getAllProductsSuccess(products));
       return true;
     } catch (error) {
-      console.error("Error fetching products:", error.message);
+      <ToastMessage message={"Error fetching products"} />;
       dispatch(getAllProductsFailure(error));
       return false;
     }

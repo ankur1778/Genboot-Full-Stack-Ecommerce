@@ -38,7 +38,6 @@ export const LoginUser = (values) => {
       }
     } catch (error) {
       dispatch(loginFail());
-      console.log(error, "errors");
       return false;
     }
   };

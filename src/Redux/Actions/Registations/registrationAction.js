@@ -19,7 +19,7 @@ export const RegisterFail = (error) => ({
   payload: error,
 });
 
-export const registerUser = (value) => {
+export const RegisterUser = (value) => {
   return async (dispatch) => {
     const payload = {
       name: value.name,
@@ -30,14 +30,11 @@ export const registerUser = (value) => {
     dispatch(RegisterRequest());
     try {
       const res = await registration(payload);
-      const data = await res.json();
-
-      if (res.status === 204) {
-        dispatch(RegisterSuccess(data));
+      if (res) {
+        dispatch(RegisterSuccess(res));
         return true;
       }
-
-      dispatch(RegisterSuccess(data));
+      dispatch(RegisterSuccess());
       return true;
     } catch (error) {
       dispatch(RegisterFail(error));

@@ -1,4 +1,4 @@
-import allProductsRequest from "./sendPublicRequest";
+import { allProductsRequest } from "../AdminComponent/api/sendRequests";
 
 export const allProducts = () =>
   allProductsRequest(`/products`, {

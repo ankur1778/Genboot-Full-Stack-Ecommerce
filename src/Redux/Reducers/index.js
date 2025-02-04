@@ -6,15 +6,23 @@ import HamburgerReducer from "./HamburgerReducer";
 import getAllProductsReducer from "./getAllProductSlice";
 import getAllCategoriesReducer from "./categoryIdReducer";
 import getProductsByCategoriesReducer from "./productByCategoriesSlice";
+import { allProductsReducerAdmin } from "../../AdminComponent/ReducersAdmin/AllProductsSlice";
+import cartSlice from "./CartSlice/CartSlice";
+import getCartSlice from "./CartSlice/getCartSlice";
+import SingleProductReducer from "./singleProductSlice";
 
 export const rootReducer = combineReducers({
+  getAllProducts: allProductsReducerAdmin,
   getAllUsers: userReducerAdmin,
-  userReducer,
-  registerSlice,
+  auth: userReducer,
+  register: registerSlice,
   hamburger: HamburgerReducer,
   allProducts: getAllProductsReducer,
   allCategories: getAllCategoriesReducer,
   productsByCategory: getProductsByCategoriesReducer,
+  cart: cartSlice,
+  getCart: getCartSlice,
+  singleProduct: SingleProductReducer,
 });
 
 export default rootReducer;

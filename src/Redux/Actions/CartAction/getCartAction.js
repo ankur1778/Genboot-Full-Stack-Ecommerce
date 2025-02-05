@@ -11,7 +11,7 @@ export const getUserCartRequest = () => ({
 
 export const getUserCartSuccess = (cart) => ({
   type: GET_CART_SUCCESS,
-  payload: { item: cart?.products }, // Ensure it's always an array
+  payload: { item: cart?.products }, 
 });
 
 export const getUserCartFailure = (error) => ({

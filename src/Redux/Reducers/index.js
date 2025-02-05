@@ -12,6 +12,8 @@ import getCartSlice from "./CartSlice/getCartSlice";
 import removeItemFromCartSlice from "./CartSlice/removeItemSlice";
 import increaseCartItemQuantitySlice from "./CartSlice/increaseQuantitySlice";
 import decreaseCartItemQuantitySlice from "./CartSlice/decreaseQuantitySlice";
+import SingleProductReducer from "./singleProductSlice";
+import getUserOrderSlice from "./OrderSlices/getUserOrdersSlice";
 
 export const rootReducer = combineReducers({
   getAllProducts: allProductsReducerAdmin,
@@ -27,6 +29,8 @@ export const rootReducer = combineReducers({
   removeCartItem: removeItemFromCartSlice,
   increaseQuantity: increaseCartItemQuantitySlice,
   decreaseQuantity: decreaseCartItemQuantitySlice,
+  singleProduct: SingleProductReducer,
+  userOrders: getUserOrderSlice,
 });
 
 export default rootReducer;

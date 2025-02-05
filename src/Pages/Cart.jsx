@@ -19,7 +19,8 @@ const Cart = () => {
   const handleRemoveItem = (productId) => {
     dispatch(removeItemFromCart(productId));
   };
-
+  
+  
   const handleIncreaseCartItemQuantity = (productId) => {
     dispatch(increaseCartItemQuantity(productId));
   };
@@ -155,12 +156,15 @@ const Cart = () => {
             </ul>
 
             <div className="mt-6 space-y-3">
-              <button
-                type="button"
-                className="text-sm px-4 py-2.5 w-full font-semibold tracking-wide bg-gray-800 hover:bg-gray-900 text-white rounded-md"
-              >
-                Checkout
-              </button>
+              <Link to="/cart/checkout">
+                {" "}
+                <button
+                  type="button"
+                  className="text-sm px-4 py-2.5 w-full font-semibold tracking-wide bg-gray-800 hover:bg-gray-900 text-white rounded-md"
+                >
+                  Checkout
+                </button>
+              </Link>
               <Link to="/">
                 <button
                   type="button"

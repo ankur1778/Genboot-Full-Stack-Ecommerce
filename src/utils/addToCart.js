@@ -10,9 +10,6 @@ const AddToCartButton = ({ productId }) => {
   const handleAddToCart = () => {
     dispatch(addItemToCart(productId));
     setIsAdded(true);
-
-    // Reset added state after 2 seconds
-    setTimeout(() => setIsAdded(false), 2000);
   };
 
   return (
@@ -20,7 +17,7 @@ const AddToCartButton = ({ productId }) => {
       <button
         onClick={handleAddToCart}
         disabled={isLoading || isAdded}
-        className="px-4 py-2 bg-gray-500 hover:scale-105 text-white rounded disabled:opacity-50"
+        className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded-md hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
       >
         {isLoading ? "Adding..." : isAdded ? "Added to cart" : "Add to Cart"}
       </button>

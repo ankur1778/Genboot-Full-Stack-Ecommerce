@@ -5,6 +5,7 @@ import { getProductsByCategories } from "../Redux/Actions/ProductsByCategories/p
 import Navbar from "../Components/Navbar";
 import MotionPath from "../Components/loader";
 import { Carousel } from "react-responsive-carousel";
+import AddToCartButton from "../utils/addToCart";
 
 const ProductsByCategories = () => {
   const { categoryId } = useParams();
@@ -46,15 +47,8 @@ const ProductsByCategories = () => {
             </h1>
           </div>
         </div>
-        <div className="mx-8 bg-categoryPageFeaturedImage4 h-[450px] my-4 rounded-3xl  bg-cover bg-center">
-          <div className="flex justify-start ms-20">
-            <h1 className="font-semibold py-20 text-3xl mt-10 sm:text-4xl md:text-5xl font-serif mx-4 sm:mx-8 text-black sm:p-12  ">
-              Shop. Save.
-              <br /> <br />
-              Smile More!
-            </h1>
-          </div>
-        </div>
+        
+        
       </Carousel>
       {isLoading ? (
         <div>
@@ -64,7 +58,8 @@ const ProductsByCategories = () => {
         <div>
           <MotionPath />
         </div>
-      ) : (
+      ) : isError ? (
+        <div style={{ color: "red" }}>Error loading products.</div>):(
         <>
           <div className="flex flex-col justify-center bg-gray-100">
             <div className="flex justify-center h-20 items-center mt-10">
@@ -97,9 +92,13 @@ const ProductsByCategories = () => {
                     </div>
                   </Link>
                   <div className="mt-6 flex justify-between items-center">
-                    <button className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700">
+                    {/* <button className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700">
                       Add to cart
-                    </button>
+                    </button> */}
+                     <AddToCartButton
+                     productId={product}
+                  />
+
                   </div>
                 </div>
               ))}

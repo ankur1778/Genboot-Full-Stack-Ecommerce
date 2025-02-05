@@ -22,7 +22,7 @@ const Login = () => {
       if (result) {
         const decodedToken = jwtdecode();
         if (decodedToken) {
-          const role = decodedToken.roleId;
+          const role = decodedToken.roleId;          
           if (role === process.env.REACT_APP_ROLE_ADMIN) {
             navigate("/admin-dashboard");
           } else {

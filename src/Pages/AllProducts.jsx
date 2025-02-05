@@ -6,12 +6,14 @@ import { Carousel } from "react-responsive-carousel";
 import AddToCartButton from "../utils/addToCart";
 import MotionPath from "../Components/loader";
 import { Link } from "react-router-dom";
+import ToastMessage from "../utils/ToastMessage";
+import { ProductMessages } from "../utils/statusMessages";
 
-const AllProducts = ({ product }) => {
+const AllProducts = () => {
   const dispatch = useDispatch();
   const { products, isLoading, isError } = useSelector(
     (state) => state.allProducts
-  );  
+  );
   useEffect(() => {
     dispatch(getAllProducts());
   }, [dispatch]);
@@ -58,7 +60,9 @@ const AllProducts = ({ product }) => {
             <MotionPath />
           </div>
         ) : isError ? (
-          <div style={{ color: "red" }}>Error loading products.</div>
+          <div style={{ color: "red" }}>
+            <ToastMessage message={ProductMessages.NOT_FETCH} />
+          </div>
         ) : (
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-10">
             {products.map((product) => (
@@ -67,28 +71,24 @@ const AllProducts = ({ product }) => {
                 className="bg-white shadow-md rounded-lg px-10 py-10"
               >
                 <Link to={`/product/${product._id}`}>
-
-                <div className="flex justify-center">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 hover:scale-110 rounded-md h-48 delay-700 ease-in"
-                  />
-                  
-                </div>
-                <div className="mt-4">
-                  <h1 className="text-sm uppercase font-bold">
-                  {product.name}
-                  </h1>
-                  <p className="mt-2 text-gray-600 text-sm">
-                    {product.description.slice(0, 40)}...
-                  </p>
-                  <p className="mt-2 text-gray-600">₹{product.price}</p>
-                </div></Link>
+                  <div className="flex justify-center">
+                    <img
+                      src={product.image}
+                      alt={product.name}
+                      className="transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 hover:scale-110 rounded-md h-48 delay-700 ease-in"
+                    />
+                  </div>
+                  <div className="mt-4">
+                    <h1 className="text-sm uppercase font-bold">
+                      {product.name}
+                    </h1>
+                    <p className="mt-2 text-gray-600 text-sm">
+                      {product.description.slice(0, 40)}...
+                    </p>
+                    <p className="mt-2 text-gray-600">₹{product.price}</p>
+                  </div>
+                </Link>
                 <div className="mt-6 flex justify-between items-center">
-                  {/* <button onClick={()=>AddToCartButton } className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700">
-                    Add to cart
-                  </button> */}
                   <AddToCartButton productId={product} />
                 </div>
               </div>

@@ -1,4 +1,6 @@
 import { SingleProduct } from "../../../api/singleproduct";
+import { ProductMessages } from "../../../utils/statusMessages";
+import ToastMessage from "../../../utils/ToastMessage";
 import {
   SINGLE_PRODUCT_REQUEST,
   SINGLE_PRODUCT_SUCCESS,
@@ -24,13 +26,14 @@ export const getSingleProduct = (productId) => {
     dispatch(singleProductRequest());
     try {
       const product = await SingleProduct(productId);
-      console.log(product, "ooo");
-      
       dispatch(singleProductSuccess(product));
       return true;
     } catch (error) {
-      console.error("Error Occured: ", error);
-      dispatch(singleProductFailure(error));
+      dispatch(
+        singleProductFailure(
+          <ToastMessage message={ProductMessages.NOT_FOUND} />
+        )
+      );
       return false;
     }
   };

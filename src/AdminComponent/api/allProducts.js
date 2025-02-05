@@ -1,6 +1,6 @@
-import { allProductsRequest } from "./sendRequests";
+import { sendRequest } from "../../api/sendPublicRequest";
 
 export const allProducts = () =>
-  allProductsRequest(`/products`, {
+  sendRequest(`/products`, {
     method: "GET",
   });

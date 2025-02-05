@@ -1,5 +1,10 @@
-import { GET_ALL_PRODUCT_REQUEST,GET_ALL_PRODUCT_SUCCESS,GET_ALL_PRODUCT_FAILURE } from "./productActionType";
+import {
+  GET_ALL_PRODUCT_REQUEST,
+  GET_ALL_PRODUCT_SUCCESS,
+  GET_ALL_PRODUCT_FAILURE,
+} from "./productActionType";
 import { allProducts } from "../../api/allProducts";
+import ToastMessage from "../../../utils/ToastMessage";
 
 export const getProductsRequest = () => ({
   type: GET_ALL_PRODUCT_REQUEST,
@@ -23,7 +28,7 @@ export const GetAllProducts = () => {
       dispatch(getProductsSuccess(res));
       return true;
     } catch (error) {
-      dispatch(getProductsFailure(error.message));
+      dispatch(getProductsFailure(<ToastMessage message={error.message} />));
     }
   };
 };

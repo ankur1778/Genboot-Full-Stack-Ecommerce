@@ -6,6 +6,8 @@ import Navbar from "../Components/Navbar";
 import MotionPath from "../Components/loader";
 import { Carousel } from "react-responsive-carousel";
 import AddToCartButton from "../utils/addToCart";
+import ToastMessage from "../utils/ToastMessage";
+import { ProductMessages } from "../utils/statusMessages";
 
 const ProductsByCategories = () => {
   const { categoryId } = useParams();
@@ -47,8 +49,6 @@ const ProductsByCategories = () => {
             </h1>
           </div>
         </div>
-        
-        
       </Carousel>
       {isLoading ? (
         <div>
@@ -56,10 +56,9 @@ const ProductsByCategories = () => {
         </div>
       ) : isError ? (
         <div>
-          <MotionPath />
+          <ToastMessage message={ProductMessages.NOT_FETCH} />
         </div>
-      ) : isError ? (
-        <div style={{ color: "red" }}>Error loading products.</div>):(
+      ) : (
         <>
           <div className="flex flex-col justify-center bg-gray-100">
             <div className="flex justify-center h-20 items-center mt-10">
@@ -92,13 +91,7 @@ const ProductsByCategories = () => {
                     </div>
                   </Link>
                   <div className="mt-6 flex justify-between items-center">
-                    {/* <button className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700">
-                      Add to cart
-                    </button> */}
-                     <AddToCartButton
-                     productId={product}
-                  />
-
+                    <AddToCartButton productId={product} />
                   </div>
                 </div>
               ))}

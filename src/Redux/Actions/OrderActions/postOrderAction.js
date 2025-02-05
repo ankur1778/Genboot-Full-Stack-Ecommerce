@@ -1,4 +1,5 @@
 import { postOrder } from "../../../api/orderCheckout";
+import { OrderMessage } from "../../../utils/statusMessages";
 import {
   POST_ORDER_FAILURE,
   POST_ORDER_REQUEST,
@@ -26,21 +27,21 @@ export const PostOrder = (values) => {
       shippingAddress1: values.shippingAddress1,
       shippingAddress2: values.shippingAddress2,
       city: values.city,
-      state : values.state,
+      state: values.state,
       zip: values.zip,
       country: values.country,
       phone: values.phone,
-    };    
+    };
     dispatch(postOrderRequest());
     try {
-      const response = await postOrder(payload);      
+      const response = await postOrder(payload);
       if (response?.status) {
         dispatch(postOrderSuccess(response));
       } else {
-        dispatch(postOrderFailure(response?.message));
+        dispatch(postOrderFailure(OrderMessage.NOT_PLACED));
       }
     } catch (error) {
-      dispatch(postOrderFailure(error.message));
+      dispatch(postOrderFailure(OrderMessage.NOT_PLACED));
     }
   };
 };

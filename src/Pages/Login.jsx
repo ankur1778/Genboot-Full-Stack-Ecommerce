@@ -22,15 +22,13 @@ const Login = () => {
       if (result) {
         const decodedToken = jwtdecode();
         if (decodedToken) {
-          const role = decodedToken.roleId;          
+          const role = decodedToken.roleId;
           if (role === process.env.REACT_APP_ROLE_ADMIN) {
             navigate("/admin-dashboard");
           } else {
             navigate("/");
           }
         }
-      } else {
-        setFieldError("general", "Invalid Credentials. Please Try Again");
       }
     } catch (error) {
       setFieldError("general", "An error Occured. Please Try Again");

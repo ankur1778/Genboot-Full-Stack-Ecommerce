@@ -1,4 +1,6 @@
 import { registration } from "../../../api/auth";
+import { AuthMessages } from "../../../utils/statusMessages.js";
+import ToastMessage from "../../../utils/ToastMessage.js";
 import {
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
@@ -34,10 +36,12 @@ export const RegisterUser = (value) => {
         dispatch(RegisterSuccess(res));
         return true;
       }
-      dispatch(RegisterSuccess());
+      dispatch(
+        RegisterSuccess(<ToastMessage message={AuthMessages.REGISTERED} />)
+      );
       return true;
     } catch (error) {
-      dispatch(RegisterFail(error));
+      dispatch(RegisterFail(<ToastMessage message={AuthMessages.INVALID} />));
       return false;
     }
   };

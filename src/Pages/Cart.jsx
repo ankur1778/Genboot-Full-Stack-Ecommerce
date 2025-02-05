@@ -7,6 +7,8 @@ import MotionPath from "../Components/loader";
 import { removeItemFromCart } from "../Redux/Actions/CartAction/removeItemAction";
 import { increaseCartItemQuantity } from "../Redux/Actions/CartAction/increaseQuantityAction";
 import { decreaseCartItemQuantity } from "../Redux/Actions/CartAction/decreaseQuantityAction";
+import ToastMessage from "../utils/ToastMessage";
+import { CartMessages, ProductMessages } from "../utils/statusMessages";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -19,8 +21,7 @@ const Cart = () => {
   const handleRemoveItem = (productId) => {
     dispatch(removeItemFromCart(productId));
   };
-  
-  
+
   const handleIncreaseCartItemQuantity = (productId) => {
     dispatch(increaseCartItemQuantity(productId));
   };
@@ -50,7 +51,9 @@ const Cart = () => {
                 <MotionPath />
               </div>
             ) : isError ? (
-              <div style={{ color: "red" }}>Error loading products.</div>
+              <div style={{ color: "red" }}>
+                <ToastMessage message={ProductMessages.NOT_FOUND} />
+              </div>
             ) : item && item.length > 0 ? (
               item.map((product) => (
                 <div
@@ -123,7 +126,9 @@ const Cart = () => {
                 </div>
               ))
             ) : (
-              <div>No items in the cart</div>
+              <div>
+                <ToastMessage message={CartMessages.EMPTY} />
+              </div>
             )}
             <hr className="border-gray-300" />
           </div>

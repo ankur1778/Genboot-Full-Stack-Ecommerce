@@ -1,4 +1,6 @@
 import { increaseCartItem } from "../../../api/Cart";
+import { CartMessages } from "../../../utils/statusMessages";
+import ToastMessage from "../../../utils/ToastMessage";
 import {
   INCREASE_CART_ITEM_QUANTITY_FAILURE,
   INCREASE_CART_ITEM_QUANTITY_REQUEST,
@@ -28,15 +30,21 @@ export const increaseCartItemQuantity = (productId) => {
     try {
       const response = await increaseCartItem(payload);
       if (response?.status) {
-        dispatch(increaseCartItemQuantitySuccess(response.cart)); // ✅ Update state immediately
+        dispatch(increaseCartItemQuantitySuccess(response.cart));
         dispatch(getUserCart());
       } else {
         dispatch(
-          increaseCartItemQuantityFailure(response?.message || "Unknown error")
+          increaseCartItemQuantityFailure(
+            <ToastMessage message={CartMessages.CANT_UPDATE} />
+          )
         );
       }
     } catch (error) {
-      dispatch(increaseCartItemQuantityFailure(error.message));
+      dispatch(
+        increaseCartItemQuantityFailure(
+          <ToastMessage message={CartMessages.CANT_UPDATE} />
+        )
+      );
     }
   };
 };

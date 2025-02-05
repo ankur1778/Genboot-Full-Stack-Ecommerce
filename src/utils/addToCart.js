@@ -1,6 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "../Redux/Actions/CartAction/addToCartAction";
 import { useState } from "react";
+import ToastMessage from "./ToastMessage";
+import { CartMessages } from "./statusMessages";
 
 const AddToCartButton = ({ productId }) => {
   const dispatch = useDispatch();
@@ -21,7 +23,11 @@ const AddToCartButton = ({ productId }) => {
       >
         {isLoading ? "Adding..." : isAdded ? "Added to cart" : "Add to Cart"}
       </button>
-      {isError && <p style={{ color: "red" }}>Error: {isError}</p>}
+      {isError && (
+        <p style={{ color: "red" }}>
+          <ToastMessage message={CartMessages.NOT_ADDED} />
+        </p>
+      )}
     </div>
   );
 };

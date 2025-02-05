@@ -21,8 +21,6 @@ const Registration = () => {
 
       if (result) {
         navigate("/login");
-      } else {
-        setFieldError("general", "Check the entered values again");
       }
     } catch (error) {
       setFieldError("general", "An error Occured. Please Try Again");

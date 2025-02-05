@@ -1,4 +1,5 @@
 import { getUserOrders } from "../../../api/orderCheckout";
+import { OrderMessage } from "../../../utils/statusMessages";
 import {
   GET_USER_ORDERS_FAILURE,
   GET_USER_ORDERS_REQUEST,
@@ -26,7 +27,7 @@ export const getUserOrder = () => {
       const orders = await getUserOrders();
       dispatch(getUserOrderSuccess(orders));
     } catch (error) {
-      dispatch(getUserOrderFailure);
+      dispatch(getUserOrderFailure(OrderMessage.NOT_FOUND));
     }
   };
 };

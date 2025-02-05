@@ -1,5 +1,6 @@
-
 import { getCategories } from "../../../api/categoryIds";
+import { CategoriesMessages } from "../../../utils/statusMessages.js";
+import ToastMessage from "../../../utils/ToastMessage.js";
 import {
   GET_ALL_CATEGORIES_REQUEST,
   GET_ALL_CATEGORIES_SUCCESS,
@@ -8,7 +9,7 @@ import {
 
 export const getAllCategoriesSuccess = (categories) => ({
   type: GET_ALL_CATEGORIES_SUCCESS,
-  payload:  categories ,
+  payload: categories,
 });
 
 export const getAllCategoriesFailure = (error) => ({
@@ -28,7 +29,11 @@ export const getAllCategories = () => {
       dispatch(getAllCategoriesSuccess(categories));
       return true;
     } catch (error) {
-      dispatch(getAllCategoriesFailure(false));
+      dispatch(
+        getAllCategoriesFailure(
+          <ToastMessage message={CategoriesMessages.CANT_FETCH} />
+        )
+      );
       return false;
     }
   };

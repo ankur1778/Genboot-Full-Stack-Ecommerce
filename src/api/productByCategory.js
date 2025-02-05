@@ -1,6 +1,6 @@
-import { productsByCategoryRequest } from "./sendPublicRequest";
+import { sendRequest } from "./sendPublicRequest";
 
 export const productsByCategory = (categoryId) =>
-  productsByCategoryRequest(`/products?categories=${categoryId}`, {
+  sendRequest(`/products?categories=${categoryId}`, {
     method: "GET",
   });

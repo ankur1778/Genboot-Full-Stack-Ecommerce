@@ -4,7 +4,8 @@ import {
   SHOW_USER_SUCCESS,
 } from "./userActionType";
 
-import { allUsers } from "../api/allUsers";
+import { allUsers } from "../../api/allUsers";
+import ToastMessage from "../../../utils/ToastMessage";
 
 export const getUsersRequest = () => ({
   type: SHOW_USER_REQUEST,
@@ -28,7 +29,7 @@ export const UserAction = () => {
       dispatch(getUsersSuccess(res));
       return true;
     } catch (error) {
-      dispatch(getUsersFailure(error.message));
+      dispatch(getUsersFailure(<ToastMessage message={error.message} />));
     }
   };
 };

@@ -1,4 +1,7 @@
 import { decreaseCartItem } from "../../../api/Cart";
+import { CartMessages } from "../../../utils/statusMessages";
+import ToastMessage from "../../../utils/ToastMessage";
+
 import {
   DECREASE_CART_ITEM_QUANTITY_REQUEST,
   DECREASE_CART_ITEM_QUANTITY_SUCCESS,
@@ -28,15 +31,21 @@ export const decreaseCartItemQuantity = (productId) => {
     try {
       const response = await decreaseCartItem(payload);
       if (response?.status) {
-        dispatch(decreaseCartItemQuantitySuccess(response.cart)); 
+        dispatch(decreaseCartItemQuantitySuccess(response.cart));
         dispatch(getUserCart());
       } else {
         dispatch(
-          decreaseCartItemQuantityFailure(response?.message || "Unknown error")
+          decreaseCartItemQuantityFailure(
+            <ToastMessage message={CartMessages.CANT_UPDATE} />
+          )
         );
       }
     } catch (error) {
-      dispatch(decreaseCartItemQuantityFailure(error.message));
+      dispatch(
+        decreaseCartItemQuantityFailure(
+          <ToastMessage message={CartMessages.CANT_UPDATE} />
+        )
+      );
     }
   };
 };

@@ -1,4 +1,6 @@
 import { removeItem } from "../../../api/Cart";
+import { CartMessages } from "../../../utils/statusMessages";
+import ToastMessage from "../../../utils/ToastMessage";
 import {
   REMOVE_CART_ITEM_REQUEST,
   REMOVE_CART_ITEM_SUCCESS,
@@ -20,21 +22,28 @@ export const removeCartItemFailure = (error) => ({
   payload: { error },
 });
 export const removeItemFromCart = (productId) => {
-    return async (dispatch) => {
-      const payload = { productId };
-      dispatch(removeCartItemRequest());
-  
-      try {
-        const response = await removeItem(payload);
-        if (response?.status) {
-          dispatch(removeCartItemSuccess(response.cart)); // ✅ Update state immediately
-          dispatch(getUserCart());           
-        } else {
-          dispatch(removeCartItemFailure(response?.message || "Unknown error"));
-        }
-      } catch (error) {
-        dispatch(removeCartItemFailure(error.message));
+  return async (dispatch) => {
+    const payload = { productId };
+    dispatch(removeCartItemRequest());
+
+    try {
+      const response = await removeItem(payload);
+      if (response?.status) {
+        dispatch(removeCartItemSuccess(response.cart));
+        dispatch(getUserCart());
+      } else {
+        dispatch(
+          removeCartItemFailure(
+            <ToastMessage message={CartMessages.CANT_REMOVE} />
+          )
+        );
       }
-    };
+    } catch (error) {
+      dispatch(
+        removeCartItemFailure(
+          <ToastMessage message={CartMessages.CANT_REMOVE} />
+        )
+      );
+    }
   };
-  
+};

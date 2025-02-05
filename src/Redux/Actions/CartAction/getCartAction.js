@@ -1,4 +1,6 @@
 import { getCart } from "../../../api/Cart";
+import { CartMessages } from "../../../utils/statusMessages";
+import ToastMessage from "../../../utils/ToastMessage";
 import {
   GET_CART_REQUEST,
   GET_CART_SUCCESS,
@@ -11,7 +13,7 @@ export const getUserCartRequest = () => ({
 
 export const getUserCartSuccess = (cart) => ({
   type: GET_CART_SUCCESS,
-  payload: { item: cart?.products }, 
+  payload: { item: cart?.products },
 });
 
 export const getUserCartFailure = (error) => ({
@@ -26,7 +28,9 @@ export const getUserCart = () => {
       const cart = await getCart();
       dispatch(getUserCartSuccess(cart));
     } catch (error) {
-      dispatch(getUserCartFailure(error.message));
+      dispatch(
+        getUserCartFailure(<ToastMessage message={CartMessages.NOT_FOUND} />)
+      );
     }
   };
 };

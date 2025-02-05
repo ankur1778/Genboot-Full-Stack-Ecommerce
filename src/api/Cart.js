@@ -1,15 +1,9 @@
-import {
-  addItemToCartRequest,
-  decreaseCartItemRequest,
-  getUserCartRequest,
-  increaseCartItemRequest,
-  removeItemFromCartRequest,
-} from "./CartRequest";
+import { sendRequest } from "./sendPublicRequest";
 
 const BASE_PATH = "/cart";
 
 export const addItemTocart = (product) => {
-  return addItemToCartRequest(`${BASE_PATH}/add-to-cart`, {
+  return sendRequest(`${BASE_PATH}/add-to-cart`, {
     method: "POST",
     body: JSON.stringify(product),
     headers: {
@@ -19,7 +13,7 @@ export const addItemTocart = (product) => {
 };
 
 export const getCart = () => {
-  return getUserCartRequest(`${BASE_PATH}/get-cart`, {
+  return sendRequest(`${BASE_PATH}/get-cart`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -28,7 +22,7 @@ export const getCart = () => {
 };
 
 export const removeItem = (productId) => {
-  return removeItemFromCartRequest(`${BASE_PATH}/remove-item`, {
+  return sendRequest(`${BASE_PATH}/remove-item`, {
     method: "DELETE",
     body: JSON.stringify(productId),
     headers: {
@@ -38,7 +32,7 @@ export const removeItem = (productId) => {
 };
 
 export const increaseCartItem = (productId) => {
-  return increaseCartItemRequest(`${BASE_PATH}/increase-quantity`, {
+  return sendRequest(`${BASE_PATH}/increase-quantity`, {
     method: "PUT",
     body: JSON.stringify(productId),
     headers: {
@@ -48,7 +42,7 @@ export const increaseCartItem = (productId) => {
 };
 
 export const decreaseCartItem = (productId) => {
-  return decreaseCartItemRequest(`${BASE_PATH}/decrease-quantity`, {
+  return sendRequest(`${BASE_PATH}/decrease-quantity`, {
     method: "PUT",
     body: JSON.stringify(productId),
     headers: {

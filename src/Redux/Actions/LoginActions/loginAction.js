@@ -1,5 +1,10 @@
 import { login } from "../../../api/auth";
 import {
+  AuthMessages,
+  ServerErrorMessage,
+} from "../../../utils/statusMessages.js";
+import ToastMessage from "../../../utils/ToastMessage.js";
+import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -31,13 +36,15 @@ export const LoginUser = (values) => {
       const response = await login(payload);
       if (response?.token) {
         Cookies.set("token", response.token);
-        dispatch(loginSuccess(response)); 
+        dispatch(loginSuccess(response));
         return true;
       } else {
-        throw new Error("Invalid login response");
+        throw new Error(
+          <ToastMessage message={ServerErrorMessage.SERVER_ERROR} />
+        );
       }
     } catch (error) {
-      dispatch(loginFail());
+      dispatch(loginFail(<ToastMessage message={AuthMessages.INVALID} />));
       return false;
     }
   };

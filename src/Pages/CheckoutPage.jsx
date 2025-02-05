@@ -51,11 +51,9 @@ const CheckoutPage = () => {
   const handlePostOrder = async (values, { setFieldError }) => {
     try {
       const orderData = { ...values, orderItems };
-      const order = await dispatch(PostOrder(orderData));
+      const order = await PostOrder(orderData);
       if (order) {
         navigate("/your-orders");
-      } else {
-        setFieldError("general", "Check the entered values again");
       }
     } catch (error) {
       setFieldError("general", "An error Occurred. Please Try Again");

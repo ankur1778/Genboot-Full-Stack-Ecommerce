@@ -1,5 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 import Cookies from "js-cookie";
+import ToastMessage from "./ToastMessage";
+import { TokenMessages } from "./statusMessages";
 
 export const jwtdecode = () => {
   const token = Cookies.get("token");
@@ -8,7 +10,7 @@ export const jwtdecode = () => {
   try {
     return jwtDecode(token);
   } catch (error) {
-    console.error("Invalid token", error);
+    <ToastMessage message={TokenMessages.INVALID} />;
     return null;
   }
 };

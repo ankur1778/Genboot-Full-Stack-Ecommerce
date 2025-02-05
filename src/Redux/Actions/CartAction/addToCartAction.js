@@ -1,4 +1,6 @@
 import { addItemTocart } from "../../../api/Cart";
+import { CartMessages } from "../../../utils/statusMessages";
+import ToastMessage from "../../../utils/ToastMessage";
 import {
   ADD_PRODUCT_TO_CART_REQUEST,
   ADD_PRODUCT_TO_CART_SUCCESS,
@@ -29,10 +31,18 @@ export const addItemToCart = (productId) => {
       if (response?.status) {
         dispatch(addItemToCartSuccess(response.cart));
       } else {
-        dispatch(addItemToCartFailure(response?.message || "Unknown error"));
+        dispatch(
+          addItemToCartFailure(
+            <ToastMessage message={CartMessages.CANT_UPDATE} />
+          )
+        );
       }
     } catch (error) {
-      dispatch(addItemToCartFailure(error.message));
+      dispatch(
+        addItemToCartFailure(
+          <ToastMessage message={CartMessages.CANT_UPDATE} />
+        )
+      );
     }
   };
 };

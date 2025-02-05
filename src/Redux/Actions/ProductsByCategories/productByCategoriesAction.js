@@ -1,4 +1,5 @@
 import { productsByCategory } from "../../../api/productByCategory";
+import { ProductMessages } from "../../../utils/statusMessages";
 import ToastMessage from "../../../utils/ToastMessage";
 import {
   GET_PRODUCTS_BY_CATEGORIES_REQUEST,
@@ -29,7 +30,7 @@ export const getProductsByCategories = (categoryId) => {
       return true;
     } catch (error) {
       dispatch(getProductsByCategoriesFailure(error));
-      <ToastMessage message={"Error Fetching Products"} />;
+      <ToastMessage message={ProductMessages.NOT_FETCH} />;
       return false;
     }
   };

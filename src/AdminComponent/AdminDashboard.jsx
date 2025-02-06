@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import AdminNavbar from './AdminNavbar' 
 import UserManagement from './UserManagement';
 import ProductManagement from './ProductManagement';
+import OrderManagement from './orderManagement';
 
 const AdminDashboard = () => {
-    const [activeComponent, setActiveComponent] = useState('userManagement')
+    const [activeComponent, setActiveComponent] = useState('productManagement')
 
     const handleChange = (component) => {
         setActiveComponent(component);
@@ -16,6 +17,7 @@ const AdminDashboard = () => {
             <div className="flex p-4">
                 {activeComponent === 'userManagement' && <UserManagement />}
                 {activeComponent === 'productManagement' && <ProductManagement />}
+                {activeComponent === 'orderManagement' && <OrderManagement/>}
             </div>
         </div>
     );

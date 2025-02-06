@@ -6,22 +6,19 @@ import { Link } from "react-router";
 import { getAllCategories } from "../Redux/Actions/CategoriesAction/categoryAction";
 import { useDispatch, useSelector } from "react-redux";
 import MotionPath from "../Components/loader";
+import ToastMessage from "../utils/ToastMessage";
+import { CategoriesMessages } from "../utils/statusMessages";
 
 const Home = () => {
   const dispatch = useDispatch();
   const { loading, error, categories } = useSelector(
     (state) => state.allCategories
   );
-  console.log(categories);
   useEffect(() => {
     dispatch(getAllCategories());
   }, [dispatch]);
   if (error) {
-    return (
-      <div>
-        <MotionPath />
-      </div>
-    );
+    return <ToastMessage message={CategoriesMessages.CANT_FETCH} />;
   }
   return (
     <>

@@ -1,4 +1,5 @@
 import { registration } from "../../../api/auth";
+
 import {
   REGISTER_REQUEST,
   REGISTER_SUCCESS,
@@ -27,19 +28,17 @@ export const RegisterUser = (value) => {
       email: value.email,
       password: value.password,
     };
+
     dispatch(RegisterRequest());
     try {
       const res = await registration(payload);
       if (res) {
         dispatch(RegisterSuccess(res));
-        return true;
+        return { success: true };
       }
-      dispatch(RegisterSuccess());
-      return true;
     } catch (error) {
       dispatch(RegisterFail(error));
-      console.log(error, "errors");
-      return false;
+      return { success: false };
     }
   };
 };

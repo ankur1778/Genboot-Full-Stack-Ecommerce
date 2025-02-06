@@ -1,13 +1,18 @@
 import { login } from "../../../api/auth";
-import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAIL } from "../ActionTypes/types.js";
+import {
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL,
+} from "../ActionTypes/types.js";
 import Cookies from "js-cookie";
+
 export const loginRequest = () => ({
   type: LOGIN_REQUEST,
 });
 
 export const loginSuccess = (userData) => ({
   type: LOGIN_SUCCESS,
-  payload: {userData},
+  payload: userData,
 });
 
 export const loginFail = (error) => ({
@@ -17,24 +22,21 @@ export const loginFail = (error) => ({
 
 export const LoginUser = (values) => {
   return async (dispatch) => {
-    const payload={
-      email:values.email,
-      password:values.password
-    }
+    const payload = {
+      email: values.email,
+      password: values.password,
+    };
     dispatch(loginRequest());
     try {
       const response = await login(payload);
-      
-      dispatch(loginSuccess());
-      if (response) {
+      if (response?.token) {
         Cookies.set("token", response.token);
-        Cookies.set("Role", response.roleId);
+        dispatch(loginSuccess(response));
+        return { success: true };
       }
-      return true;
     } catch (error) {
-      dispatch(loginFail());
-      console.log(error, "errors");
-      return false;
+      dispatch(loginFail(error));
+      return { success: false };
     }
   };
 };

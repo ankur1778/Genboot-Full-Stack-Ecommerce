@@ -1,10 +1,14 @@
-import {SHOW_USER_REQUEST, SHOW_USER_SUCCESS, SHOW_USER_FAILURE} from '../ActionsAdmin/userActionType'
+import {
+  SHOW_USER_FAILURE,
+  SHOW_USER_REQUEST,
+  SHOW_USER_SUCCESS,
+} from "../ActionsAdmin/AllUsers/userActionType";
 
 const initialState = {
-  users : [],
-  isLoading : false,
-  isError : false
-}
+  users: [],
+  isLoading: false,
+  isError: false,
+};
 
 export const userReducerAdmin = (state = initialState, action) => {
   switch (action.type) {
@@ -18,7 +22,7 @@ export const userReducerAdmin = (state = initialState, action) => {
     case SHOW_USER_SUCCESS:
       return {
         ...state,
-        users: action.payload, 
+        users: action.payload,
         isLoading: false,
         isError: false,
       };

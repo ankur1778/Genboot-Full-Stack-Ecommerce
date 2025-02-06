@@ -1,38 +1,43 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { UserAction } from "./ActionsAdmin/userAction";
 import EditModal from "../AdminComponent/EditModal";
-import image from '../Images/usermanagement.svg';
-import EditImage from '../Images/Edit.svg'
+import image from "../Images/usermanagement.svg";
+import EditImage from "../Images/Edit.svg";
+import { UserAction } from "./ActionsAdmin/AllUsers/userAction";
+import ToastMessage from "../utils/ToastMessage";
+import { AdminMessage } from "../utils/statusMessages";
 
 const UserManagement = () => {
   const dispatch = useDispatch();
-  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const { users, isError, isLoading } = useSelector(
     (state) => state.getAllUsers
   );
+
+  if(isError){
+    <ToastMessage message={AdminMessage.CANT_FETCH_USERS} />
+  }
 
   useEffect(() => {
     dispatch(UserAction());
   }, [dispatch]);
 
-  const handleOpenEditModal = () =>{
-    setIsEditModalOpen(true)
-  }
+  const handleOpenEditModal = () => {
+    setIsEditModalOpen(true);
+  };
 
-  const handleSave = ()=>{
-    setIsEditModalOpen(false)
-  }
+  const handleSave = () => {
+    setIsEditModalOpen(false);
+  };
 
-  const handleClose = ()=>{
-    setIsEditModalOpen(false)
-  }
-
+  const handleClose = () => {
+    setIsEditModalOpen(false);
+  };
 
   return (
     <div className="bg-[#C1BAA1] h-screen border-2 border-neutral-100">
       <div className="bg-white flex my-7 shadow-md items-center rounded-md p-3 mx-16">
-        <img className='h-20 w-20' src={image} alt="load"/>
+        <img className="h-20 w-20" src={image} alt="load" />
         <h4 className="font-semibold text-4xl mb-1">User Management</h4>
       </div>
       {isLoading && (
@@ -40,7 +45,6 @@ const UserManagement = () => {
           <div className="spinner-border animate-spin border-t-4 border-blue-600 rounded-full w-8 h-8"></div>
         </div>
       )}
-      {isError && <div className="text-red-500">{isError}</div>}
       <div className="border-2 border-gray-200 shadow-md rounded-md p-6 bg-white mx-16">
         <input
           type="text"
@@ -74,7 +78,7 @@ const UserManagement = () => {
                     <td className="px-20 py-3">{user?.phNo}</td>
                     <td className="px-20 py-3">
                       <button onClick={() => handleOpenEditModal(user)}>
-                      <img src={EditImage} alt="load"/>
+                        <img src={EditImage} alt="load" />
                       </button>
                     </td>
                   </tr>
@@ -91,10 +95,7 @@ const UserManagement = () => {
         </div>
       </div>
       {isEditModalOpen && (
-        <EditModal 
-          onClose={handleClose}
-          onSave={handleSave}
-        />
+        <EditModal onClose={handleClose} onSave={handleSave} />
       )}
     </div>
   );

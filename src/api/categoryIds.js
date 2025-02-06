@@ -1,6 +1,6 @@
-import { categoryIdRequest } from "./sendPublicRequest";
+import { sendRequest } from "./sendPublicRequest";
 
 export const getCategories = () =>
-    categoryIdRequest("/categories", {
-      method: "GET",
-    });
+  sendRequest("/categories", {
+    method: "GET",
+  });

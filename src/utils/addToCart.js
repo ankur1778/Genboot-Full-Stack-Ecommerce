@@ -8,10 +8,13 @@ const AddToCartButton = ({ productId }) => {
   const dispatch = useDispatch();
   const { isLoading, isError } = useSelector((state) => state.cart);
   const [isAdded, setIsAdded] = useState(false);
+  const [toast, setToast] = useState({ message: "", type: "" });
 
   const handleAddToCart = () => {
     dispatch(addItemToCart(productId));
     setIsAdded(true);
+    setIsAdded(true);
+    setToast({ message: CartMessages.ADDED, type: "success" });
   };
 
   return (
@@ -23,6 +26,9 @@ const AddToCartButton = ({ productId }) => {
       >
         {isLoading ? "Adding..." : isAdded ? "Added to cart" : "Add to Cart"}
       </button>
+      {toast.message && (
+        <ToastMessage message={toast.message} type={toast.type} />
+      )}
       {isError && (
         <p style={{ color: "red" }}>
           <ToastMessage message={CartMessages.NOT_ADDED} />

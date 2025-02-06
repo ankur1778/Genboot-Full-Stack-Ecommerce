@@ -1,3 +1,4 @@
+import { addToWishlists } from "../../../api/wishlists";
 import { WishListMessage } from "../../../utils/statusMessages";
 import ToastMessage from "../../../utils/ToastMessage";
 import {
@@ -22,11 +23,11 @@ export const addToWishlistFailure = (error) => ({
 
 export const addItemToWishlist = (product) => {
   return async (dispatch) => {
-    const payload = { product: product._id };
+    const payload = { product: product };
     dispatch(addToWishlistRequest());
 
     try {
-      const response = await payload;
+      const response = await addToWishlists(payload);      
       if (response?.status) {
         dispatch(addToWishlistSucccess(response.cart));
       } else {

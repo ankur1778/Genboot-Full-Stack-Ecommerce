@@ -8,6 +8,7 @@ import { Carousel } from "react-responsive-carousel";
 import AddToCartButton from "../utils/addToCart";
 import ToastMessage from "../utils/ToastMessage";
 import { ProductMessages } from "../utils/statusMessages";
+import AddToWishlistButton from "../utils/addToWishlist";
 
 const ProductsByCategories = () => {
   const { categoryId } = useParams();
@@ -92,6 +93,9 @@ const ProductsByCategories = () => {
                   </Link>
                   <div className="mt-6 flex justify-between items-center">
                     <AddToCartButton productId={product} />
+                    <div>
+                    <AddToWishlistButton product={product} />
+                    </div>
                   </div>
                 </div>
               ))}

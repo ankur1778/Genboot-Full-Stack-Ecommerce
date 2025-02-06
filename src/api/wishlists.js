@@ -14,3 +14,10 @@ export const getWishlists = () => {
     method: "GET",
   });
 };
+
+export const removeFromWishlists = (product) => {
+  return sendRequest(`${BASE_PATH}/remove-from-wishlist`, {
+    method: "DELETE",
+    body: JSON.stringify(product),
+  });
+};

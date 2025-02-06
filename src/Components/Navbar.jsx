@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { togglehamburger } from "../Redux/Actions/HamburgerAction/HamburgerAction";
 import logo from "../Images/logo1.png";
 import cartLogo from "../Images/cartLogo.png";
-import profile from '../Images/profileLogo.svg'
+import profile from "../Images/profileLogo.svg";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -55,10 +55,16 @@ const Navbar = () => {
             Cart
           </Link>
           <Link
+            to="/wishlists"
+            className="hover:border px-4 py-2 rounded-lg border-slate-300"
+          >
+            Wishlist
+          </Link>
+          <Link
             to="/profile"
             className="hover:border px-4 py-2 rounded-lg border-slate-300"
           >
-            <img src={profile} alt="Profile"/>
+            <img src={profile} alt="Profile" />
           </Link>
         </div>
         <div className="md:hidden flex items-center">

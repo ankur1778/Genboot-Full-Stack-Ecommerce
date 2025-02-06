@@ -10,9 +10,11 @@ import {
 export const getWishlistRequest = () => ({
   type: GET_WISHLIST_REQUEST,
 });
-export const getWishlistSuccess = (items) => ({
+export const getWishlistSuccess = (wishlist) => ({
   type: GET_WISHLIST_SUCCESS,
-  payload: items,
+  payload: {
+    items: wishlist.products.map((item) => item.product), // Extract product objects from wishlist items
+  },
 });
 
 export const getWishlistFailure = (error) => ({

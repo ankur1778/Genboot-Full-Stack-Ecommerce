@@ -26,6 +26,8 @@ export const WishListMessage = {
   EXIST: "Item already exists in wishlist",
   EMPTY: "Product not found in wishlist",
   REMOVED: "Product removed successfully",
+  CANT_ADD: "Can't add to wishlist",
+  CANT_REMOVE: "Can't Remove Item From Wishlist",
 };
 
 export const OrderMessage = {
@@ -38,6 +40,7 @@ export const OrderMessage = {
 export const CartMessages = {
   NOT_FOUND: "Cart not found",
   EMPTY: "Item not in cart",
+  ADDED: "Item added to cart",
   CANT_UPDATE: "Can't update Quantity",
   CANT_REMOVE: "Can't Remove the Item",
   REMOVED: "Item removed from cart",

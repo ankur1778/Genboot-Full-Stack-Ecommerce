@@ -8,6 +8,7 @@ import MotionPath from "../Components/loader";
 import { Link } from "react-router-dom";
 import ToastMessage from "../utils/ToastMessage";
 import { ProductMessages } from "../utils/statusMessages";
+import AddToWishlistButton from "../utils/addToWishlist";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
@@ -87,6 +88,9 @@ const AllProducts = () => {
                 </Link>
                 <div className="mt-6 flex justify-between items-center">
                   <AddToCartButton productId={product} />
+                  <div>
+                    <AddToWishlistButton product={product} />
+                  </div>
                 </div>
               </div>
             ))}

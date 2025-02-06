@@ -15,6 +15,9 @@ import decreaseCartItemQuantitySlice from "./CartSlice/decreaseQuantitySlice";
 import SingleProductReducer from "./singleProductSlice";
 import { ordersReducer } from "../../AdminComponent/ReducersAdmin/AllOrdersSlice";
 import getUserOrderSlice from "./OrderSlices/getUserOrdersSlice";
+import addToWishlistReducer from "./Wishlists/addToWishlistSlice";
+import getWishlistReducer from "./Wishlists/getWishlistSlice";
+import removeItemFromWishlistSlice from "./Wishlists/removeFromWishlistSlice";
 
 export const rootReducer = combineReducers({
   getAllProducts: allProductsReducerAdmin,
@@ -31,6 +34,9 @@ export const rootReducer = combineReducers({
   removeCartItem: removeItemFromCartSlice,
   increaseQuantity: increaseCartItemQuantitySlice,
   decreaseQuantity: decreaseCartItemQuantitySlice,
+  addToWishlist: addToWishlistReducer,
+  getWishlist: getWishlistReducer,
+  removeFromWishlist: removeItemFromWishlistSlice,
   singleProduct: SingleProductReducer,
   userOrders: getUserOrderSlice,
 });

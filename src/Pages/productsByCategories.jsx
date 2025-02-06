@@ -47,8 +47,6 @@ const ProductsByCategories = () => {
             </h1>
           </div>
         </div>
-        
-        
       </Carousel>
       {isLoading ? (
         <div>
@@ -59,11 +57,12 @@ const ProductsByCategories = () => {
           <MotionPath />
         </div>
       ) : isError ? (
-        <div style={{ color: "red" }}>Error loading products.</div>):(
+        <div style={{ color: "red" }}>Error loading products.</div>
+      ) : (
         <>
           <div className="flex flex-col justify-center bg-gray-100">
             <div className="flex justify-center h-20 items-center mt-10">
-              <h1 className="text-[60px] font-semibold italic ">
+              <h1 className="text-[60px] font-semibold uppercase italic ">
                 {productsByCategories[0]?.category?.name}
               </h1>
             </div>
@@ -92,13 +91,7 @@ const ProductsByCategories = () => {
                     </div>
                   </Link>
                   <div className="mt-6 flex justify-between items-center">
-                    {/* <button className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700">
-                      Add to cart
-                    </button> */}
-                     <AddToCartButton
-                     productId={product}
-                  />
-
+                    <AddToCartButton productId={product} />
                   </div>
                 </div>
               ))}

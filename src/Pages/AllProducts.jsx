@@ -90,9 +90,6 @@ const AllProducts = ({ product }) => {
                   <p className="mt-2 text-gray-600">₹{product.price}</p>
                 </div></Link>
                 <div className="mt-6 flex justify-between items-center">
-                  {/* <button onClick={()=>AddToCartButton } className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700">
-                    Add to cart
-                  </button> */}
                   <AddToCartButton productId={product} />
                 </div>
               </div>

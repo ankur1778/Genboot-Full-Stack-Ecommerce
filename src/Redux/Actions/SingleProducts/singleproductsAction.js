@@ -24,8 +24,6 @@ export const getSingleProduct = (productId) => {
     dispatch(singleProductRequest());
     try {
       const product = await SingleProduct(productId);
-      console.log(product, "ooo");
-      
       dispatch(singleProductSuccess(product));
       return true;
     } catch (error) {

@@ -10,10 +10,12 @@ import { allProductsReducerAdmin } from "../../AdminComponent/ReducersAdmin/AllP
 import cartSlice from "./CartSlice/CartSlice";
 import getCartSlice from "./CartSlice/getCartSlice";
 import SingleProductReducer from "./singleProductSlice";
+import { ordersReducer } from "../../AdminComponent/ReducersAdmin/AllOrdersSlice";
 
 export const rootReducer = combineReducers({
   getAllProducts: allProductsReducerAdmin,
   getAllUsers: userReducerAdmin,
+  getAllOrders: ordersReducer,
   auth: userReducer,
   register: registerSlice,
   hamburger: HamburgerReducer,

@@ -16,6 +16,9 @@ const AdminNavbar = ({handleChange}) => {
                         <li className='px-4 py-2 text-lg cursor-pointer hover:bg-gray-200 hover:text-red-800  rounded-lg font-serif' onClick={()=>handleChange('productManagement')}>
                             Product Management
                         </li>
+                        <li className='px-4 py-2 text-lg cursor-pointer hover:bg-gray-200 hover:text-red-800  rounded-lg font-serif' onClick={() => handleChange('orderManagement')}>
+                            Order Management
+                        </li>
                         <li className='px-4 py-2 text-lg cursor-pointer hover:bg-gray-200 hover:text-red-800  rounded-lg font-serif'>
                             Profile
                         </li>

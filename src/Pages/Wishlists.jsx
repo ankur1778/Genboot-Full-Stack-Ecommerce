@@ -13,9 +13,8 @@ const Wishlists = () => {
   const { items, isLoading, isError } = useSelector(
     (state) => state.getWishlist
   );
-  console.log(items);
-  
-  const handleRemoveItem = (product) => {    
+
+  const handleRemoveItem = (product) => {
     dispatch(removeItemFromWishlist(product));
   };
   useEffect(() => {

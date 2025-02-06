@@ -45,7 +45,6 @@ const AllOrdersPage = () => {
             className="w-screen flex justify-center items-center mt-6"
           >
             <div className="bg-white px-8 py-6 shadow-xl rounded-lg border w-[90%] max-w-4xl">
-              {/* Order Header */}
               <div className="flex flex-col md:flex-row md:justify-between items-start md:items-center bg-gray-100 p-4 rounded-md shadow-sm">
                 <div>
                   <p className="text-lg font-semibold">Order Details</p>

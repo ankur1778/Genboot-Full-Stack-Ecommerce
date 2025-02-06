@@ -62,7 +62,7 @@ const ProductsByCategories = () => {
         <>
           <div className="flex flex-col justify-center bg-gray-100">
             <div className="flex justify-center h-20 items-center mt-10">
-              <h1 className="text-[60px] font-semibold italic ">
+              <h1 className="text-[60px] font-semibold uppercase italic ">
                 {productsByCategories[0]?.category?.name}
               </h1>
             </div>

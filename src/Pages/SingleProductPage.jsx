@@ -7,6 +7,7 @@ import MotionPath from "../Components/loader";
 import AddToCartButton from "../utils/addToCart";
 import ToastMessage from "../utils/ToastMessage";
 import { ProductMessages } from "../utils/statusMessages";
+import Button from "../utils/button";
 
 const SingleProductPage = () => {
   const dispatch = useDispatch();
@@ -18,6 +19,13 @@ const SingleProductPage = () => {
   useEffect(() => {
     dispatch(getSingleProduct(productId));
   }, [dispatch, productId]);
+
+  const colorOptions = [
+    { light: "bg-gray-800", dark: "bg-gray-200" },
+    { light: "bg-red-500", dark: "bg-red-700" },
+    { light: "bg-blue-500", dark: "bg-blue-700" },
+    { light: "bg-yellow-500", dark: "bg-yellow-700" },
+  ];
 
   useEffect(() => {
     if (isError) {
@@ -39,7 +47,7 @@ const SingleProductPage = () => {
                 products && (
                   <div className=" rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
                     <img
-                      className="w-full h-80"
+                      className="w-full h-80 p-2"
                       src={products?.image}
                       alt={products?.name}
                     />
@@ -78,12 +86,7 @@ const SingleProductPage = () => {
                     <span className="font-bold text-gray-700 dark:text-gray-300">
                       Select Color:
                     </span>
-                    <div className="flex items-center mt-2">
-                      <button className="w-6 h-6 rounded-full bg-gray-800 dark:bg-gray-200 mr-2"></button>
-                      <button className="w-6 h-6 rounded-full bg-red-500 dark:bg-red-700 mr-2"></button>
-                      <button className="w-6 h-6 rounded-full bg-blue-500 dark:bg-blue-700 mr-2"></button>
-                      <button className="w-6 h-6 rounded-full bg-yellow-500 dark:bg-yellow-700 mr-2"></button>
-                    </div>
+                    <Button colors={colorOptions} />
                   </div>
                   <div>
                     <span className="font-bold text-gray-700 dark:text-gray-300">

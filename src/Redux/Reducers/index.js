@@ -13,11 +13,13 @@ import removeItemFromCartSlice from "./CartSlice/removeItemSlice";
 import increaseCartItemQuantitySlice from "./CartSlice/increaseQuantitySlice";
 import decreaseCartItemQuantitySlice from "./CartSlice/decreaseQuantitySlice";
 import SingleProductReducer from "./singleProductSlice";
+import { ordersReducer } from "../../AdminComponent/ReducersAdmin/AllOrdersSlice";
 import getUserOrderSlice from "./OrderSlices/getUserOrdersSlice";
 
 export const rootReducer = combineReducers({
   getAllProducts: allProductsReducerAdmin,
   getAllUsers: userReducerAdmin,
+  getAllOrders: ordersReducer,
   auth: userReducer,
   register: registerSlice,
   hamburger: HamburgerReducer,

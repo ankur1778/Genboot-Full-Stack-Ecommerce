@@ -12,6 +12,8 @@ const ProductManagement = () => {
   const { products, isError, isLoading } = useSelector(
     (state) => state.getAllProducts
   );
+  const cellClass = "px-3 py-3";
+  const fields = ["name", "category.name", "price", "countInStock"];
 
   useEffect(() => {
     dispatch(GetAllProducts());
@@ -63,10 +65,16 @@ const ProductManagement = () => {
                 ) : (
                   products?.map((product) => (
                     <tr key={product._id}>
-                      <td className="px-3 py-3">{product?.name}</td>
-                      <td className="px-3 py-3">{product?.category?.name}</td>
-                      <td className="px-3 py-3">{product?.price}</td>
-                      <td className="px-3 py-3">{product?.countInStock}</td>
+                      {fields.map((field, index) => {
+                        const value = field
+                          .split(".")
+                          .reduce((a, key) => a?.[key], product);
+                        return (
+                          <td key={index} className={cellClass}>
+                            {value}
+                          </td>
+                        );
+                      })}
                     </tr>
                   ))
                 )}

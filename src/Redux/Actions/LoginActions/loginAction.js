@@ -1,10 +1,5 @@
 import { login } from "../../../api/auth";
 import {
-  AuthMessages,
-  ServerErrorMessage,
-} from "../../../utils/statusMessages.js";
-import ToastMessage from "../../../utils/ToastMessage.js";
-import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
@@ -37,15 +32,11 @@ export const LoginUser = (values) => {
       if (response?.token) {
         Cookies.set("token", response.token);
         dispatch(loginSuccess(response));
-        return true;
-      } else {
-        throw new Error(
-          <ToastMessage message={ServerErrorMessage.SERVER_ERROR} />
-        );
+        return { success: true };
       }
     } catch (error) {
-      dispatch(loginFail(<ToastMessage message={AuthMessages.INVALID} />));
-      return false;
+      dispatch(loginFail(error));
+      return { success: false };
     }
   };
 };

@@ -32,6 +32,9 @@ const Cart = () => {
     dispatch(decreaseCartItemQuantity(productId));
   };
 
+  if (isError) {
+    <ToastMessage message={ProductMessages.NOT_FOUND} />;
+  }
   const calculateTotal = () => {
     return item.reduce(
       (total, currentItem) =>
@@ -50,13 +53,7 @@ const Cart = () => {
         <div className="grid md:grid-cols-3 gap-8 mt-16">
           <div className="md:col-span-2 space-y-4">
             {isLoading ? (
-              <div>
-                <MotionPath />
-              </div>
-            ) : isError ? (
-              <div style={{ color: "red" }}>
-                <ToastMessage message={ProductMessages.NOT_FOUND} />
-              </div>
+              <MotionPath />
             ) : item && item.length > 0 ? (
               item.map((product) => (
                 <div
@@ -159,7 +156,6 @@ const Cart = () => {
 
             <div className="mt-6 space-y-3">
               <Link to="/cart/checkout">
-                {" "}
                 <button
                   type="button"
                   className="text-sm px-4 py-2.5 w-full font-semibold tracking-wide bg-gray-800 hover:bg-gray-900 text-white rounded-md"
@@ -172,7 +168,7 @@ const Cart = () => {
                   type="button"
                   className="text-sm px-4 py-2.5 w-full font-semibold tracking-wide bg-transparent text-gray-800 border border-gray-300 rounded-md"
                 >
-                  Continue Shopping{" "}
+                  Continue Shopping
                 </button>
               </Link>
             </div>

@@ -5,38 +5,45 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { LoginUser } from "../Redux/Actions/LoginActions/loginAction";
 import { jwtdecode } from "../utils/jwt_decode";
+import ToastMessage from "../utils/ToastMessage";
+import { AuthMessages, ServerErrorMessage } from "../utils/statusMessages";
 
 const Login = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
+  const [toast, setToast] = useState({ message: "", type: "" });
 
   const validationSchema = Yup.object().shape({
     email: Yup.string().email().required("Email is required"),
     password: Yup.string().required("Password is required"),
   });
 
-  const handleLogin = async (values, { setFieldError }) => {
+  const handleLogin = async (values) => {
     try {
       const result = await dispatch(LoginUser(values));
-      if (result) {
+      if (result.success) {
+        setToast({ message: AuthMessages.LOGGED, type: "success" });
+
         const decodedToken = jwtdecode();
         if (decodedToken) {
           const role = decodedToken.roleId;
           if (role === process.env.REACT_APP_ROLE_ADMIN) {
             navigate("/admin-dashboard");
           } else {
+            setToast({ message: AuthMessages.INVALID, type: "error" });
+
             navigate("/");
           }
         }
       }
     } catch (error) {
-      setFieldError("general", "An error Occured. Please Try Again");
+      <ToastMessage message={ServerErrorMessage.SERVER_ERROR} />;
     }
   };
 
   useEffect(() => {
-    const decodedToken = jwtdecode(); // Call the function
+    const decodedToken = jwtdecode();
     if (decodedToken) {
       const role = decodedToken.roleId;
       if (role === process.env.REACT_APP_ROLE_ADMIN) {
@@ -49,6 +56,7 @@ const Login = () => {
 
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-gray-100 ">
+      <ToastMessage message={toast.message} type={toast.type} />
       <div className="px-12 py-4 shadow-lg rounded-md justify-center border-2 max-w-[1000px] bg-white">
         <h1 className="font-bold text-2xl text-center mt-2 mb-4">Login</h1>
         <Formik

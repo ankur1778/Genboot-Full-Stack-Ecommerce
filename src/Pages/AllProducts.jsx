@@ -18,6 +18,9 @@ const AllProducts = () => {
     dispatch(getAllProducts());
   }, [dispatch]);
 
+  if (isError) {
+    <ToastMessage message={ProductMessages.NOT_FETCH} />;
+  }
   return (
     <>
       <Navbar />
@@ -56,13 +59,7 @@ const AllProducts = () => {
       </Carousel>
       <div className="product-list">
         {isLoading ? (
-          <div className="flex justify-center">
-            <MotionPath />
-          </div>
-        ) : isError ? (
-          <div style={{ color: "red" }}>
-            <ToastMessage message={ProductMessages.NOT_FETCH} />
-          </div>
+          <MotionPath />
         ) : (
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-10">
             {products.map((product) => (

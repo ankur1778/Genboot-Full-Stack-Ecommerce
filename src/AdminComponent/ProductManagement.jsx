@@ -3,6 +3,9 @@ import image from "../Images/Product.svg";
 import filter from "../Images/sort.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { GetAllProducts } from "./ActionsAdmin/Allproducts/productAction";
+import ToastMessage from "../utils/ToastMessage";
+import { ProductMessages } from "../utils/statusMessages";
+import MotionPath from "../Components/loader";
 
 const ProductManagement = () => {
   const dispatch = useDispatch();
@@ -13,6 +16,10 @@ const ProductManagement = () => {
   useEffect(() => {
     dispatch(GetAllProducts());
   }, [dispatch]);
+
+  if (isError) {
+    <ToastMessage message={ProductMessages.NOT_FETCH} />;
+  }
   return (
     <>
       <div className="bg-gray-400 h-screen border-2 border-neutral-100">
@@ -52,9 +59,7 @@ const ProductManagement = () => {
               </thead>
               <tbody>
                 {isLoading ? (
-                  <div>Loading...</div>
-                ) : isError ? (
-                  <div style={{ color: "red" }}>Error loading products.</div>
+                  <MotionPath />
                 ) : (
                   products?.map((product) => (
                     <tr key={product._id}>

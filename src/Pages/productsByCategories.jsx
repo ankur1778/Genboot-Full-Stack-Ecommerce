@@ -18,6 +18,10 @@ const ProductsByCategories = () => {
   useEffect(() => {
     dispatch(getProductsByCategories(categoryId));
   }, [dispatch, categoryId]);
+
+  if (isError) {
+    <ToastMessage message={ProductMessages.NOT_FETCH} />;
+  }
   return (
     <>
       <Navbar />
@@ -53,10 +57,6 @@ const ProductsByCategories = () => {
       {isLoading ? (
         <div>
           <MotionPath />
-        </div>
-      ) : isError ? (
-        <div>
-          <ToastMessage message={ProductMessages.NOT_FETCH} />
         </div>
       ) : (
         <>

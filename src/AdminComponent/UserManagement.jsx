@@ -4,6 +4,8 @@ import EditModal from "../AdminComponent/EditModal";
 import image from "../Images/usermanagement.svg";
 import EditImage from "../Images/Edit.svg";
 import { UserAction } from "./ActionsAdmin/AllUsers/userAction";
+import ToastMessage from "../utils/ToastMessage";
+import { AdminMessage } from "../utils/statusMessages";
 
 const UserManagement = () => {
   const dispatch = useDispatch();
@@ -11,6 +13,10 @@ const UserManagement = () => {
   const { users, isError, isLoading } = useSelector(
     (state) => state.getAllUsers
   );
+
+  if(isError){
+    <ToastMessage message={AdminMessage.CANT_FETCH_USERS} />
+  }
 
   useEffect(() => {
     dispatch(UserAction());
@@ -39,7 +45,6 @@ const UserManagement = () => {
           <div className="spinner-border animate-spin border-t-4 border-blue-600 rounded-full w-8 h-8"></div>
         </div>
       )}
-      {isError && <div className="text-red-500">{isError}</div>}
       <div className="border-2 border-gray-200 shadow-md rounded-md p-6 bg-white mx-16">
         <input
           type="text"

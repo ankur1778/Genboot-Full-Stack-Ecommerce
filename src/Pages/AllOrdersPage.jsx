@@ -3,6 +3,8 @@ import Navbar from "../Components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserOrder } from "../Redux/Actions/OrderActions/getUserOrderAction";
 import MotionPath from "../Components/loader";
+import ToastMessage from "../utils/ToastMessage";
+import { OrderMessage } from "../utils/statusMessages";
 
 const AllOrdersPage = () => {
   const dispatch = useDispatch();
@@ -14,6 +16,9 @@ const AllOrdersPage = () => {
     dispatch(getUserOrder());
   }, [dispatch]);
 
+  if (isError) {
+    <ToastMessage message={OrderMessage.NOT_FOUND} />;
+  }
   return (
     <>
       <Navbar />
@@ -29,12 +34,10 @@ const AllOrdersPage = () => {
         <div className="flex justify-center mt-6">
           <MotionPath />
         </div>
-      ) : isError ? (
-        <p className="text-center mt-6 text-red-500 text-lg">
-          Failed to load orders.
-        </p>
       ) : orders?.length === 0 ? (
-        <p className="text-center mt-6 text-gray-500 text-lg">No orders found.</p>
+        <p className="text-center mt-6 text-gray-500 text-lg">
+          No orders found.
+        </p>
       ) : (
         orders.map((order) => (
           <div
@@ -53,8 +56,7 @@ const AllOrdersPage = () => {
                     </span>
                   </p>
                   <p className="text-sm text-gray-600">
-                    Order ID:{" "}
-                    <span className="font-medium">{order._id}</span>
+                    Order ID: <span className="font-medium">{order._id}</span>
                   </p>
                 </div>
                 <p className="text-lg font-bold text-gray-800">
@@ -67,8 +69,9 @@ const AllOrdersPage = () => {
                 <p className="text-gray-700 font-semibold">Shipping Address:</p>
                 <p className="text-gray-900 font-medium">
                   {order.shippingAddress1}
-                  {order.shippingAddress2 && `, ${order.shippingAddress2}`},{" "}
-                  {order.city}, {order.state}, {order.zip}, {order.country}
+                  {order.shippingAddress2 &&
+                    `, ${order.shippingAddress2}`}, {order.city}, {order.state},{" "}
+                  {order.zip}, {order.country}
                 </p>
               </div>
 

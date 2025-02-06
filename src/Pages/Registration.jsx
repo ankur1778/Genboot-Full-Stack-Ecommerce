@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import { RegisterUser } from "../Redux/Actions/Registations/registrationAction";
 import { useNavigate } from "react-router-dom";
+import ToastMessage from "../utils/ToastMessage";
+import { AuthMessages } from "../utils/statusMessages";
 
 const Registration = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [toast, setToast] = useState({ message: "", type: "" });
   const validationSchema = Yup.object({
     name: Yup.string().max(20, "Name must be at most 20 characters"),
     phNo: Yup.string().matches(/^[0-9]{10}$/, "Phone number must be 10 digits"),
@@ -15,20 +18,20 @@ const Registration = () => {
     password: Yup.string().min(6, "Password must be at least 6 characters"),
   });
 
-  const handleRegisteration = async (values, { setFieldError }) => {
-    try {
-      const result = await dispatch(RegisterUser(values));
+  const handleRegistration = async (values) => {
+    const result = await dispatch(RegisterUser(values));
 
-      if (result) {
-        navigate("/login");
-      }
-    } catch (error) {
-      setFieldError("general", "An error Occured. Please Try Again");
+    if (result.success) {
+      setToast({ message: AuthMessages.REGISTERED, type: "success" });
+      setTimeout(() => navigate("/login"), 2000);
+    } else {
+      setToast({ message: AuthMessages.INVALID, type: "error" });
     }
   };
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+      <ToastMessage message={toast.message} type={toast.type} />
       <div className="bg-white p-8 rounded-lg shadow-lg w-full sm:w-96">
         <h2 className="text-2xl font-bold text-center mb-4">Register</h2>
         <Formik
@@ -39,7 +42,7 @@ const Registration = () => {
             password: "",
           }}
           validationSchema={validationSchema}
-          onSubmit={handleRegisteration}
+          onSubmit={handleRegistration}
         >
           {({ handleSubmit, handleChange, values, isSubmitting }) => (
             <Form onSubmit={handleSubmit}>

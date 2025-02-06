@@ -14,8 +14,8 @@ export const AuthMessages = {
 };
 
 export const RoleMessages = {
-  MISSING : "Role Id or Token is missing"
-}
+  MISSING: "Role Id or Token is missing",
+};
 export const ProductMessages = {
   NOT_FOUND: "Can't found the product",
   NOT_FETCH: "Can't fetch products",
@@ -50,6 +50,7 @@ export const ServerErrorMessage = {
 
 export const AdminMessage = {
   NOT_AUTH: "Access denied: You are not authorized",
+  CANT_FETCH: "Can't fetch the users",
 };
 
 export const CategoriesMessages = {

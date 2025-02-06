@@ -7,11 +7,14 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { PostOrder } from "../Redux/Actions/OrderActions/postOrderAction";
 import { useNavigate } from "react-router-dom";
 import MotionPath from "../Components/loader";
+import ToastMessage from "../utils/ToastMessage";
+import { OrderMessage, ProductMessages } from "../utils/statusMessages";
 
 const CheckoutPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { item, isLoading, isError } = useSelector((state) => state.getCart);
+  const [toast, setToast] = useState({ message: "", type: "" });
   const [orderItems, setOrderItems] = useState([]);
   const calculateTotal = () => {
     return item.reduce(
@@ -52,17 +55,23 @@ const CheckoutPage = () => {
     try {
       const orderData = { ...values, orderItems };
       const order = await PostOrder(orderData);
-      if (order) {
+      if (order.success) {
+        setToast({ message: OrderMessage.PLACED, type: "success" });
         navigate("/your-orders");
       }
     } catch (error) {
-      setFieldError("general", "An error Occurred. Please Try Again");
+      setToast({ message: OrderMessage.NOT_PLACED, type: "error" });
     }
   };
+
+  if (isError) {
+    <ToastMessage message={ProductMessages.NOT_FOUND} />;
+  }
   return (
     <>
       <Navbar />
       <div className="w-screen flex justify-center items-center bg-[#EAEDED]">
+        <ToastMessage message={toast.message} type={toast.type} />
         <div className="px-8 py-4 shadow-lg rounded-2xl border bg-white w-[90%] max-w-4xl">
           <div className="bg-gray-50 mt-4 p-4 rounded-md">
             <div className="flex justify-between">
@@ -73,11 +82,7 @@ const CheckoutPage = () => {
               </span>
             </div>
             {isLoading ? (
-              <div>
-                <MotionPath />
-              </div>
-            ) : isError ? (
-              <div style={{ color: "red" }}>Error loading products.</div>
+              <MotionPath />
             ) : (
               item?.map((item) => (
                 <div

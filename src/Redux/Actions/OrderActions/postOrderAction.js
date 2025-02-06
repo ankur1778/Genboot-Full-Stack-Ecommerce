@@ -35,13 +35,16 @@ export const PostOrder = (values) => {
     dispatch(postOrderRequest());
     try {
       const response = await postOrder(payload);
-      if (response?.status) {
+      if (response) {
         dispatch(postOrderSuccess(response));
+        return { success: true };
       } else {
         dispatch(postOrderFailure(OrderMessage.NOT_PLACED));
+        return { success: false };
       }
     } catch (error) {
       dispatch(postOrderFailure(OrderMessage.NOT_PLACED));
+      return { success: false };
     }
   };
 };

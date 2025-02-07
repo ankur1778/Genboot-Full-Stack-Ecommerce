@@ -1,11 +1,10 @@
+import { allUsers } from "../../api/allUsers";
+import ToastMessage from "../../../utils/ToastMessage";
 import {
   SHOW_USER_FAILURE,
   SHOW_USER_REQUEST,
   SHOW_USER_SUCCESS,
-} from "./userActionType";
-
-import { allUsers } from "../../api/allUsers";
-import ToastMessage from "../../../utils/ToastMessage";
+} from "../ActionTypes/userActionType";
 
 export const getUsersRequest = () => ({
   type: SHOW_USER_REQUEST,

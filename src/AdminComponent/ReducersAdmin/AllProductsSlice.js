@@ -1,8 +1,8 @@
 import {
-  GET_ALL_PRODUCT_FAILURE,
-  GET_ALL_PRODUCT_REQUEST,
-  GET_ALL_PRODUCT_SUCCESS,
-} from "../ActionsAdmin/Allproducts/productActionType";
+  GET_ALL_PRODUCTS_FAILURE,
+  GET_ALL_PRODUCTS_REQUEST,
+  GET_ALL_PRODUCTS_SUCCESS,
+} from "../../Redux/Actions/ActionTypes/types";
 
 const initialState = {
   products: null,
@@ -12,21 +12,21 @@ const initialState = {
 
 export const allProductsReducerAdmin = (state = initialState, action) => {
   switch (action.type) {
-    case GET_ALL_PRODUCT_REQUEST:
+    case GET_ALL_PRODUCTS_REQUEST:
       return {
         ...state,
         products: null,
         isLoading: true,
         isError: false,
       };
-    case GET_ALL_PRODUCT_SUCCESS:
+    case GET_ALL_PRODUCTS_SUCCESS:
       return {
         ...state,
         products: action.payload,
         isLoading: false,
         isError: false,
       };
-    case GET_ALL_PRODUCT_FAILURE:
+    case GET_ALL_PRODUCTS_FAILURE:
       return {
         ...state,
         products: null,

@@ -1,22 +1,22 @@
-import {
-  GET_ALL_PRODUCT_REQUEST,
-  GET_ALL_PRODUCT_SUCCESS,
-  GET_ALL_PRODUCT_FAILURE,
-} from "./productActionType";
 import { allProducts } from "../../api/allProducts";
 import ToastMessage from "../../../utils/ToastMessage";
+import {
+  GET_ALL_PRODUCTS_FAILURE,
+  GET_ALL_PRODUCTS_REQUEST,
+  GET_ALL_PRODUCTS_SUCCESS,
+} from "../../../Redux/Actions/ActionTypes/types";
 
 export const getProductsRequest = () => ({
-  type: GET_ALL_PRODUCT_REQUEST,
+  type: GET_ALL_PRODUCTS_REQUEST,
 });
 
 export const getProductsSuccess = (products) => ({
-  type: GET_ALL_PRODUCT_SUCCESS,
+  type: GET_ALL_PRODUCTS_SUCCESS,
   payload: products,
 });
 
 export const getProductsFailure = (error) => ({
-  type: GET_ALL_PRODUCT_FAILURE,
+  type: GET_ALL_PRODUCTS_FAILURE,
   payload: error,
 });
 

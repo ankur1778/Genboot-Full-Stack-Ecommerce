@@ -14,3 +14,10 @@ export const getUserOrders = () => {
     method: "GET",
   });
 };
+
+export const cancelOrder = (orderId) => {
+  return sendRequest(`${BASE_PATH}/updatestatus/${orderId}`, {
+    method: "PUT",
+    body: JSON.stringify({ status: "Cancelled" }),
+  });
+};

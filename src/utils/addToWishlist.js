@@ -13,7 +13,7 @@ const AddToWishlistButton = ({ product }) => {
   const [toast, setToast] = useState({ message: "", type: "" });
 
   const handleAddToWishlist = () => {
-    dispatch(addItemToWishlist(product));
+    dispatch(addItemToWishlist(product));         
     setIsAdded(true);
     setToast({ message: WishListMessage.ADDED, type: "success" });
   };

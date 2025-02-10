@@ -11,9 +11,9 @@ export const getAllProductsRequest = () => ({
   type: GET_ALL_PRODUCTS_REQUEST,
 });
 
-export const getAllProductsSuccess = (products) => ({
+export const getAllProductsSuccess = (products, totalProducts) => ({
   type: GET_ALL_PRODUCTS_SUCCESS,
-  payload: products,
+  payload: { products, totalProducts },
 });
 
 export const getAllProductsFailure = (error) => ({
@@ -26,7 +26,9 @@ export const getAllProducts = () => {
     dispatch(getAllProductsRequest());
     try {
       const products = await allProducts();
-      dispatch(getAllProductsSuccess(products));
+      dispatch(
+        getAllProductsSuccess(products.products, products.totalProducts)
+      );
       return true;
     } catch (error) {
       <ToastMessage message={ProductMessages.NOT_FETCH} />;

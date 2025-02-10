@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProducts } from "../Redux/Actions/AllProducts/allProductAction";
@@ -9,15 +9,18 @@ import { Link } from "react-router-dom";
 import ToastMessage from "../utils/ToastMessage";
 import { ProductMessages } from "../utils/statusMessages";
 import AddToWishlistButton from "../utils/addToWishlist";
+import Pagination from "../utils/Pagination";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
-  const { products, isLoading, isError } = useSelector(
+  const { products, totalProducts, isLoading, isError } = useSelector(
     (state) => state.allProducts
   );
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 20;
   useEffect(() => {
-    dispatch(getAllProducts());
-  }, [dispatch]);
+    dispatch(getAllProducts(itemsPerPage, currentPage));
+  }, [dispatch, currentPage]);
 
   if (isError) {
     <ToastMessage message={ProductMessages.NOT_FETCH} />;
@@ -63,7 +66,7 @@ const AllProducts = () => {
           <MotionPath />
         ) : (
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-10">
-            {products.map((product) => (
+            {products?.map((product) => (
               <div
                 key={product._id}
                 className="bg-white shadow-md rounded-lg px-10 py-10"
@@ -83,19 +86,25 @@ const AllProducts = () => {
                     <p className="mt-2 text-gray-600 text-sm">
                       {product.description.slice(0, 40)}...
                     </p>
-                    <p className="mt-2 text-gray-600">₹{product.price}</p>
+                    <p className="mt-2 font-semibold text-gray-600">₹{product.price}</p>
                   </div>
                 </Link>
                 <div className="mt-6 flex justify-between items-center">
                   <AddToCartButton productId={product} />
                   <div>
-                    <AddToWishlistButton product={product} />
+                    <AddToWishlistButton product={product} />                    
                   </div>
                 </div>
               </div>
             ))}
           </div>
         )}
+        <Pagination
+          totalItems={totalProducts}
+          itemsPerPage={itemsPerPage}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       </div>
     </>
   );

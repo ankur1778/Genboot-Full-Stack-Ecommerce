@@ -5,7 +5,9 @@ import {
 } from "../../Redux/Actions/ActionTypes/types";
 
 const initialState = {
-  products: null,
+  products: [],
+totalProducts: 0,
+
   isLoading: false,
   isError: false,
 };
@@ -19,13 +21,13 @@ export const allProductsReducerAdmin = (state = initialState, action) => {
         isLoading: true,
         isError: false,
       };
-    case GET_ALL_PRODUCTS_SUCCESS:
-      return {
-        ...state,
-        products: action.payload,
-        isLoading: false,
-        isError: false,
-      };
+case GET_ALL_PRODUCTS_SUCCESS:
+  return {
+    ...state,
+    isLoading: false,
+    products: action.payload.products,
+    totalProducts: action.payload.totalProducts, // Store total count
+  };
     case GET_ALL_PRODUCTS_FAILURE:
       return {
         ...state,

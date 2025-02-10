@@ -13,7 +13,7 @@ export const getWishlistRequest = () => ({
 export const getWishlistSuccess = (wishlist) => ({
   type: GET_WISHLIST_SUCCESS,
   payload: {
-    items: wishlist.products.map((item) => item.product), // Extract product objects from wishlist items
+    items: wishlist.products.map((item) => item.product),
   },
 });
 

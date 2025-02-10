@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   products: [],
+  totalProducts: 0,
   isLoading: false,
   isError: false,
 };
@@ -19,10 +20,11 @@ const getAllProductsReducer = (state = initialState, action) => {
         isLoading: true,
         isError: false,
       };
-    case GET_ALL_PRODUCTS_SUCCESS: 
+    case GET_ALL_PRODUCTS_SUCCESS:
       return {
         ...state,
-        products: action.payload,
+        products: action.payload.products,
+        totalProducts: action.payload.totalProducts,
         isLoading: false,
         isError: false,
       };

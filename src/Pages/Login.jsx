@@ -1,3 +1,130 @@
+// import React, { useEffect, useState } from "react";
+// import { Formik, Field, Form } from "formik";
+// import * as Yup from "yup";
+// import { useNavigate } from "react-router-dom";
+// import { useDispatch } from "react-redux";
+// import { LoginUser } from "../Redux/Actions/LoginActions/loginAction";
+// import { jwtdecode } from "../utils/jwt_decode";
+
+// const Login = () => {
+//   const navigate = useNavigate();
+//   const [showPassword, setShowPassword] = useState(false);
+//   const dispatch = useDispatch();
+
+//   const validationSchema = Yup.object().shape({
+//     email: Yup.string().email().required("Email is required"),
+//     password: Yup.string().required("Password is required"),
+//   });
+
+//   const handleLogin = async (values, { setFieldError }) => {
+//     try {
+//       const result = await dispatch(LoginUser(values));
+//       if (result) {
+//         const decodedToken = jwtdecode();
+//         if (decodedToken) {
+//           const role = decodedToken.roleId;          
+//           if (role === process.env.REACT_APP_ROLE_ADMIN) {
+//             navigate("/admin-dashboard");
+//           } else {
+//             navigate("/");
+//           }
+//         }
+//       } else {
+//         setFieldError("general", "Invalid Credentials. Please Try Again");
+//       }
+//     } catch (error) {
+//       setFieldError("general", "An error Occured. Please Try Again");
+//     }
+//   };
+
+//   useEffect(() => {
+//     const decodedToken = jwtdecode(); // Call the function
+//     if (decodedToken) {
+//       const role = decodedToken.roleId;
+//       if (role === process.env.REACT_APP_ROLE_ADMIN) {
+//         navigate("/admin-dashboard");
+//       } else {
+//         navigate("/");
+//       }
+//     }
+//   }, [navigate]);
+
+//   return (
+//     <div className="w-screen h-screen flex justify-center items-center bg-gray-100 ">
+//       <div className="px-12 py-4 shadow-lg rounded-md justify-center border-2 max-w-[1000px] bg-white">
+//         <h1 className="font-bold text-2xl text-center mt-2 mb-4">Login</h1>
+//         <Formik
+//           initialValues={{ email: "", password: "" }}
+//           validationSchema={validationSchema}
+//           onSubmit={handleLogin}
+//         >
+//           {({ handleSubmit, handleChange, values, errors, isSubmitting }) => (
+//             <Form onSubmit={handleSubmit}>
+//               {errors.general && (
+//                 <div className="text-red-600 text-sm mb-2 font-serif">
+//                   {errors.general}
+//                 </div>
+//               )}
+//               <div className="mb-4">
+//                 <label className="block font-medium text-gray-700">Email</label>
+//                 <Field
+//                   className="mt-2 flex border-2 border-gray-300 rounded-md items-center p-2 h-10 w-60"
+//                   name="email"
+//                   required
+//                   placeholder="Enter email"
+//                   onChange={handleChange}
+//                   value={values.email}
+//                 />
+//                 {errors.email && (
+//                   <span className="text-red-600 text-sm">{errors.email}</span>
+//                 )}
+//               </div>
+//               <div className="mb-4">
+//                 <label className="block font-medium text-gray-700">
+//                   Password
+//                 </label>
+//                 <Field
+//                   className="mt-2 flex border-2 border-gray-300 rounded-md items-center p-2 h-10 w-60"
+//                   name="password"
+//                   required
+//                   placeholder="Enter Password"
+//                   type={showPassword ? "text" : "password"}
+//                   onChange={handleChange}
+//                   value={values.password}
+//                 />
+//                 {errors.password && (
+//                   <span className="text-red-600 flex text-sm">
+//                     {errors.password}
+//                   </span>
+//                 )}
+//                 <label className="block font-medium text-gray-700 p-2">
+//                   <input
+//                     type="checkbox"
+//                     className="mt-4 me-2"
+//                     checked={showPassword}
+//                     onChange={() => setShowPassword((prev) => !prev)}
+//                   />
+//                   Show Password
+//                 </label>
+//               </div>
+//               <div>
+//                 <button
+//                   className="w-full p-2 bg-blue-500 text-white text-center items-center font-bold text-2xl rounded-md my-4 hover:bg-blue-600"
+//                   type="submit"
+//                   disabled={isSubmitting}
+//                 >
+//                   Login
+//                 </button>
+//               </div>
+//             </Form>
+//           )}
+//         </Formik>
+//       </div>
+//     </div>
+//   );
+// };
+// export default Login;
+
 import React, { useEffect, useState } from "react";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
@@ -38,7 +165,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    const decodedToken = jwtdecode(); // Call the function
+    const decodedToken = jwtdecode(); 
     if (decodedToken) {
       const role = decodedToken.roleId;
       if (role === process.env.REACT_APP_ROLE_ADMIN) {
@@ -50,77 +177,93 @@ const Login = () => {
   }, [navigate]);
 
   return (
-    <div className="w-screen h-screen flex justify-center items-center bg-gray-100 ">
-      <div className="px-12 py-4 shadow-lg rounded-md justify-center border-2 max-w-[1000px] bg-white">
-        <h1 className="font-bold text-2xl text-center mt-2 mb-4">Login</h1>
-        <Formik
-          initialValues={{ email: "", password: "" }}
-          validationSchema={validationSchema}
-          onSubmit={handleLogin}
-        >
-          {({ handleSubmit, handleChange, values, errors, isSubmitting }) => (
-            <Form onSubmit={handleSubmit}>
-              {errors.general && (
-                <div className="text-red-600 text-sm mb-2 font-serif">
-                  {errors.general}
-                </div>
-              )}
-              <div className="mb-4">
-                <label className="block font-medium text-gray-700">Email</label>
+    <div className="w-screen h-screen flex justify-center items-center bg-gray-100">
+      <div className="bg-[#dfa674] rounded-2xl flex max-w-3xl p-5 items-center shadow-lg">
+        <div className="md:w-1/2 px-8">
+          <h2 className="font-bold text-3xl text-[#002D74]">Login</h2>
+          <p className="text-sm mt-4 text-[#002D74]">
+            If you already a member, easily log in now.
+          </p>
+          <Formik
+            initialValues={{ email: "", password: "" }}
+            validationSchema={validationSchema}
+            onSubmit={handleLogin}
+          >
+            {({ handleSubmit, handleChange, values, errors, isSubmitting }) => (
+              <Form onSubmit={handleSubmit} className="flex flex-col gap-4">
+                {errors.general && (
+                  <div className="text-red-600 text-sm mb-2 font-serif">
+                    {errors.general}
+                  </div>
+                )}
                 <Field
-                  className="mt-2 flex border-2 border-gray-300 rounded-md items-center p-2 h-10 w-60"
+                  className="p-2 mt-8 rounded-xl border"
                   name="email"
-                  required
-                  placeholder="Enter email"
+                  placeholder="Email"
                   onChange={handleChange}
                   value={values.email}
                 />
                 {errors.email && (
                   <span className="text-red-600 text-sm">{errors.email}</span>
                 )}
-              </div>
-              <div className="mb-4">
-                <label className="block font-medium text-gray-700">
-                  Password
-                </label>
-                <Field
-                  className="mt-2 flex border-2 border-gray-300 rounded-md items-center p-2 h-10 w-60"
-                  name="password"
-                  required
-                  placeholder="Enter Password"
-                  type={showPassword ? "text" : "password"}
-                  onChange={handleChange}
-                  value={values.password}
-                />
+                <div className="relative">
+                  <Field
+                    className="p-2 rounded-xl border w-full"
+                    name="password"
+                    placeholder="Password"
+                    type={showPassword ? "text" : "password"}
+                    onChange={handleChange}
+                    value={values.password}
+                  />
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="gray"
+                    className="bi bi-eye absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer z-20 opacity-100"
+                    viewBox="0 0 16 16"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                  >
+                    <path
+                      d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"
+                    ></path>
+                    <path
+                      d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"
+                    ></path>
+                  </svg>
+                </div>
                 {errors.password && (
                   <span className="text-red-600 flex text-sm">
                     {errors.password}
                   </span>
                 )}
-                <label className="block font-medium text-gray-700 p-2">
-                  <input
-                    type="checkbox"
-                    className="mt-4 me-2"
-                    checked={showPassword}
-                    onChange={() => setShowPassword((prev) => !prev)}
-                  />
-                  Show Password
-                </label>
-              </div>
-              <div>
                 <button
-                  className="w-full p-2 bg-blue-500 text-white text-center items-center font-bold text-2xl rounded-md my-4 hover:bg-blue-600"
+                  className="bg-[#002D74] text-white py-2 rounded-xl hover:scale-105 duration-300 hover:bg-[#206ab1] font-medium"
                   type="submit"
                   disabled={isSubmitting}
                 >
                   Login
                 </button>
-              </div>
-            </Form>
-          )}
-        </Formik>
+              </Form>
+            )}
+          </Formik>
+          <div className="mt-4 text-sm flex justify-between items-center">
+            <p>If you don't have an account..</p>
+            <button className="bg-[#002D74] text-white py-2 px-5 rounded-xl hover:border-gray-400 hover:scale-110 hover:bg-[#002c7424] font-semibold duration-300">
+              Register
+            </button>
+          </div>
+        </div>
+        <div className="md:block hidden w-1/2">
+          <img
+            className="rounded-2xl max-h-[1600px]"
+            src="https://images.unsplash.com/photo-1552010099-5dc86fcfaa38?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxmcmVzaHxlbnwwfDF8fHwxNzEyMTU4MDk0fDA&ixlib=rb-4.0.3&q=80&w=1080"
+            alt=""
+          />
+        </div>
       </div>
     </div>
   );
 };
+
 export default Login;

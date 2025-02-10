@@ -5,7 +5,7 @@ export const SingleProduct = async (productId) => {
     const product = await singleProductRequest(`/products/${productId}`, {  
       method: "GET",
     });
-    return product;  // Return the resolved product data
+    return product; 
   } catch (error) {
     console.error("Error fetching product: ", error);
     throw error;  

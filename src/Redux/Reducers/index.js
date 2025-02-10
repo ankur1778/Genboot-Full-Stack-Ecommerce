@@ -11,6 +11,7 @@ import cartSlice from "./CartSlice/CartSlice";
 import getCartSlice from "./CartSlice/getCartSlice";
 import SingleProductReducer from "./singleProductSlice";
 import { ordersReducer } from "../../AdminComponent/ReducersAdmin/AllOrdersSlice";
+import profileReducer from "./profileSlice";
 
 export const rootReducer = combineReducers({
   getAllProducts: allProductsReducerAdmin,
@@ -25,6 +26,7 @@ export const rootReducer = combineReducers({
   cart: cartSlice,
   getCart: getCartSlice,
   singleProduct: SingleProductReducer,
+  getUsersDetail: profileReducer,
 });
 
 export default rootReducer;

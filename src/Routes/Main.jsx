@@ -10,6 +10,7 @@ import { PrivateRoute } from "./PrivateRoute";
 import AdminDashboard from "../AdminComponent/AdminDashboard";
 import Cart from "../Pages/Cart";
 import SingleProductPage from "../Pages/SingleProductPage";
+import ProfilePage from "../Pages/ProfilePage";
 
 const Main = () => {
   return (
@@ -25,6 +26,7 @@ const Main = () => {
           <Route path="/category/:categoryId" element={<PrivateRoute Component={ProductsByCategories} />} />
           <Route path="/admin-dashboard" element={<PrivateRoute Component={AdminDashboard} />} />
           <Route path="/product/:productId" element={<PrivateRoute Component={SingleProductPage} />} />
+          <Route path="/profile" element={<PrivateRoute Component={ProfilePage}/>}/>
         </Routes>
       </BrowserRouter>
     </div>

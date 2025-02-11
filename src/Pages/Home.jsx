@@ -87,7 +87,6 @@ const Home = () => {
           </div>
         )}
       </div>
-
       <div className="flex justify-center">
         <Link to="/all-products">
           <button className="mt-8 bg-black text-white px-6 py-3 text-lg lg:text-xl font-semibold rounded-xl hover:bg-opacity-90 transition">

@@ -7,18 +7,35 @@ import ToastMessage from "../utils/ToastMessage";
 import { ProductMessages } from "../utils/statusMessages";
 import MotionPath from "../Components/loader";
 import Pagination from "../utils/Pagination";
+import { debounce } from "lodash";
 
 const ProductManagement = () => {
   const dispatch = useDispatch();
   const { products, totalProducts, isError, isLoading } = useSelector(
     (state) => state.getAllProducts
   );
+  const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
+  const [sort, setSort] = useState("name");
+  const [sortOrder, setSortOrder] = useState("asc");
+  const searchHandler = debounce((e) => {
+    setSearch(e.target.value);
+  }, 500);
 
+  const handleSort = (field) => {
+    if (sort === field) {
+      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+    } else {
+      setSort(field);
+      setSortOrder("asc");
+    }
+  };
   useEffect(() => {
-    dispatch(GetAllProducts(itemsPerPage, currentPage));
-  }, [dispatch, currentPage]);
+    dispatch(
+      GetAllProducts(itemsPerPage, currentPage, search, `${sort}:${sortOrder}`)
+    );
+  }, [dispatch, currentPage, search, sort, sortOrder]);
 
   if (isError) {
     return <ToastMessage message={ProductMessages.NOT_FETCH} />;
@@ -45,6 +62,7 @@ const ProductManagement = () => {
       <div className="border-2 border-gray-200 shadow-md rounded-md p-4 md:p-6 bg-white">
         <input
           type="text"
+          onChange={searchHandler}
           placeholder="Search Products"
           className="w-full border-2 h-10 md:h-12 rounded-lg px-2 mb-3"
         />
@@ -53,10 +71,16 @@ const ProductManagement = () => {
           <table className="w-full text-sm text-left text-gray-500">
             <thead className="bg-gray-300 text-gray-800 uppercase">
               <tr>
-                <th className={cellClass}>PRODUCT NAME</th>
-                <th className={cellClass}>CATEGORY</th>
-                <th className={cellClass}>Price</th>
-                <th className={cellClass}>COUNT IN STOCK</th>
+                {fields.map((field, index) => (
+                  <th
+                    key={index}
+                    className="px-3 py-3 cursor-pointer"
+                    onClick={() => handleSort(field)}
+                  >
+                    {field.split(".")[0]}
+                    {sort === field ? (sortOrder === "asc" ? "🔼" : "🔽") : ""}
+                  </th>
+                ))}
               </tr>
             </thead>
             <tbody>
@@ -64,7 +88,7 @@ const ProductManagement = () => {
                 <MotionPath />
               ) : (
                 products?.map((product) => (
-                  <tr key={product._id} className="border-b">
+                  <tr key={product._id} className="border-b hover:bg-gray-100 transition">
                     {fields.map((field, index) => {
                       const value = field
                         .split(".")

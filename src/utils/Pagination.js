@@ -1,7 +1,7 @@
 import React from "react";
 
 const Pagination = ({ totalItems, itemsPerPage, currentPage, setCurrentPage }) => {
-  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const totalPages = (totalItems / itemsPerPage);
 
   const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
 

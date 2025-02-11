@@ -20,11 +20,11 @@ export const getProductsFailure = (error) => ({
   payload: error,
 });
 
-export const GetAllProducts = (limit, page) => {
+export const GetAllProducts = (limit, page, search, sort) => {
   return async (dispatch) => {
     dispatch(getProductsRequest());
     try {
-      const res = await allProducts(limit, page);
+      const res = await allProducts(limit, page, search, sort);
       dispatch(getProductsSuccess(res.products, res.totalProducts));
       return true;
     } catch (error) {

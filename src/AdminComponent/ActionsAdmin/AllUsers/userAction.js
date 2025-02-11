@@ -20,11 +20,11 @@ export const getUsersFailure = (error) => ({
   payload: error,
 });
 
-export const UserAction = (limit, page) => {
+export const UserAction = (limit, page,search,sort) => {
   return async (dispatch) => {
     dispatch(getUsersRequest());
     try {
-      const res = await allUsers(limit, page);
+      const res = await allUsers(limit, page,search,sort);      
       dispatch(getUsersSuccess(res.users, res.totalUsers));
       return true;
     } catch (error) {

@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import { useDispatch } from "react-redux";
 import { RegisterUser } from "../Redux/Actions/Registations/registrationAction";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ToastMessage from "../utils/ToastMessage";
 import { AuthMessages } from "../utils/statusMessages";
 
@@ -20,6 +20,9 @@ const Registration = () => {
 
   const handleRegistration = async (values) => {
     const result = await dispatch(RegisterUser(values));
+  const handleRegisteration = async (values, { setFieldError }) => {    
+    try {
+      const result = await dispatch(RegisterUser(values));
 
     if (result.success) {
       setToast({ message: AuthMessages.REGISTERED, type: "success" });
@@ -42,7 +45,7 @@ const Registration = () => {
             password: "",
           }}
           validationSchema={validationSchema}
-          onSubmit={handleRegistration}
+          onSubmit={handleRegisteration}
         >
           {({ handleSubmit, handleChange, values, isSubmitting }) => (
             <Form onSubmit={handleSubmit}>

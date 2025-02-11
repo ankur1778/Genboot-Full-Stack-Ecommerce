@@ -19,6 +19,7 @@ import removeItemFromWishlistSlice from "./Wishlists/removeFromWishlistSlice";
 import cancelOrderSlice from "./OrderSlices/cancelOrderSlice";
 import getSpecificOrderReducer from "../../AdminComponent/ReducersAdmin/Orders/specificOrderAction";
 import { ordersReducer } from "../../AdminComponent/ReducersAdmin/Orders/AllOrdersSlice";
+import profileReducer from "./profileSlice";
 
 export const rootReducer = combineReducers({
   getAllProducts: allProductsReducerAdmin,
@@ -41,6 +42,7 @@ export const rootReducer = combineReducers({
   userOrders: getUserOrderSlice,
   cancelOrder: cancelOrderSlice,
   specificOrder: getSpecificOrderReducer,
+  getUsersDetail: profileReducer,
 });
 
 export default rootReducer;

@@ -9,9 +9,9 @@ export const getOrderRequest = () => ({
   type: GET_ALL_ORDER_REQUEST,
 });
 
-export const getOrderSuccess = (orders) => ({
+export const getOrderSuccess = (orders, totalOrders) => ({
   type: GET_ALL_ORDER_SUCCESS,
-  payload: orders,
+  payload: { orders, totalOrders },
 });
 
 export const getOrederFailure = (error) => ({
@@ -19,12 +19,12 @@ export const getOrederFailure = (error) => ({
   payload: error,
 });
 
-export const GetAllOrders = () => {
+export const GetAllOrders = (limit, page) => {
   return async (dispatch) => {
     dispatch(getOrderRequest());
     try {
-      const res = await allOrders();
-      dispatch(getOrderSuccess(res));
+      const res = await allOrders(limit, page);
+      dispatch(getOrderSuccess(res.orderList, res.totalOrders));      
       return true;
     } catch (error) {
       dispatch(getOrederFailure(error.message));

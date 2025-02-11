@@ -7,18 +7,23 @@ import { OrderMessage } from "../utils/statusMessages";
 import EditImage from "../Images/Edit.svg";
 import UpdateStatusModal from "./updateOrderStatusModal";
 import { UpdateOrderStatus } from "./ActionsAdmin/OrdersActions/updateOrderAction";
+import Pagination from "../utils/Pagination";
+import MotionPath from "../Components/loader";
 
 const OrderManagement = () => {
   const dispatch = useDispatch();
-  const { orders, isError, isLoading } = useSelector(
+  const { orders, totalOrders, isError, isLoading } = useSelector(
     (state) => state.getAllOrders
   );
+
   const [selectedOrder, setSelectedOrder] = useState(null);
-  const cellClass = "px-6 py-3";
+  const cellClass = "px-6 py-4 border-b text-center";
   const fields = ["_id", "user.name", "totalPrice", "status"];
+  const [currentPage, setCurrentPage] = useState(1);
+  const ordersPerPage = 10;
   useEffect(() => {
-    dispatch(GetAllOrders());
-  }, [dispatch]);
+    dispatch(GetAllOrders(ordersPerPage, currentPage));
+  }, [dispatch, currentPage]);
 
   if (isError) {
     return <ToastMessage message={OrderMessage.NOT_FOUND} />;
@@ -37,56 +42,61 @@ const OrderManagement = () => {
       UpdateOrderStatus(selectedOrder._id, status)
     );
     if (success) {
-      dispatch(GetAllOrders());
+      dispatch(GetAllOrders(10, 1));
     }
     handleCloseModal();
   };
 
   return (
-    <div className="bg-gray-400 min-h-screen border-2 border-neutral-100">
-      <div className="bg-white flex justify-between my-7 shadow-md items-center rounded-md p-4 mx-16">
+    <div className="bg-gray-50 min-h-screen py-10 px-4 md:px-16">
+      <div className="bg-white flex justify-between items-center shadow-xl rounded-lg p-6 mb-6 border border-gray-200">
         <div className="flex items-center">
           <img
-            className="h-16 w-16"
+            className="h-14 w-14"
             src="https://cdn-icons-png.flaticon.com/512/17035/17035655.png"
             alt="Order Icon"
           />
-          <h4 className="font-semibold text-3xl ml-4">Order Management</h4>
+          <h4 className="font-bold text-3xl ml-4 text-gray-800">
+            Order Management
+          </h4>
         </div>
-        <div className="flex items-center cursor-pointer">
+        <div className="flex items-center cursor-pointer hover:text-blue-600 transition">
           <img className="h-6" src={filterIcon} alt="Sort Icon" />
-          <h4 className="font-semibold text-xl ml-2">Sort</h4>
+          <h4 className="ml-2 font-semibold text-gray-700">Sort</h4>
         </div>
       </div>
 
-      <div className="border-2 border-gray-200 shadow-md rounded-md p-6 bg-white mx-16">
+      <div className="bg-white shadow-xl rounded-lg p-6 border border-gray-200">
         <input
           type="text"
           placeholder="Search Orders"
-          className="w-full border-2 h-12 rounded-lg px-2"
+          className="w-full border border-gray-300 h-12 rounded-lg px-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
         />
 
-        <div className="relative overflow-x-auto my-3">
-          <table className="w-full text-sm text-left text-gray-500">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+        <div className="overflow-x-auto">
+          <table className="w-full text-sm text-gray-700">
+            <thead className="bg-gray-300 text-gray-800 uppercase">
               <tr>
-                <th className="px-6 py-3">Order ID</th>
-                <th className="px-6 py-3">User Name</th>
-                <th className="px-6 py-3">Total Price</th>
-                <th className="px-6 py-3">Order Status</th>
-                <th className="px-6 py-3">Actions</th>
+                <th className={cellClass}>Order ID</th>
+                <th className={cellClass}>User Name</th>
+                <th className={cellClass}>Total Price</th>
+                <th className={cellClass}>Order Status</th>
+                <th className={cellClass}>Actions</th>
               </tr>
             </thead>
             <tbody>
               {isLoading ? (
                 <tr>
-                  <td colSpan="5" className="text-center py-3">
-                    Loading...
+                  <td
+                    colSpan="5"
+                    className="text-center py-4 font-semibold text-gray-600"
+                  >
+                    <MotionPath />
                   </td>
                 </tr>
               ) : orders?.length > 0 ? (
                 orders.map((order) => (
-                  <tr key={order._id} className="border-b">
+                  <tr key={order._id} className="hover:bg-gray-100 transition">
                     {fields.map((field, index) => {
                       const value = field
                         .split(".")
@@ -97,8 +107,11 @@ const OrderManagement = () => {
                         </td>
                       );
                     })}
-                    <td className="px-6 py-3">
-                      <button onClick={() => handleOpenEditModal(order)}>
+                    <td className={cellClass}>
+                      <button
+                        onClick={() => handleOpenEditModal(order)}
+                        className="p-2 bg-blue-500 hover:bg-blue-700 text-white rounded-md shadow-md transition"
+                      >
                         <img src={EditImage} alt="Edit" className="h-5" />
                       </button>
                     </td>
@@ -106,7 +119,10 @@ const OrderManagement = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="5" className="text-center py-3">
+                  <td
+                    colSpan="5"
+                    className="text-center py-4 text-gray-500 font-medium"
+                  >
                     <ToastMessage message={OrderMessage.NOT_FOUND} />
                   </td>
                 </tr>
@@ -123,6 +139,12 @@ const OrderManagement = () => {
           onSave={handleSaveStatus}
         />
       )}
+      <Pagination
+        totalItems={totalOrders}
+        itemsPerPage={ordersPerPage}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 };

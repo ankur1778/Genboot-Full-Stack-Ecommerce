@@ -10,9 +10,9 @@ export const getUsersRequest = () => ({
   type: SHOW_USER_REQUEST,
 });
 
-export const getUsersSuccess = (users) => ({
+export const getUsersSuccess = (users, totalUsers) => ({
   type: SHOW_USER_SUCCESS,
-  payload: users,
+  payload: { users, totalUsers },
 });
 
 export const getUsersFailure = (error) => ({
@@ -20,12 +20,12 @@ export const getUsersFailure = (error) => ({
   payload: error,
 });
 
-export const UserAction = () => {
+export const UserAction = (limit, page,search,sort) => {
   return async (dispatch) => {
     dispatch(getUsersRequest());
     try {
-      const res = await allUsers();
-      dispatch(getUsersSuccess(res));
+      const res = await allUsers(limit, page,search,sort);      
+      dispatch(getUsersSuccess(res.users, res.totalUsers));
       return true;
     } catch (error) {
       dispatch(getUsersFailure(<ToastMessage message={error.message} />));

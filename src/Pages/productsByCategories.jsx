@@ -15,6 +15,7 @@ const ProductsByCategories = () => {
   const { productsByCategories, isError, isLoading } = useSelector(
     (state) => state.productsByCategory
   );
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getProductsByCategories(categoryId));
@@ -68,7 +69,7 @@ const ProductsByCategories = () => {
               </h1>
             </div>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-10">
-              {productsByCategories.map((product) => (
+              {productsByCategories?.products?.map((product) => (
                 <div
                   key={product.id}
                   className="bg-white shadow-md rounded-lg px-10 py-10"
@@ -94,7 +95,7 @@ const ProductsByCategories = () => {
                   <div className="mt-6 flex justify-between items-center">
                     <AddToCartButton productId={product} />
                     <div>
-                    <AddToWishlistButton product={product} />
+                      <AddToWishlistButton product={product} />
                     </div>
                   </div>
                 </div>

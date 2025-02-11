@@ -1,8 +1,8 @@
 import { sendRequest } from "../../api/sendPublicRequest";
 const BASE_PATH = "/orders";
 
-export const allOrders = () =>
-  sendRequest(`${BASE_PATH}/get-all-orders`, {
+export const allOrders = (limit,page) =>
+  sendRequest(`${BASE_PATH}/get-all-orders?limit=${limit}&page=${page}`, {
     method: "GET",
   });
 

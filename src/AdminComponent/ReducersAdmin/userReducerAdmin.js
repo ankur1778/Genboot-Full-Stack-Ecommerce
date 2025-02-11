@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   users: [],
+  totalUsers: 0,
   isLoading: false,
   isError: false,
 };
@@ -22,7 +23,8 @@ export const userReducerAdmin = (state = initialState, action) => {
     case SHOW_USER_SUCCESS:
       return {
         ...state,
-        users: action.payload,
+        users: action.payload.users,
+        totalUsers: action.payload.totalUsers,
         isLoading: false,
         isError: false,
       };

@@ -1,5 +1,5 @@
 import React from "react";
-function EditModal({
+function EditUserModal({
   UserName,
   phNo,
   email,
@@ -76,4 +76,4 @@ function EditModal({
   );
 }
 
-export default EditModal;
+export default EditUserModal;

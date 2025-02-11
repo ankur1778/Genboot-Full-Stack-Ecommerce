@@ -13,7 +13,6 @@ const Wishlists = () => {
   const { items, isLoading, isError } = useSelector(
     (state) => state.getWishlist
   );
-
   const handleRemoveItem = (product) => {
     dispatch(removeItemFromWishlist(product));
   };

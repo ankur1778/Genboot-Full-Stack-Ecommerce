@@ -23,13 +23,12 @@ export const addToWishlistFailure = (error) => ({
 
 export const addItemToWishlist = (product) => {
   return async (dispatch) => {
-    const payload = { product: product };
     dispatch(addToWishlistRequest());
-
+    const payload = { product: product._id };
     try {
-      const response = await addToWishlists(payload);      
-      if (response?.status) {
-        dispatch(addToWishlistSucccess(response.cart));
+      const response = await addToWishlists(payload);
+      if (response) {
+        dispatch(addToWishlistSucccess(response));
       } else {
         dispatch(
           addToWishlistFailure(<ToastMessage message={WishListMessage} />)
@@ -37,9 +36,7 @@ export const addItemToWishlist = (product) => {
       }
     } catch (error) {
       dispatch(
-        addToWishlistFailure(
-          <ToastMessage message={WishListMessage} />
-        )
+        addToWishlistFailure(<ToastMessage message={WishListMessage} />)
       );
     }
   };

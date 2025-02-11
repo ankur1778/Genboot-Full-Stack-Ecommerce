@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   orders: [],
+  totalOrders: 0,
   isLoading: false,
   isError: false,
 };
@@ -22,7 +23,8 @@ export const ordersReducer = (state = initialState, action) => {
     case GET_ALL_ORDER_SUCCESS:
       return {
         ...state,
-        orders: action.payload,
+        orders: action.payload.orders,
+        totalOrders: action.payload.totalOrders,
         isLoading: false,
         isError: false,
       };

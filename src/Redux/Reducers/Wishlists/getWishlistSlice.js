@@ -22,7 +22,7 @@ const getWishlistReducer = (state = initialstate, action) => {
     case GET_WISHLIST_SUCCESS:
       return {
         ...state,
-        items: action.payload,
+        items: action.payload.items,
         isLoading: false,
         isError: false,
       };

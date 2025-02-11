@@ -1,23 +1,45 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../Components/Navbar";
 import { useDispatch, useSelector } from "react-redux";
 import { getUserOrder } from "../Redux/Actions/OrderActions/getUserOrderAction";
 import MotionPath from "../Components/loader";
 import ToastMessage from "../utils/ToastMessage";
 import { OrderMessage } from "../utils/statusMessages";
+import CancelOrderModal from "../Components/CancelOrderModal";
+import { orderCancellation } from "../Redux/Actions/OrderActions/cancelOrderAction";
 
 const AllOrdersPage = () => {
   const dispatch = useDispatch();
+  const [openCancelOrderModal, setOpenCancelOrderModal] = useState(false);
+  const [cancelOrderId, setCancelOrderId] = useState(null);
+  const [showToast, setShowToast] = useState(null);
+
   const { orders, isLoading, isError } = useSelector(
     (state) => state.userOrders
   );
 
+  const handleCancelOrder = () => {
+    if (cancelOrderId) {
+      dispatch(orderCancellation(cancelOrderId)).catch(() => {
+        setShowToast(OrderMessage.NOT_FOUND);
+      });
+    }
+  };
+  const handleOpenCancelOrderModal = (orderId) => {
+    setCancelOrderId(orderId);
+    setOpenCancelOrderModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenCancelOrderModal(false);
+    setCancelOrderId(null);
+  };
   useEffect(() => {
     dispatch(getUserOrder());
   }, [dispatch]);
 
   if (isError) {
-    <ToastMessage message={OrderMessage.NOT_FOUND} />;
+    showToast(<ToastMessage message={OrderMessage.NOT_FOUND} />);
   }
   return (
     <>
@@ -63,15 +85,22 @@ const AllOrdersPage = () => {
                 </p>
               </div>
 
-              {/* Shipping Address */}
-              <div className="mt-4 bg-gray-50 p-4 rounded-md">
-                <p className="text-gray-700 font-semibold">Shipping Address:</p>
-                <p className="text-gray-900 font-medium">
-                  {order.shippingAddress1}
-                  {order.shippingAddress2 &&
-                    `, ${order.shippingAddress2}`}, {order.city}, {order.state},{" "}
-                  {order.zip}, {order.country}
-                </p>
+              <div className="mt-4 bg-gray-50 p-4 rounded-md flex justify-between">
+                <div>
+                  <p className="text-gray-700 font-semibold">
+                    Shipping Address:
+                  </p>
+                  <p className="text-gray-900 font-medium">
+                    {order.shippingAddress1}
+                    {order.shippingAddress2 &&
+                      `, ${order.shippingAddress2}`}, {order.city},{" "}
+                    {order.state}, {order.zip}, {order.country}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-gray-700 font-semibold">Status:</p>
+                  <p className="text-gray-900 font-medium">{order.status}</p>
+                </div>
               </div>
 
               <div className="bg-gray-50 mt-4 p-4 rounded-md">
@@ -108,10 +137,24 @@ const AllOrdersPage = () => {
                     </p>
                   </div>
                 ))}
+                <div className="flex justify-end">
+                  <button
+                    onClick={() => handleOpenCancelOrderModal(order._id)}
+                    className="mt-4 bg-gray-500 text-white px-4 py-3 text-lg lg:text-xl font-semibold rounded-xl hover:bg-opacity-90 transition"
+                  >
+                    Cancel
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         ))
+      )}
+      {openCancelOrderModal && (
+        <CancelOrderModal
+          onClose={handleCloseModal}
+          onCancel={handleCancelOrder}
+        />
       )}
     </>
   );

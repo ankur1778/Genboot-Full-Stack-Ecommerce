@@ -95,6 +95,12 @@ const Navbar = () => {
             Cart
           </Link>
           <Link
+            to="/wishlists"
+            className="hover:border px-4 py-2 rounded-lg border-slate-300"
+          >
+            Cart
+          </Link>
+          <Link
             to="/profile"
             className="hover:border px-4 py-2 rounded-lg border-slate-300"
           >

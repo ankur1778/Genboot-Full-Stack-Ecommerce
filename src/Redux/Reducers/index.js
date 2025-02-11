@@ -13,11 +13,13 @@ import removeItemFromCartSlice from "./CartSlice/removeItemSlice";
 import increaseCartItemQuantitySlice from "./CartSlice/increaseQuantitySlice";
 import decreaseCartItemQuantitySlice from "./CartSlice/decreaseQuantitySlice";
 import SingleProductReducer from "./singleProductSlice";
-import { ordersReducer } from "../../AdminComponent/ReducersAdmin/AllOrdersSlice";
 import getUserOrderSlice from "./OrderSlices/getUserOrdersSlice";
 import addToWishlistReducer from "./Wishlists/addToWishlistSlice";
 import getWishlistReducer from "./Wishlists/getWishlistSlice";
 import removeItemFromWishlistSlice from "./Wishlists/removeFromWishlistSlice";
+import cancelOrderSlice from "./OrderSlices/cancelOrderSlice";
+import getSpecificOrderReducer from "../../AdminComponent/ReducersAdmin/Orders/specificOrderAction";
+import { ordersReducer } from "../../AdminComponent/ReducersAdmin/Orders/AllOrdersSlice";
 
 export const rootReducer = combineReducers({
   getAllProducts: allProductsReducerAdmin,
@@ -39,6 +41,8 @@ export const rootReducer = combineReducers({
   removeFromWishlist: removeItemFromWishlistSlice,
   singleProduct: SingleProductReducer,
   userOrders: getUserOrderSlice,
+  cancelOrder: cancelOrderSlice,
+  specificOrder: getSpecificOrderReducer,
 });
 
 export default rootReducer;

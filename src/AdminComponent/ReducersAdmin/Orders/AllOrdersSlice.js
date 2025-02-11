@@ -1,34 +1,36 @@
 import {
-  SHOW_USER_FAILURE,
-  SHOW_USER_REQUEST,
-  SHOW_USER_SUCCESS,
-} from "../ActionsAdmin/ActionTypes/userActionType";
+  GET_ALL_ORDER_FAILURE,
+  GET_ALL_ORDER_REQUEST,
+  GET_ALL_ORDER_SUCCESS,
+} from "../../ActionsAdmin/ActionTypes/orderActionType";
 
 const initialState = {
-  users: [],
+  orders: [],
   isLoading: false,
   isError: false,
 };
 
-export const userReducerAdmin = (state = initialState, action) => {
+export const ordersReducer = (state = initialState, action) => {
   switch (action.type) {
-    case SHOW_USER_REQUEST:
+    case GET_ALL_ORDER_REQUEST:
       return {
         ...state,
-        users: [],
+        orders: null,
         isLoading: true,
         isError: false,
       };
-    case SHOW_USER_SUCCESS:
+    case GET_ALL_ORDER_SUCCESS:
       return {
         ...state,
-        users: action.payload,
+        orders: action.payload,
         isLoading: false,
         isError: false,
       };
-    case SHOW_USER_FAILURE:
+
+    case GET_ALL_ORDER_FAILURE:
       return {
         ...state,
+        orders: null,
         isLoading: false,
         isError: action.payload,
       };

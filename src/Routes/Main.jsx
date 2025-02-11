@@ -13,6 +13,7 @@ import SingleProductPage from "../Pages/SingleProductPage";
 import CheckoutPage from "../Pages/CheckoutPage";
 import AllOrdersPage from "../Pages/AllOrdersPage";
 import Wishlists from "../Pages/Wishlists";
+import ProfilePage from "../Pages/ProfilePage";
 
 const Main = () => {
   return (
@@ -52,6 +53,7 @@ const Main = () => {
             path="/wishlists"
             element={<PrivateRoute Component={Wishlists} />}
           />
+          <Route path="/profile" element={<PrivateRoute Component={ProfilePage}/>}/>
         </Routes>
       </BrowserRouter>
     </div>

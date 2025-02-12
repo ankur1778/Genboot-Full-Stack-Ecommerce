@@ -22,23 +22,23 @@ const Cart = () => {
   }, [dispatch]);
 
   const handleRemoveItem = (productId) => {
-    dispatch(removeItemFromCart(productId));
+    dispatch(removeItemFromCart(String(productId)));
   };
 
   const handleIncreaseCartItemQuantity = (productId) => {
-    dispatch(increaseCartItemQuantity(productId));
-  };
-  const handleDecreaseCartItemQuantity = (productId) => {
-    dispatch(decreaseCartItemQuantity(productId));
+    dispatch(increaseCartItemQuantity(String(productId)));
   };
 
-  if (isError) {
-    <ToastMessage message={ProductMessages.NOT_FOUND} />;
-  }
+  const handleDecreaseCartItemQuantity = (productId) => {
+    dispatch(decreaseCartItemQuantity(String(productId)));
+  };
+
   const calculateTotal = () => {
+    if (!item || item.length === 0) return 0;
+
     return item.reduce(
-      (total, currentItem) =>
-        total + currentItem.product.price * currentItem.quantity,
+      (total, cartItem) =>
+        total + (cartItem?.product?.price || 0) * (cartItem?.quantity || 0),
       0
     );
   };
@@ -50,6 +50,8 @@ const Cart = () => {
         <h1 className="text-3xl font-bold text-gray-800 text-center">
           Shopping Cart
         </h1>
+        {isError && <ToastMessage message={ProductMessages.NOT_FOUND} />}
+
         <div className="grid md:grid-cols-3 gap-8 mt-16">
           <div className="md:col-span-2 space-y-4">
             {isLoading ? (
@@ -121,6 +123,7 @@ const Cart = () => {
               ))
             ) : (
               <div>
+                <p className="font-semibold text-2xl text-center"> Your Cart is Empty</p>
                 <ToastMessage message={CartMessages.EMPTY} />
               </div>
             )}
@@ -140,16 +143,26 @@ const Cart = () => {
                 </span>
               </li>
               <li className="flex flex-wrap gap-4 text-sm">
-                Shipping <span className="ml-auto font-bold">₹2.00</span>
+                Shipping{" "}
+                <span className="ml-auto font-bold">
+                  ₹{(calculateTotal() / 5).toFixed(2)}
+                </span>
               </li>
               <li className="flex flex-wrap gap-4 text-sm">
-                Tax <span className="ml-auto font-bold">₹4.00</span>
+                Tax{" "}
+                <span className="ml-auto font-bold">
+                  ₹{(calculateTotal() / 10).toFixed(2)}
+                </span>
               </li>
               <hr className="border-gray-300" />
               <li className="flex flex-wrap gap-4 text-sm font-bold">
                 Total{" "}
                 <span className="ml-auto">
-                  ₹{(calculateTotal() + 6).toFixed(2)}
+                  ₹
+                  {(
+                    calculateTotal() +
+                    (calculateTotal() / 5 + calculateTotal() / 10)
+                  ).toFixed(2)}
                 </span>
               </li>
             </ul>
@@ -166,17 +179,12 @@ const Cart = () => {
               <Link to="/">
                 <button
                   type="button"
-                  className="text-sm px-4 py-2.5 w-full font-semibold tracking-wide bg-transparent text-gray-800 border border-gray-300 rounded-md"
+                  className="text-sm mt-2 px-4 py-2.5 w-full font-semibold tracking-wide bg-transparent text-gray-800 border border-gray-300 rounded-md"
                 >
                   Continue Shopping
                 </button>
               </Link>
             </div>
-          </div>
-        </div>
-        <div className="grid md:grid-cols-3 gap-8 mt-16">
-          <div className="md:col-span-2 space-y-4">
-            <hr className="border-gray-300" />
           </div>
         </div>
       </div>

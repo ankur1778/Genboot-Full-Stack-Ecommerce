@@ -2,14 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LoginUser } from "../Redux/Actions/LoginActions/loginAction";
 import { jwtdecode } from "../utils/jwt_decode";
 import ToastMessage from "../utils/ToastMessage";
 import { AuthMessages, ServerErrorMessage } from "../utils/statusMessages";
+import BtnLoader from "../utils/btnLoader";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { isLoading } = useSelector((state) => state.auth);
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const [toast, setToast] = useState({ message: "", type: "" });
@@ -32,7 +34,6 @@ const Login = () => {
             navigate("/admin-dashboard");
           } else {
             setToast({ message: AuthMessages.INVALID, type: "error" });
-
             navigate("/");
           }
         }
@@ -103,12 +104,8 @@ const Login = () => {
                     viewBox="0 0 16 16"
                     onClick={() => setShowPassword((prev) => !prev)}
                   >
-                    <path
-                      d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"
-                    ></path>
-                    <path
-                      d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"
-                    ></path>
+                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"></path>
+                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"></path>
                   </svg>
                 </div>
                 {errors.password && (
@@ -121,7 +118,7 @@ const Login = () => {
                   type="submit"
                   disabled={isSubmitting}
                 >
-                  Login
+                  {isLoading ? <BtnLoader msg="Logging in..." /> : "Login"}
                 </button>
               </Form>
             )}
@@ -129,7 +126,7 @@ const Login = () => {
           <div className="mt-4 text-sm flex justify-between items-center">
             <p>If you don't have an account..</p>
             <button className="bg-[#002D74] text-white py-2 px-5 rounded-xl hover:border-gray-400 hover:scale-110 hover:bg-[#002c7424] font-semibold duration-300">
-              <Link to='/register'>Register</Link>
+              <Link to="/register">Register</Link>
             </button>
           </div>
         </div>

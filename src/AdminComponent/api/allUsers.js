@@ -9,3 +9,14 @@ export const allUsers = (limit, page, search, sort) =>
       method: "GET",
     }
   );
+
+export const updateUser = (userId, payload) =>
+  sendRequest(`${BASE_PATH}/users/update/${userId}`, {
+    method: "PUT",
+    body: JSON.stringify(payload),
+  });
+
+export const deleteUser = (userId) =>
+  sendRequest(`${BASE_PATH}/users/delete/${userId}`, {
+    method: "DELETE",
+  });

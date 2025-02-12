@@ -3,7 +3,7 @@ import logo from "../Images/logo.png";
 
 const AdminNavbar = ({ handleChange }) => {
   return (
-    <nav className="bg-white h-screen w-64 md:w-56 lg:w-64 font-bold shadow-md fixed md:relative z-20">
+    <nav className="bg-white h-auto w-64 md:w-56 lg:w-64 font-bold shadow-md fixed md:relative z-20">
       <div className="flex justify-center my-6">
         <img className="h-16 w-20" src={logo} alt="Logo" />
       </div>

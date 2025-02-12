@@ -9,7 +9,7 @@ import { ProductMessages } from "../utils/statusMessages";
 import AddToWishlistButton from "../utils/addToWishlist";
 import Pagination from "../utils/Pagination";
 import { debounce } from "lodash";
-import { GetAllProducts } from "../AdminComponent/ActionsAdmin/Allproducts/productAction";
+import { GetAllProducts } from "../AdminComponent/Redux/ActionsAdmin/Allproducts/productAction";
 
 const AllProducts = () => {
   const dispatch = useDispatch();

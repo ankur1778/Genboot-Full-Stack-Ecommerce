@@ -1,8 +1,5 @@
-import {
-  GET_ALL_PRODUCTS_FAILURE,
-  GET_ALL_PRODUCTS_REQUEST,
-  GET_ALL_PRODUCTS_SUCCESS,
-} from "../../Redux/Actions/ActionTypes/types";
+import { GET_ALL_PRODUCTS_FAILURE, GET_ALL_PRODUCTS_REQUEST, GET_ALL_PRODUCTS_SUCCESS } from "../../../../Redux/Actions/ActionTypes/types";
+
 
 const initialState = {
   products: [],

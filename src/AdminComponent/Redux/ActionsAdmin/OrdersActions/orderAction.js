@@ -1,4 +1,4 @@
-import { allOrders } from "../../api/allOrders";
+import { allOrders } from "../../../api/allOrders";
 import {
   GET_ALL_ORDER_REQUEST,
   GET_ALL_ORDER_SUCCESS,

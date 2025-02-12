@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RegisterUser } from "../Redux/Actions/Registations/registrationAction";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ToastMessage from "../utils/ToastMessage";
 import { AuthMessages } from "../utils/statusMessages";
+import BtnLoader from "../utils/btnLoader";
 
 const Registration = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isLoading } = useSelector((state) => state.register);
   const [toast, setToast] = useState({ message: "", type: "" });
   const validationSchema = Yup.object({
     name: Yup.string().max(20, "Name must be at most 20 characters"),
@@ -20,18 +22,14 @@ const Registration = () => {
 
   const handleRegistration = async (values) => {
     const result = await dispatch(RegisterUser(values));
-  const handleRegisteration = async (values, { setFieldError }) => {    
-    try {
-      const result = await dispatch(RegisterUser(values));
 
     if (result.success) {
       setToast({ message: AuthMessages.REGISTERED, type: "success" });
-      setTimeout(() => navigate("/login"), 2000);
+      navigate("/login");
     } else {
       setToast({ message: AuthMessages.INVALID, type: "error" });
     }
   };
-
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center">
       <ToastMessage message={toast.message} type={toast.type} />
@@ -45,7 +43,7 @@ const Registration = () => {
             password: "",
           }}
           validationSchema={validationSchema}
-          onSubmit={handleRegisteration}
+          onSubmit={handleRegistration}
         >
           {({ handleSubmit, handleChange, values, isSubmitting }) => (
             <Form onSubmit={handleSubmit}>
@@ -143,10 +141,10 @@ const Registration = () => {
 
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded-md"
+                disabled={isSubmitting || isLoading}
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded-md flex items-center justify-center"
               >
-                Register
+                {isLoading ? <BtnLoader msg="Registering..." /> : "Register"}
               </button>
             </Form>
           )}

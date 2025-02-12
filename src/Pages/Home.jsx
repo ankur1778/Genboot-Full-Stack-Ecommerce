@@ -23,7 +23,7 @@ const Home = () => {
   return (
     <>
       <Navbar />
-      <Carousel showArrows={true} showThumbs={false}>
+      <Carousel showArrows={false} autoPlay infiniteLoop showThumbs={false} showIndicators={false} showStatus={false}>
         <div className="mx-8 bg-homeFeaturedImage1 h-[450px] my-4 rounded-3xl  bg-cover bg-center">
           <div className="flex justify-end">
             <h1 className="font-semibold  py-20  text-3xl mt-20 sm:text-4xl md:text-[48px] font-serif sm:mx-8 sm:p-12  ">

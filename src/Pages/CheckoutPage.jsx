@@ -41,6 +41,7 @@ const CheckoutPage = () => {
   const validationSchema = Yup.object({
     shippingAddress1: Yup.string().required("Shipping Address 1 is required"),
     shippingAddress2: Yup.string(),
+    state: Yup.string().required("State is required"),
     phone: Yup.string()
       .matches(/^[0-9]{10}$/, "Phone number must be 10 digits")
       .required("Phone is required"),
@@ -54,19 +55,20 @@ const CheckoutPage = () => {
   const handlePostOrder = async (values, { setFieldError }) => {
     try {
       const orderData = { ...values, orderItems };
-      const order = await PostOrder(orderData);
-      if (order.success) {
+      const order = await dispatch(PostOrder(orderData));
+      if (order?.success) {
         setToast({ message: OrderMessage.PLACED, type: "success" });
         navigate("/your-orders");
-      }
+      } 
     } catch (error) {
       setToast({ message: OrderMessage.NOT_PLACED, type: "error" });
     }
   };
 
   if (isError) {
-    <ToastMessage message={ProductMessages.NOT_FOUND} />;
+    return <ToastMessage message={ProductMessages.NOT_FOUND} />;
   }
+
   return (
     <>
       <Navbar />

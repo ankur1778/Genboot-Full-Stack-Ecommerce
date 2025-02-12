@@ -1,8 +1,8 @@
-import { allUsersRequest } from "../AdminComponent/api/sendRequests";
+import { sendRequest } from "./sendPublicRequest";
 
 const BASE_PATH = '/admin'
 
 export const allUsers = (userId) =>
-  allUsersRequest(`${BASE_PATH}/users/${userId}`, {
+  sendRequest(`${BASE_PATH}/users/${userId}`, {
     method: "GET",
   });

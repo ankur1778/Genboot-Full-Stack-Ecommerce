@@ -1,10 +1,10 @@
-import { allProducts } from "../../api/allProducts";
-import ToastMessage from "../../../utils/ToastMessage";
 import {
   GET_ALL_PRODUCTS_FAILURE,
   GET_ALL_PRODUCTS_REQUEST,
   GET_ALL_PRODUCTS_SUCCESS,
-} from "../../../Redux/Actions/ActionTypes/types";
+} from "../../../../Redux/Actions/ActionTypes/types";
+import ToastMessage from "../../../../utils/ToastMessage";
+import { allProducts } from "../../../api/allProducts";
 
 export const getProductsRequest = () => ({
   type: GET_ALL_PRODUCTS_REQUEST,

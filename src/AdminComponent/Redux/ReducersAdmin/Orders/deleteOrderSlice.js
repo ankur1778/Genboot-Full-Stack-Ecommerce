@@ -1,42 +1,39 @@
 import {
-  UPDATE_ORDER_STATUS_FAILURE,
-  UPDATE_ORDER_STATUS_REQUEST,
-  UPDATE_ORDER_STATUS_SUCCESS,
+  DELETE_ORDER_REQUEST,
+  DELETE_ORDER_SUCCESS,
+  DELETE_ORDER_FAILURE,
 } from "../../ActionsAdmin/ActionTypes/orderActionType";
 
 const initialState = {
-  orders: [],
+  order: [],
   isLoading: false,
   isError: false,
 };
 
-const updateOrderStatusReducer = (state = initialState, action) => {
+const deleteOrderReducer = (state = initialState, action) => {
   switch (action.type) {
-    case UPDATE_ORDER_STATUS_REQUEST:
+    case DELETE_ORDER_REQUEST:
       return {
         ...state,
-        orders: null,
         isLoading: true,
         isError: false,
       };
-    case UPDATE_ORDER_STATUS_SUCCESS:
+    case DELETE_ORDER_SUCCESS:
       return {
         ...state,
-        orders: action.payload,
+        order: action.payload.order,
         isLoading: false,
         isError: false,
       };
-
-    case UPDATE_ORDER_STATUS_FAILURE:
+    case DELETE_ORDER_FAILURE:
       return {
         ...state,
-        orders: null,
         isLoading: false,
-        isError: action.payload,
+        isError: action.payload.error,
       };
     default:
       return state;
   }
 };
 
-export default updateOrderStatusReducer;
+export default deleteOrderReducer;

@@ -17,6 +17,7 @@ const AllOrdersPage = () => {
   const { orders, isLoading, isError } = useSelector(
     (state) => state.userOrders
   );
+console.log(orders);
 
   const handleCancelOrder = () => {
     if (cancelOrderId) {

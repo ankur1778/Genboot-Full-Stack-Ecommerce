@@ -24,6 +24,7 @@ import deleteOrderReducer from "../../AdminComponent/Redux/ReducersAdmin/Orders/
 import deleteUserReducer from "../../AdminComponent/Redux/ReducersAdmin/Users/deleteUserSlice";
 import updateProductDetailsReducer from "../../AdminComponent/Redux/ReducersAdmin/Products/updateProductSlice";
 import deleteProductReducer from "../../AdminComponent/Redux/ReducersAdmin/Products/deleteProductSlice";
+import clearCartReducer from "./CartSlice/clearCartSlice";
 
 export const rootReducer = combineReducers({
   getAllProducts: allProductsReducerAdmin,
@@ -37,6 +38,7 @@ export const rootReducer = combineReducers({
   cart: cartSlice,
   getCart: getCartSlice,
   removeCartItem: removeItemFromCartSlice,
+  clearCart: clearCartReducer,
   increaseQuantity: increaseCartItemQuantitySlice,
   decreaseQuantity: decreaseCartItemQuantitySlice,
   addToWishlist: addToWishlistReducer,

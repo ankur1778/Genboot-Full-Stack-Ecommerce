@@ -12,10 +12,15 @@ import { increaseCartItemQuantity } from "../Redux/Actions/CartAction/increaseQu
 import { decreaseCartItemQuantity } from "../Redux/Actions/CartAction/decreaseQuantityAction";
 import ToastMessage from "../utils/ToastMessage";
 import { CartMessages, ProductMessages } from "../utils/statusMessages";
+import { ClearCart } from "../Redux/Actions/CartAction/clearCartAction";
+import BtnLoader from "../utils/btnLoader";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const { item, isLoading, isError } = useSelector((state) => state.getCart);
+  const { isLoading: clearCartLoading } = useSelector(
+    (state) => state.clearCart
+  );
 
   useEffect(() => {
     dispatch(getUserCart());
@@ -33,15 +38,25 @@ const Cart = () => {
     dispatch(decreaseCartItemQuantity(String(productId)));
   };
 
-  const calculateTotal = () => {
-    if (!item || item.length === 0) return 0;
+  const handleClearCart = (cartId) => {
+    dispatch(ClearCart({ cartId }));
+    dispatch(getUserCart());
+  };
 
-    return item.reduce(
+  const calculateTotal = () => {
+    if (!item || !item.products || item.products.length === 0) return 0;
+    return item.products.reduce(
       (total, cartItem) =>
         total + (cartItem?.product?.price || 0) * (cartItem?.quantity || 0),
       0
     );
   };
+
+  // Optimized calculations
+  const subtotal = calculateTotal();
+  const shipping = subtotal / 5;
+  const tax = subtotal / 10;
+  const total = subtotal + shipping + tax;
 
   return (
     <>
@@ -56,8 +71,8 @@ const Cart = () => {
           <div className="md:col-span-2 space-y-4">
             {isLoading ? (
               <MotionPath />
-            ) : item && item.length > 0 ? (
-              item.map((product) => (
+            ) : item?.products?.length > 0 ? (
+              item.products.map((product) => (
                 <div
                   key={product._id}
                   className="grid grid-cols-3 items-start gap-4"
@@ -84,7 +99,7 @@ const Cart = () => {
                         <img
                           src={removeItem}
                           className="w-4 fill-current inline"
-                          alt=""
+                          alt="Remove"
                         />
                         REMOVE
                       </button>
@@ -105,9 +120,8 @@ const Cart = () => {
                         onClick={() =>
                           handleDecreaseCartItemQuantity(product.product._id)
                         }
-                        alt=""
+                        alt="Decrease"
                       />
-
                       <span className="mx-3 font-bold">{product.quantity}</span>
                       <img
                         src={increaseQuantity}
@@ -115,7 +129,7 @@ const Cart = () => {
                         onClick={() =>
                           handleIncreaseCartItemQuantity(product.product._id)
                         }
-                        alt=""
+                        alt="Increase"
                       />
                     </button>
                   </div>
@@ -123,11 +137,29 @@ const Cart = () => {
               ))
             ) : (
               <div>
-                <p className="font-semibold text-2xl text-center"> Your Cart is Empty</p>
+                <p className="font-semibold text-2xl text-center">
+                  Your Cart is Empty
+                </p>
                 <ToastMessage message={CartMessages.EMPTY} />
               </div>
             )}
-            <hr className="border-gray-300" />
+
+            {item?.products?.length > 0 && (
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  className="text-sm px-4 py-2.5 font-semibold tracking-wide bg-gray-800 hover:bg-gray-900 text-white rounded-md"
+                  onClick={() => handleClearCart(item._id)}
+                  disabled={clearCartLoading}
+                >
+                  {clearCartLoading ? (
+                    <BtnLoader msg="loading" />
+                  ) : (
+                    "Clear Cart"
+                  )}
+                </button>
+              </div>
+            )}
           </div>
 
           <div className="bg-gray-100 rounded-md p-4 h-max">
@@ -139,31 +171,21 @@ const Cart = () => {
               <li className="flex flex-wrap gap-4 text-sm">
                 Subtotal{" "}
                 <span className="ml-auto font-bold">
-                  ₹{calculateTotal().toFixed(2)}
+                  ₹{subtotal.toFixed(2)}
                 </span>
               </li>
               <li className="flex flex-wrap gap-4 text-sm">
                 Shipping{" "}
                 <span className="ml-auto font-bold">
-                  ₹{(calculateTotal() / 5).toFixed(2)}
+                  ₹{shipping.toFixed(2)}
                 </span>
               </li>
               <li className="flex flex-wrap gap-4 text-sm">
-                Tax{" "}
-                <span className="ml-auto font-bold">
-                  ₹{(calculateTotal() / 10).toFixed(2)}
-                </span>
+                Tax <span className="ml-auto font-bold">₹{tax.toFixed(2)}</span>
               </li>
               <hr className="border-gray-300" />
               <li className="flex flex-wrap gap-4 text-sm font-bold">
-                Total{" "}
-                <span className="ml-auto">
-                  ₹
-                  {(
-                    calculateTotal() +
-                    (calculateTotal() / 5 + calculateTotal() / 10)
-                  ).toFixed(2)}
-                </span>
+                Total <span className="ml-auto">₹{total.toFixed(2)}</span>
               </li>
             </ul>
 
@@ -171,7 +193,12 @@ const Cart = () => {
               <Link to="/cart/checkout">
                 <button
                   type="button"
-                  className="text-sm px-4 py-2.5 w-full font-semibold tracking-wide bg-gray-800 hover:bg-gray-900 text-white rounded-md"
+                  className={`text-sm px-4 py-2.5 w-full font-semibold tracking-wide rounded-md ${
+                    subtotal > 0
+                      ? "bg-gray-800 hover:bg-gray-900 text-white"
+                      : "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  }`}
+                  disabled={subtotal === 0}
                 >
                   Checkout
                 </button>

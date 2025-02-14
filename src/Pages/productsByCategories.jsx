@@ -22,8 +22,9 @@ const ProductsByCategories = () => {
   }, [dispatch, categoryId]);
 
   if (isError) {
-    <ToastMessage message={ProductMessages.NOT_FETCH} />;
+    return <ToastMessage message={ProductMessages.NOT_FETCH} />;
   }
+
   return (
     <>
       <Navbar />
@@ -65,7 +66,9 @@ const ProductsByCategories = () => {
           <div className="flex flex-col justify-center bg-gray-100">
             <div className="flex justify-center h-20 items-center mt-10">
               <h1 className="text-[60px] font-semibold uppercase italic ">
-                {productsByCategories[0]?.category?.name}
+                {productsByCategories?.products?.length > 0
+                  ? productsByCategories.products[0].category.name
+                  : "Category"}
               </h1>
             </div>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-10">

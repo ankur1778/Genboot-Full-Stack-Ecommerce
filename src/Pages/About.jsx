@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Navbar from "../Components/Navbar";
 import TeamMember from "../Images/team-2.jpg";
 import TeamMember1 from "../Images/team-3.jpg";
@@ -7,8 +7,24 @@ import logo from "../Images/logo1.png";
 import PaymentMethod from "../Images/paymentfeature.png";
 import UseAnimationFrame from "../Animations/AnimationAbout";
 import HangoutImage from "../Images/hangouts-messenger-svgrepo-com.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllCategories } from "../Redux/Actions/CategoriesAction/categoryAction";
+import ToastMessage from "../utils/ToastMessage";
+import { CategoriesMessages } from "../utils/statusMessages";
+import MotionPath from "../Components/loader";
+import { Link } from "react-router-dom";
 
 const About = () => {
+  const dispatch = useDispatch();
+  const { loading, error, categories } = useSelector(
+    (state) => state.allCategories
+  );
+  useEffect(() => {
+    dispatch(getAllCategories());
+  }, [dispatch]);
+  if (error) {
+    return <ToastMessage message={CategoriesMessages.CANT_FETCH} />;
+  }
   return (
     <div>
       <Navbar />
@@ -16,7 +32,8 @@ const About = () => {
         <div className="flex justify-start">
           <h1 className="font-semibold  py-20  text-3xl text-[#E78F81] mt-20 sm:text-4xl md:text-[48px] font-serif sm:mx-8 sm:p-12  ">
             Luxury Products,
-            <br /><br />
+            <br />
+            <br />
             <br />
             Affordable Pricing !
           </h1>
@@ -60,7 +77,7 @@ const About = () => {
       </div>
       <div className="grid grid-cols-2 bg-slate-300 ">
         <div className="flex justify-center items-center">
-          <div className='text-center'>
+          <div className="text-center">
             <img className="mx-auto" src={HangoutImage} alt="oa" />
             <p className="text-justify text-2xl  font-serif">
               "Going out after work? Take your <br />
@@ -116,13 +133,26 @@ const About = () => {
           <img className="my-8" src={PaymentMethod} alt="load" />
         </div>
         <div className="my-8 px-28">
-          <h1 className="text-2xl font-serif font-semibold ">Shopping</h1>
-          <h2 className="text-lg font-serif py-2">Men's Fashion</h2>
-          <h2 className="text-lg font-serif py-2">Women's Fashion</h2>
-          <h2 className="text-lg font-serif py-2">Sports</h2>
-          <h2 className="text-lg font-serif py-2">Stationary</h2>
-          <h2 className="text-lg font-serif py-2">Shoes</h2>
-          <h2 className="text-lg font-serif py-2">Electronics</h2>
+          <h1 className="text-2xl font-semibold font-serif">Shopping</h1>
+          {loading ? (
+            <MotionPath />
+          ) : categories ? (
+            categories.map((category) => (
+              <div key={category?._id}>
+                <Link to={`/category/${category._id}`}>
+                  <div>
+                    <p className="text-lg font-serif py-2 hover:text-red-700 hover:scale-105">
+                      {category?.name}
+                    </p>
+                  </div>
+                </Link>
+              </div>
+            ))
+          ) : (
+            <div className="h-20 items-center flex justify-center">
+              <MotionPath />
+            </div>
+          )}
         </div>
         <div className="flex justify-center items-center mt-24">
           <UseAnimationFrame />

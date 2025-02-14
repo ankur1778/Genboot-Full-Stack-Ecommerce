@@ -49,7 +49,7 @@ const AddToWishlistButton = ({ product }) => {
                 fill="currentFill"
               />
             </svg>
-            <span class="sr-only">Loading...</span>
+            <span className="sr-only">Loading...</span>
           </div>
         ) : isAdded ? (
           <p className="w-8 h-8 text-xl">💖</p>

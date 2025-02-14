@@ -105,7 +105,7 @@ const AllProducts = () => {
                     />
                   </div>
                   <div className="mt-4">
-                    <h1 className="text-sm uppercase font-bold">
+                    <h1 className="text-sm uppercase font-bold hover:text-blue-900">
                       {product.name}
                     </h1>
                     <p className="mt-2 text-gray-600 text-sm">

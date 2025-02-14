@@ -7,6 +7,8 @@ import { WishListMessage } from "../utils/statusMessages";
 import remove from "../Images/removeItem.svg";
 import MotionPath from "../Components/loader";
 import { removeItemFromWishlist } from "../Redux/Actions/Wishlists/removeItemFromWishlist";
+import AddToCartButton from "../utils/addToCart";
+import { Link } from "react-router-dom";
 
 const Wishlists = () => {
   const dispatch = useDispatch();
@@ -32,54 +34,53 @@ const Wishlists = () => {
           <h2 className="text-3xl font-serif font-semibold text-center mb-6">
             Your Wishlist Items
           </h2>
-          {isLoading ? (
-            <div className="flex justify-center items-center mt-8">
+          <div className="product-list">
+            {isLoading ? (
               <MotionPath />
-            </div>
-          ) : items?.length === 0 ? (
-            <p className="text-center text-gray-500 text-lg mt-6">
-              Your Wishlist is Empty
-            </p>
-          ) : (
-            items?.map((item) => (
-              <div
-                key={item?._id}
-                className="flex justify-between items-center mt-4 p-4 border-b last:border-none rounded-lg hover:shadow-lg transition-all"
-              >
-                <div className="flex gap-4">
-                  <div className="w-24 h-24 shrink-0 bg-gray-200 p-2 rounded-md">
-                    <img
-                      src={item.image}
-                      alt={item.name}
-                      className="w-full h-full object-contain rounded-md"
-                    />
-                  </div>
-                  <div>
-                    <p className="text-gray-800 font-medium text-lg">
-                      {item.name}
-                    </p>
-                    <p className="text-gray-600 text-sm line-clamp-2">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex flex-col items-end">
-                  <button
-                    type="button"
-                    onClick={() => handleRemoveItem(item._id)}
-                    className="mt-6 font-semibold text-red-500 text-xs flex gap-1 shrink-0"
+            ) : (
+              <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 px-10">
+                {items?.map((product) => (
+                  <div
+                    key={product._id}
+                    className="bg-white shadow-md rounded-lg p-4"
                   >
-                    <img
-                      src={remove}
-                      className="w-4 fill-current inline"
-                      alt=""
-                    />
-                    REMOVE
-                  </button>
-                </div>
+                    <Link to={`/product/${product._id}`}>
+                      <div className="flex justify-center">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="transition-shadow duration-300 cursor-pointer hover:shadow-lg hover:shadow-gray-400 hover:scale-110 rounded-md h-48 delay-700 ease-in"
+                        />
+                      </div>
+                      <div className="mt-4">
+                        <h1 className="text-sm uppercase font-bold hover:text-blue-900">
+                          {product.name}
+                        </h1>
+                        <p className="mt-2 text-gray-600 text-sm">
+                          {product.description.slice(0, 40)}...
+                        </p>
+                        <p className="mt-2 font-semibold text-gray-600">
+                          ₹{product.price}
+                        </p>
+                      </div>
+                    </Link>
+                    <div className="mt-6 flex justify-between items-center">
+                      <AddToCartButton productId={product} />
+                      <div className="text-red-500">
+                        <img
+                          className="w-4 fill-current inline cursor-pointer"
+                          src={remove}
+                          alt=""
+                          onClick={handleRemoveItem}
+                        />
+                        Remove
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-            ))
-          )}
+            )}
+          </div>
         </div>
       </div>
     </>

@@ -1,4 +1,4 @@
-import { updateOrderStatus } from "../../api/allOrders";
+import { updateOrderStatus } from "../../../api/allOrders";
 import {
   UPDATE_ORDER_STATUS_FAILURE,
   UPDATE_ORDER_STATUS_REQUEST,

@@ -22,7 +22,7 @@ const getCartSlice = (state = initialState, action) => {
     case GET_CART_SUCCESS:
       return {
         ...state,
-        item: action.payload.item,
+        item: action.payload,
         isLoading: false,
         isError: false,
       };

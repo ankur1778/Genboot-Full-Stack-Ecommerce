@@ -97,7 +97,7 @@ const SingleProductPage = () => {
                     </p>
                   </div>
                   <div className="mt-6">
-                    <AddToCartButton productId={products?._id} />
+                    <AddToCartButton productId={products} />
                   </div>
                 </>
               )}

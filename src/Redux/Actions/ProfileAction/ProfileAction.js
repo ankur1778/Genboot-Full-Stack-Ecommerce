@@ -23,7 +23,6 @@ export const getUserDetail = (userId) => {
       dispatch(fetchUsersSuccess(user));  
       return true;
     } catch (error) {
-      console.error("Error Occurred: ", error);
       dispatch(fetchUsersFailure(error));
       return false;
     }

@@ -13,7 +13,7 @@ export const getUserCartRequest = () => ({
 
 export const getUserCartSuccess = (cart) => ({
   type: GET_CART_SUCCESS,
-  payload: { item: cart?.products },
+  payload: cart,
 });
 
 export const getUserCartFailure = (error) => ({

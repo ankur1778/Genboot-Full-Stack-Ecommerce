@@ -2,15 +2,17 @@ import React, { useEffect, useState } from "react";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LoginUser } from "../Redux/Actions/LoginActions/loginAction";
 import { jwtdecode } from "../utils/jwt_decode";
 import ToastMessage from "../utils/ToastMessage";
 import { AuthMessages, ServerErrorMessage } from "../utils/statusMessages";
 import Image from "../Images/Login image.jpg";
+import BtnLoader from "../utils/btnLoader";
 
 const Login = () => {
   const navigate = useNavigate();
+  const { isLoading } = useSelector((state) => state.auth);
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useDispatch();
   const [toast, setToast] = useState({ message: "", type: "" });
@@ -33,7 +35,6 @@ const Login = () => {
             navigate("/admin-dashboard");
           } else {
             setToast({ message: AuthMessages.INVALID, type: "error" });
-
             navigate("/");
           }
         }
@@ -123,6 +124,18 @@ const Login = () => {
                       <path d="M227.42383,164.8125a3.9998,3.9998,0,1,1-6.92774,4l-20.55542-35.602a120.13387,120.13387,0,0,1-41.15942,19.102l6.4541,36.59961a4.00051,4.00051,0,0,1-3.24512,4.63379,4.06136,4.06136,0,0,1-.69921.06152,4.00171,4.00171,0,0,1-3.93457-3.30664l-6.4043-36.31738a131.58367,131.58367,0,0,1-45.99341-.01709l-6.40405,36.32178a4.00265,4.00265,0,0,1-3.93457,3.30664,4.06041,4.06041,0,0,1-.69922-.06153,4,4,0,0,1-3.24512-4.63379l6.45484-36.60986a120.1421,120.1421,0,0,1-41.11426-19.10937L35.35254,168.9707a3.9998,3.9998,0,1,1-6.92774-4l21.18067-36.68554A142.43333,142.43333,0,0,1,28.8877,107.38867a3.99986,3.99986,0,1,1,6.22265-5.02734,132.78926,132.78926,0,0,0,22.266,21.856c.03113.02636.068.04687.09815.07373C74.60583,137.4248,97.77954,148,128,148c30.19849,0,53.36011-10.56055,70.48779-23.68115.0149-.01319.03308-.02344.0481-.03614a132.77462,132.77462,0,0,0,22.35278-21.92138,3.99986,3.99986,0,1,1,6.22266,5.02734,142.41445,142.41445,0,0,1-20.75806,20.92969Z" />
                     </svg>
                   )}
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="gray"
+                    className="bi bi-eye absolute top-1/2 right-3 -translate-y-1/2 cursor-pointer z-20 opacity-100"
+                    viewBox="0 0 16 16"
+                    onClick={() => setShowPassword((prev) => !prev)}
+                  >
+                    <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zM1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z"></path>
+                    <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5zM4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0z"></path>
+                  </svg>
                 </div>
 
                 {errors.password && (
@@ -135,7 +148,7 @@ const Login = () => {
                   type="submit"
                   disabled={isSubmitting}
                 >
-                  Login
+                  {isLoading ? <BtnLoader msg="Logging in..." /> : "Login"}
                 </button>
               </Form>
             )}

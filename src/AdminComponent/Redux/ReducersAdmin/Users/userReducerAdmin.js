@@ -2,7 +2,7 @@ import {
   SHOW_USER_FAILURE,
   SHOW_USER_REQUEST,
   SHOW_USER_SUCCESS,
-} from "../ActionsAdmin/ActionTypes/userActionType";
+} from "../../ActionsAdmin/ActionTypes/userActionType";
 
 const initialState = {
   users: [],

@@ -1,16 +1,21 @@
 import React, { useState } from "react";
 import * as Yup from "yup";
 import { Formik, Field, Form, ErrorMessage } from "formik";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RegisterUser } from "../Redux/Actions/Registations/registrationAction";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ToastMessage from "../utils/ToastMessage";
 import { AuthMessages } from "../utils/statusMessages";
+<<<<<<< HEAD
 import Image from "../Images/register image.jpg";
+=======
+import BtnLoader from "../utils/btnLoader";
+>>>>>>> 9b97932a67b2d5efa7d3477e5dc69dc0c976b950
 
 const Registration = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { isLoading } = useSelector((state) => state.register);
   const [toast, setToast] = useState({ message: "", type: "" });
 
   const validationSchema = Yup.object({
@@ -28,15 +33,15 @@ const Registration = () => {
 
     if (result.success) {
       setToast({ message: AuthMessages.REGISTERED, type: "success" });
-      setTimeout(() => navigate("/login"), 2000);
+      navigate("/login");
     } else {
       setToast({ message: AuthMessages.INVALID, type: "error" });
     }
   };
-
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-gradient-to-r from-green-200 via-gray-200 to-blue-200">
       <ToastMessage message={toast.message} type={toast.type} />
+<<<<<<< HEAD
       <div className="bg-gradient-to-r from-gray-100 to-gray-200 rounded-2xl flex  max-h-2xl p-1 items-center shadow-xl">
         <div className="md:block hidden">
           <img className="rounded-2xl h-96 p-4" src={Image} alt="" />
@@ -140,6 +145,124 @@ const Registration = () => {
             )}
           </Formik>
         </div>
+=======
+      <div className="bg-white p-8 rounded-lg shadow-lg w-full sm:w-96">
+        <h2 className="text-2xl font-bold text-center mb-4">Register</h2>
+        <Formik
+          initialValues={{
+            name: "",
+            phNo: "",
+            email: "",
+            password: "",
+          }}
+          validationSchema={validationSchema}
+          onSubmit={handleRegistration}
+        >
+          {({ handleSubmit, handleChange, values, isSubmitting }) => (
+            <Form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label
+                  htmlFor="name"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Name
+                </label>
+                <Field
+                  id="name"
+                  name="name"
+                  onChange={handleChange}
+                  value={values.name}
+                  required
+                  type="text"
+                  className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md"
+                />
+                <ErrorMessage
+                  name="name"
+                  component="div"
+                  className="text-red-600 text-sm mt-1"
+                />
+              </div>
+
+              <div className="mb-4">
+                <label
+                  htmlFor="phNo"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Phone Number
+                </label>
+                <Field
+                  id="phNo"
+                  required
+                  onChange={handleChange}
+                  value={values.phNo}
+                  name="phNo"
+                  type="tel"
+                  className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md"
+                />
+                <ErrorMessage
+                  name="phNo"
+                  component="div"
+                  className="text-red-600 text-sm mt-1"
+                />
+              </div>
+
+              <div className="mb-4">
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Email
+                </label>
+                <Field
+                  id="email"
+                  name="email"
+                  required
+                  onChange={handleChange}
+                  value={values.email}
+                  type="email"
+                  className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md"
+                />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className="text-red-600 text-sm mt-1"
+                />
+              </div>
+
+              <div className="mb-4">
+                <label
+                  htmlFor="password"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  Password
+                </label>
+                <Field
+                  id="password"
+                  name="password"
+                  onChange={handleChange}
+                  value={values.password}
+                  required
+                  type="password"
+                  className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-md"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className="text-red-600 text-sm mt-1"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting || isLoading}
+                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded-md flex items-center justify-center"
+              >
+                {isLoading ? <BtnLoader msg="Registering..." /> : "Register"}
+              </button>
+            </Form>
+          )}
+        </Formik>
+>>>>>>> 9b97932a67b2d5efa7d3477e5dc69dc0c976b950
       </div>
     </div>
   );

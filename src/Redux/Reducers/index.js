@@ -1,11 +1,9 @@
 import { combineReducers } from "redux";
 import { userReducer } from "./loginReducer";
 import { registerSlice } from "./registrationReducer";
-import { userReducerAdmin } from "../../AdminComponent/ReducersAdmin/userReducerAdmin";
 import HamburgerReducer from "./HamburgerReducer";
 import getAllCategoriesReducer from "./categoryIdReducer";
 import getProductsByCategoriesReducer from "./productByCategoriesSlice";
-import { allProductsReducerAdmin } from "../../AdminComponent/ReducersAdmin/AllProductsSlice";
 import cartSlice from "./CartSlice/CartSlice";
 import getCartSlice from "./CartSlice/getCartSlice";
 import removeItemFromCartSlice from "./CartSlice/removeItemSlice";
@@ -17,9 +15,16 @@ import addToWishlistReducer from "./Wishlists/addToWishlistSlice";
 import getWishlistReducer from "./Wishlists/getWishlistSlice";
 import removeItemFromWishlistSlice from "./Wishlists/removeFromWishlistSlice";
 import cancelOrderSlice from "./OrderSlices/cancelOrderSlice";
-import getSpecificOrderReducer from "../../AdminComponent/ReducersAdmin/Orders/specificOrderAction";
-import { ordersReducer } from "../../AdminComponent/ReducersAdmin/Orders/AllOrdersSlice";
 import profileReducer from "./profileSlice";
+import { ordersReducer } from "../../AdminComponent/Redux/ReducersAdmin/Orders/AllOrdersSlice";
+import { userReducerAdmin } from "../../AdminComponent/Redux/ReducersAdmin/Users/userReducerAdmin";
+import { allProductsReducerAdmin } from "../../AdminComponent/Redux/ReducersAdmin/Products/AllProductsSlice";
+import getSpecificOrderReducer from "../../AdminComponent/Redux/ReducersAdmin/Orders/specificOrderSlice";
+import deleteOrderReducer from "../../AdminComponent/Redux/ReducersAdmin/Orders/deleteOrderSlice";
+import deleteUserReducer from "../../AdminComponent/Redux/ReducersAdmin/Users/deleteUserSlice";
+import updateProductDetailsReducer from "../../AdminComponent/Redux/ReducersAdmin/Products/updateProductSlice";
+import deleteProductReducer from "../../AdminComponent/Redux/ReducersAdmin/Products/deleteProductSlice";
+import clearCartReducer from "./CartSlice/clearCartSlice";
 
 export const rootReducer = combineReducers({
   getAllProducts: allProductsReducerAdmin,
@@ -33,6 +38,7 @@ export const rootReducer = combineReducers({
   cart: cartSlice,
   getCart: getCartSlice,
   removeCartItem: removeItemFromCartSlice,
+  clearCart: clearCartReducer,
   increaseQuantity: increaseCartItemQuantitySlice,
   decreaseQuantity: decreaseCartItemQuantitySlice,
   addToWishlist: addToWishlistReducer,
@@ -42,7 +48,11 @@ export const rootReducer = combineReducers({
   userOrders: getUserOrderSlice,
   cancelOrder: cancelOrderSlice,
   specificOrder: getSpecificOrderReducer,
+  deleteOrder: deleteOrderReducer,
   getUsersDetail: profileReducer,
+  deleteUser: deleteUserReducer,
+  updateProduct: updateProductDetailsReducer,
+  deleteProduct: deleteProductReducer,
 });
 
 export default rootReducer;

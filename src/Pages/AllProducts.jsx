@@ -9,7 +9,7 @@ import { ProductMessages } from "../utils/statusMessages";
 import AddToWishlistButton from "../utils/addToWishlist";
 import Pagination from "../utils/Pagination";
 import { debounce } from "lodash";
-import { GetAllProducts } from "../AdminComponent/ActionsAdmin/Allproducts/productAction";
+import { GetAllProducts } from "../AdminComponent/Redux/ActionsAdmin/Allproducts/productAction";
 
 const AllProducts = () => {
   const dispatch = useDispatch();
@@ -105,7 +105,7 @@ const AllProducts = () => {
                     />
                   </div>
                   <div className="mt-4">
-                    <h1 className="text-sm uppercase font-bold">
+                    <h1 className="text-sm uppercase font-bold hover:text-blue-900">
                       {product.name}
                     </h1>
                     <p className="mt-2 text-gray-600 text-sm">

@@ -102,9 +102,14 @@ const SingleProductPage = () => {
                       {products?.description}
                     </p>
                   </div>
+<<<<<<< HEAD
 
                   <div className="mt-8 flex items-center justify-between">
                     <AddToCartButton productId={products?._id} />
+=======
+                  <div className="mt-6">
+                    <AddToCartButton productId={products} />
+>>>>>>> 9b97932a67b2d5efa7d3477e5dc69dc0c976b950
                   </div>
                 </>
               )}

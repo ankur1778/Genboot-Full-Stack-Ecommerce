@@ -1,5 +1,5 @@
-import { allUsers } from "../../api/allUsers";
-import ToastMessage from "../../../utils/ToastMessage";
+import { allUsers } from "../../../api/allUsers";
+import ToastMessage from "../../../../utils/ToastMessage";
 import {
   SHOW_USER_FAILURE,
   SHOW_USER_REQUEST,

@@ -1,7 +1,19 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { GetAllOrders } from "../Redux/ActionsAdmin/OrdersActions/orderAction";
+import { DeleteOrder } from "../Redux/ActionsAdmin/OrdersActions/deleteOrderAction";
 
 const UpdateStatusModal = ({ order, onClose, onSave }) => {
+  const dispatch = useDispatch();
   const [status, setStatus] = useState(order?.status || "");
+
+  const handleDeleteOrder = async (userId) => {
+    const success = await dispatch(DeleteOrder(userId));
+    if (success) {
+      await dispatch(GetAllOrders(10, 1));
+      onClose();
+    }
+  };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
@@ -23,10 +35,10 @@ const UpdateStatusModal = ({ order, onClose, onSave }) => {
             <strong>User:</strong> {order?.user?.name}
           </p>
           <p>
-            <strong>Total:</strong> ${order?.totalPrice}
+            <strong>Total:</strong> ₹{order?.totalPrice}
           </p>
         </div>
-        
+
         <div className="mt-4">
           <label className="block font-semibold">Update Status:</label>
           <select
@@ -44,9 +56,15 @@ const UpdateStatusModal = ({ order, onClose, onSave }) => {
         <div className="flex justify-end mt-4">
           <button
             onClick={onClose}
-            className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 mr-2"
+            className="px-4 py-2 bg-gray-300 text-gray-700 rounded hover:bg-gray-400 mx-2"
           >
             Cancel
+          </button>
+          <button
+            onClick={() => handleDeleteOrder(order._id)}
+            className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600 mx-2"
+          >
+            Delete
           </button>
           <button
             onClick={() => onSave(status)}

@@ -19,7 +19,7 @@ export const getUserDetail = (userId) => {
   return async (dispatch) => {
     dispatch(fetchUsersRequest());
     try {
-      const user = await allUsers(userId);  
+      const user = await allUsers(userId); 
       dispatch(fetchUsersSuccess(user));  
       return true;
     } catch (error) {

@@ -4,11 +4,11 @@ import { Link, useParams } from "react-router-dom";
 import { getProductsByCategories } from "../Redux/Actions/ProductsByCategories/productByCategoriesAction";
 import Navbar from "../Components/Navbar";
 import MotionPath from "../Components/loader";
-import { Carousel } from "react-responsive-carousel";
 import AddToCartButton from "../utils/addToCart";
 import ToastMessage from "../utils/ToastMessage";
 import { ProductMessages } from "../utils/statusMessages";
 import AddToWishlistButton from "../utils/addToWishlist";
+import CustomCarousel from "../Components/Carousel";
 
 const ProductsByCategories = () => {
   const { categoryId } = useParams();
@@ -22,40 +22,31 @@ const ProductsByCategories = () => {
   }, [dispatch, categoryId]);
 
   if (isError) {
-    <ToastMessage message={ProductMessages.NOT_FETCH} />;
+    return <ToastMessage message={ProductMessages.NOT_FETCH} />;
   }
+  const slides = [
+    {
+      className: "bg-categoryPageFeaturedImage1",
+      title: "Discover More,",
+      subtitle: "Spend Less!",
+    },
+    {
+      className: "bg-categoryPageFeaturedImage2",
+      title: "Shop The Best,",
+      subtitle: "Forget The Rest!",
+    },
+    {
+      className: "bg-categoryPageFeaturedImage3",
+      title: "From Wishlist to Doorstep",
+      subtitle: "We Make Shopping Simple!",
+    },
+  ];
+
+
   return (
     <>
       <Navbar />
-      <Carousel showArrows={true} showThumbs={false} interval={3000}>
-        <div className="mx-8 bg-categoryPageFeaturedImage1 h-[450px] my-4 rounded-3xl  bg-cover bg-center">
-          <div className="flex justify-start">
-            <h1 className="font-semibold  py-20  text-3xl mt-20 sm:text-4xl md:text-[48px] font-serif sm:mx-8 sm:p-12  ">
-              Discover More,
-              <br /> <br />
-              Spend Less!
-            </h1>
-          </div>
-        </div>
-        <div className="mx-8 bg-categoryPageFeaturedImage2 h-[450px] my-4 rounded-3xl  bg-cover bg-center">
-          <div className="flex justify-end">
-            <h1 className="font-semibold py-20 text-3xl mt-20 sm:text-3xl md:text-[48px] font-serif mx-4 sm:mx-8   sm:p-12  ">
-              Shop The Best,
-              <br /> <br />
-              Forget The Rest!
-            </h1>
-          </div>
-        </div>
-        <div className="mx-8 bg-categoryPageFeaturedImage3 h-[450px] my-4 rounded-3xl  bg-cover bg-center">
-          <div className="flex justify-end w-1/3">
-            <h1 className="font-semibold py-20 text-3xl mt-20 sm:text-4xl md:text-[40px] font-serif mx-4 sm:mx-8   sm:p-12  ">
-              From Wishlist to Doorstep
-              <br /> <br />
-              We Make Shopping Simple!
-            </h1>
-          </div>
-        </div>
-      </Carousel>
+      <CustomCarousel slides={slides}/>
       {isLoading ? (
         <div>
           <MotionPath />
@@ -65,7 +56,9 @@ const ProductsByCategories = () => {
           <div className="flex flex-col justify-center bg-gray-100">
             <div className="flex justify-center h-20 items-center mt-10">
               <h1 className="text-[60px] font-semibold uppercase italic ">
-                {productsByCategories[0]?.category?.name}
+                {productsByCategories?.products?.length > 0
+                  ? productsByCategories.products[0].category.name
+                  : "Category"}
               </h1>
             </div>
             <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-10">

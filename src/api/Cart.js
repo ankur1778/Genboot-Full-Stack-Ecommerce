@@ -35,3 +35,10 @@ export const decreaseCartItem = (productId) => {
     body: JSON.stringify(productId),
   });
 };
+
+export const clearCart = (cartId) => {
+  return sendRequest(`${BASE_PATH}/clear-cart`, {
+    method: "DELETE",
+    body: JSON.stringify(cartId),
+  });
+};

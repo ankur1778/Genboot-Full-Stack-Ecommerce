@@ -32,22 +32,24 @@ const SingleProductPage = () => {
       ToastMessage({ message: ProductMessages.NOT_FETCH });
     }
   }, [isError]);
+
   return (
     <>
       <Navbar />
-      <div className="bg-gray-100 dark:bg-gray-800 py-8 mt-8">
+      <div className="bg-gray-50 dark:bg-gray-900 py-12 mt-6 rounded-3xl shadow-2xl">
+
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row -mx-4">
-            <div className="md:flex-1 px-4">
+          <div className="flex flex-col md:flex-row gap-8">
+            <div className="md:flex-2 px-4">
               {isLoading ? (
                 <div className="flex justify-center">
                   <MotionPath />
                 </div>
               ) : (
                 products && (
-                  <div className=" rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
+                  <div className="rounded-2xl bg-gradient-to-r from-[#F0EBE3] to-[#E8D3A4] shadow-xl hover:shadow-2xl transition duration-500 ease-in-out transform hover:scale-105">
                     <img
-                      className="w-full h-80 p-2"
+                      className="w-full h-96 p-4 object-contain rounded-2xl transition duration-500 ease-in-out transform hover:scale-110"
                       src={products?.image}
                       alt={products?.name}
                     />
@@ -55,49 +57,59 @@ const SingleProductPage = () => {
                 )
               )}
             </div>
-            <div className="md:flex-1 px-4">
+
+            <div className="md:flex-1 px-4 flex flex-col justify-between">
               {products && (
                 <>
-                  <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">
+                  <h2 className="text-4xl font-semibold font-serif text-[#3E2C41] dark:text-white mb-6 transition duration-500 ease-in-out transform hover:scale-105">
                     {products?.name}
                   </h2>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                    {products?.description}
-                  </p>
-                  <div className="flex mb-4">
-                    <div className="mr-4">
-                      <span className="font-bold text-gray-700 dark:text-gray-300">
+
+                  <div className="flex items-center justify-between mb-5">
+                    <div className="mr-4 mt-3">
+                      <span className="font-semibold text-xl text-[#6A4C3C] dark:text-gray-300">
                         Price:
                       </span>
-                      <span className="text-gray-600 dark:text-gray-300">
+                      <span className="text-2xl font-bold text-[#F19C42] dark:text-[#F7A00F]">
                         ₹{products?.price}
                       </span>
                     </div>
                   </div>
-                  <div className="mr-4">
-                    <span className="font-bold text-gray-700 dark:text-gray-300">
+
+                  <div className="mr-4 mt-3 mb-4">
+                    <span className="font-semibold text-xl text-[#6A4C3C] dark:text-gray-300">
                       Category:
                     </span>
-                    <span className="text-gray-600 dark:text-gray-300">
+                    <span className="text-xl text-[#8E6B4E] ml-1 dark:text-gray-300 font-semibold">
                       {products?.category?.name}
                     </span>
                   </div>
-                  <div className="mb-4 mr-4">
-                    <span className="font-bold text-gray-700 dark:text-gray-300">
+
+                  <div className="mb-4 mt-6">
+                    <span className="font-semibold text-xl text-[#6A4C3C] dark:text-gray-300">
                       Select Color:
                     </span>
-                    <Button colors={colorOptions} />
+                    <div className="mt-2">
+                      <Button colors={colorOptions} />
+                    </div>
                   </div>
-                  <div>
-                    <span className="font-bold text-gray-700 dark:text-gray-300">
+
+                  <div className="mt-6">
+                    <span className="font-semibold text-xl text-[#6A4C3C] dark:text-gray-300">
                       Product Description:
                     </span>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm mt-2">
+                    <p className="text-lg text-[#4C4A4A] dark:text-gray-300 mt-2 font-medium leading-relaxed">
                       {products?.description}
                     </p>
                   </div>
-                  <div className="mt-6">
+<<<<<<< HEAD
+
+                  <div className="mt-8 flex items-center justify-between">
                     <AddToCartButton productId={products?._id} />
+=======
+                  <div className="mt-6">
+                    <AddToCartButton productId={products} />
+>>>>>>> 9b97932a67b2d5efa7d3477e5dc69dc0c976b950
                   </div>
                 </>
               )}

@@ -114,7 +114,6 @@ const ProfilePage = () => {
                     />
                   </div>
                 </div>
-
                 <div className="mb-6 text-center">
                   <button
                     className="w-full px-4 py-2 font-serif text-2xl font-bold text-white bg-[#DCA47C] rounded-full hover:bg-[#a56334] dark:bg-[#da8d55] dark:text-white dark:hover:bg-blue-900 focus:outline-none focus:shadow-outline"

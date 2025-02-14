@@ -61,7 +61,7 @@ const AllOrdersPage = () => {
           No orders found.
         </p>
       ) : (
-        orders.map((order) => (
+        orders?.map((order) => (
           <div
             key={order?._id}
             className="w-screen flex justify-center items-center mt-6"

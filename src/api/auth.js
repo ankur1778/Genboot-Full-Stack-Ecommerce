@@ -8,9 +8,7 @@ export const login = (data) =>
   });
 
 export const registration = (data) => {
-  try {
-    console.log(data, "gghhkk");
-    
+  try {   
     return sendPublicRequest(`${BASE_PATH}/register`, {
       body: JSON.stringify(data),
     });

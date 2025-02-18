@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetAllOrders } from "./ActionsAdmin/OrdersActions/orderAction";
-import filterIcon from "../Images/sort.svg";
 import ToastMessage from "../utils/ToastMessage";
 import { OrderMessage } from "../utils/statusMessages";
 import EditImage from "../Images/Edit.svg";
-import UpdateStatusModal from "./updateOrderStatusModal";
-import { UpdateOrderStatus } from "./ActionsAdmin/OrdersActions/updateOrderAction";
+import UpdateStatusModal from "./Modals/updateOrderStatusModal";
 import Pagination from "../utils/Pagination";
 import MotionPath from "../Components/loader";
+import { UpdateOrderStatus } from "./Redux/ActionsAdmin/OrdersActions/updateOrderAction";
+import { GetAllOrders } from "./Redux/ActionsAdmin/OrdersActions/orderAction";
 
 const OrderManagement = () => {
   const dispatch = useDispatch();
@@ -60,19 +59,9 @@ const OrderManagement = () => {
             Order Management
           </h4>
         </div>
-        <div className="flex items-center cursor-pointer hover:text-blue-600 transition">
-          <img className="h-6" src={filterIcon} alt="Sort Icon" />
-          <h4 className="ml-2 font-semibold text-gray-700">Sort</h4>
-        </div>
       </div>
 
       <div className="bg-white shadow-xl rounded-lg p-6 border border-gray-200">
-        <input
-          type="text"
-          placeholder="Search Orders"
-          className="w-full border border-gray-300 h-12 rounded-lg px-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
-        />
-
         <div className="overflow-x-auto">
           <table className="w-full text-sm text-gray-700">
             <thead className="bg-gray-300 text-gray-800 uppercase">

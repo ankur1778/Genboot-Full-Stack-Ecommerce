@@ -16,31 +16,40 @@ const CheckoutPage = () => {
   const { item, isLoading, isError } = useSelector((state) => state.getCart);
   const [toast, setToast] = useState({ message: "", type: "" });
   const [orderItems, setOrderItems] = useState([]);
+
   const calculateTotal = () => {
-    return item.reduce(
-      (total, currentItem) =>
-        total + currentItem.product.price * currentItem.quantity,
+    if (!item || !item.products || item.products.length === 0) return 0;
+    return item.products.reduce(
+      (total, cartItem) =>
+        total + (cartItem?.product?.price || 0) * (cartItem?.quantity || 0),
       0
     );
   };
+
+  const subtotal = calculateTotal();
+  const shipping = subtotal / 5;
+  const tax = subtotal / 10;
+  const total = subtotal + shipping + tax;
+
   useEffect(() => {
     dispatch(getUserCart());
   }, [dispatch]);
 
   useEffect(() => {
-    if (item) {
+    if (item.products) {
       setOrderItems(
-        item.map((cartItem) => ({
+        item.products.map((cartItem) => ({
           quantity: cartItem.quantity,
           product: cartItem.product._id,
         }))
       );
     }
-  }, [item]);
+  }, [item.products]);
 
   const validationSchema = Yup.object({
     shippingAddress1: Yup.string().required("Shipping Address 1 is required"),
     shippingAddress2: Yup.string(),
+    state: Yup.string().required("State is required"),
     phone: Yup.string()
       .matches(/^[0-9]{10}$/, "Phone number must be 10 digits")
       .required("Phone is required"),
@@ -51,11 +60,11 @@ const CheckoutPage = () => {
     city: Yup.string().required("City is required"),
   });
 
-  const handlePostOrder = async (values, { setFieldError }) => {
+  const handlePostOrder = async (values) => {
     try {
       const orderData = { ...values, orderItems };
-      const order = await PostOrder(orderData);
-      if (order.success) {
+      const order = await dispatch(PostOrder(orderData));
+      if (order?.success) {
         setToast({ message: OrderMessage.PLACED, type: "success" });
         navigate("/your-orders");
       }
@@ -65,8 +74,9 @@ const CheckoutPage = () => {
   };
 
   if (isError) {
-    <ToastMessage message={ProductMessages.NOT_FOUND} />;
+    return <ToastMessage message={ProductMessages.NOT_FOUND} />;
   }
+
   return (
     <>
       <Navbar />
@@ -77,14 +87,13 @@ const CheckoutPage = () => {
             <div className="flex justify-between">
               <h2 className="text-lg font-semibold mb-3">Items:</h2>
               <span className="ml-auto">
-                <p className="font-bold">Total :</p> ₹
-                {(calculateTotal() + 6).toFixed(2)}
+                <p className="font-bold">Total :</p> ₹{total}
               </span>
             </div>
             {isLoading ? (
               <MotionPath />
             ) : (
-              item?.map((item) => (
+              item?.products?.map((item) => (
                 <div
                   key={item._id}
                   className="border-b last:border-b-0 py-3 flex flex-col md:flex-row justify-between items-start md:items-center gap-4"

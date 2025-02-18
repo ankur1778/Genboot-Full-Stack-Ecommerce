@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import image from "../Images/Product.svg";
-import filter from "../Images/sort.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { GetAllProducts } from "./ActionsAdmin/Allproducts/productAction";
 import ToastMessage from "../utils/ToastMessage";
 import { ProductMessages } from "../utils/statusMessages";
 import MotionPath from "../Components/loader";
 import Pagination from "../utils/Pagination";
 import { debounce } from "lodash";
+import EditImage from "../Images/Edit.svg";
+import EditProductModal from "./Modals/EditProductModal";
+import { GetAllProducts } from "./Redux/ActionsAdmin/Allproducts/productAction";
 
 const ProductManagement = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ const ProductManagement = () => {
     (state) => state.getAllProducts
   );
   const [search, setSearch] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const [sort, setSort] = useState("name");
@@ -23,6 +25,13 @@ const ProductManagement = () => {
     setSearch(e.target.value);
   }, 500);
 
+  const handleOpenEditModal = (user) => {
+    setSelectedProduct(user);
+  };
+
+  const handleCloseModal = () => {
+    setSelectedProduct(null);
+  };
   const handleSort = (field) => {
     if (sort === field) {
       setSortOrder(sortOrder === "asc" ? "desc" : "asc");
@@ -54,8 +63,7 @@ const ProductManagement = () => {
           </h4>
         </div>
         <div className="flex items-center cursor-pointer mt-2 md:mt-0">
-          <img className="h-6 md:h-[1.70rem]" src={filter} alt="" />
-          <h4 className="font-semibold text-lg md:text-xl mx-1">Sort</h4>
+          <button className="p-2 border-2 bg-gray-100 rounded-lg font-semibold">Add New Product</button>
         </div>
       </div>
 
@@ -81,6 +89,7 @@ const ProductManagement = () => {
                     {sort === field ? (sortOrder === "asc" ? "🔼" : "🔽") : ""}
                   </th>
                 ))}
+                <th className={cellClass}>ACTION</th>
               </tr>
             </thead>
             <tbody>
@@ -88,7 +97,10 @@ const ProductManagement = () => {
                 <MotionPath />
               ) : (
                 products?.map((product) => (
-                  <tr key={product._id} className="border-b hover:bg-gray-100 transition">
+                  <tr
+                    key={product._id}
+                    className="border-b hover:bg-gray-100 transition"
+                  >
                     {fields.map((field, index) => {
                       const value = field
                         .split(".")
@@ -99,6 +111,11 @@ const ProductManagement = () => {
                         </td>
                       );
                     })}
+                    <td className={cellClass}>
+                      <button onClick={() => handleOpenEditModal(product)}>
+                        <img src={EditImage} alt="Edit" />
+                      </button>
+                    </td>
                   </tr>
                 ))
               )}
@@ -111,6 +128,12 @@ const ProductManagement = () => {
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />
+        {selectedProduct && (
+          <EditProductModal
+            product={selectedProduct}
+            onClose={handleCloseModal}
+          />
+        )}
       </div>
     </div>
   );

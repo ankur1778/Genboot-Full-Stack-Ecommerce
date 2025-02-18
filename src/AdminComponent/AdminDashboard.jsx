@@ -12,7 +12,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="flex flex-col md:flex-row h-screen">
+    <div className="flex flex-col md:flex-row h-screen bg-gray-600">
       <button
         className="md:hidden bg-blue-500 text-white p-2 m-2 rounded"
         onClick={() => setIsSidebarOpen(!isSidebarOpen)}

@@ -14,6 +14,9 @@ import CheckoutPage from "../Pages/CheckoutPage";
 import AllOrdersPage from "../Pages/AllOrdersPage";
 import Wishlists from "../Pages/Wishlists";
 import ProfilePage from "../Pages/ProfilePage";
+import Logout from "../Pages/Logout";
+import Payment from "../Pages/Payment";
+import PaymentsSuccess from "../Pages/PaymentSuccess";
 
 const Main = () => {
   return (
@@ -22,6 +25,7 @@ const Main = () => {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
+          <Route path="/logout" element={<Logout/>}/>
           <Route path="/" element={<PrivateRoute Component={Home} />} />
           <Route
             path="/all-products"
@@ -54,6 +58,8 @@ const Main = () => {
             element={<PrivateRoute Component={Wishlists} />}
           />
           <Route path="/profile" element={<PrivateRoute Component={ProfilePage}/>}/>
+          <Route path="/payment-method" element={<PrivateRoute Component={Payment}/>}/>
+          <Route path="/payment-success" element={<PrivateRoute Component={PaymentsSuccess}/>}/>
         </Routes>
       </BrowserRouter>
     </div>

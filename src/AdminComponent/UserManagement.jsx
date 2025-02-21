@@ -61,11 +61,11 @@ const UserManagement = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen p-4 md:p-8">
-      <div className="bg-white flex flex-col md:flex-row justify-between my-4 shadow-md items-center rounded-md p-4">
+    <div className="bg-gray-300 min-h-screen p-4 md:p-8">
+      <div className="bg-white flex flex-col md:flex-row justify-between my-4 shadow-lg items-center rounded-md p-4">
         <div className="flex items-center">
           <img className="h-16 w-16 md:h-20 md:w-20" src={image} alt="Users" />
-          <h4 className="font-semibold text-xl md:text-3xl ml-4">
+          <h4 className="font-semibold text-xl md:text-3xl">
             User Management
           </h4>
         </div>
@@ -79,7 +79,7 @@ const UserManagement = () => {
         </div>
       </div>
 
-      <div className="border-2 border-gray-200 shadow-md rounded-md p-4 md:p-6 bg-white">
+      <div className=" shadow-lg rounded-md p-4 md:p-6 bg-white">
         <input
           type="text"
           placeholder="Search User"
@@ -87,9 +87,9 @@ const UserManagement = () => {
           onChange={searchHandler}
         />
 
-        <div className="relative overflow-x-auto">
+        <div className="relative overflow-x-auto shadow-lg rounded-md">
           <table className="w-full text-sm text-left text-gray-500">
-            <thead className="text-xs text-gray-700 uppercase bg-gray-50">
+            <thead className="text-sm text-gray-700 uppercase bg-gray-300">
               <tr>
                 {fields.map((field, index) => (
                   <th
@@ -128,7 +128,7 @@ const UserManagement = () => {
                       );
                     })}
                     <td className={cellClass}>
-                      <button onClick={() => handleOpenEditModal(user)}>
+                      <button className="bg-blue-500 p-2 shadow-md hover:bg-blue-600 rounded-md" onClick={() => handleOpenEditModal(user)}>
                         <img src={EditImage} alt="Edit" />
                       </button>
                     </td>

@@ -40,7 +40,7 @@ function EditProductModal({ product, onClose }) {
     <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
       <div className="bg-white rounded-lg shadow-lg p-6 w-96">
         <div className="flex justify-between items-center border-b-2 pb-2">
-          <h2 className="text-lg font-semibold">Edit User Details</h2>
+          <h2 className="text-lg font-semibold">Edit Product Details</h2>
           <h1
             className="hover:bg-red-600 hover:text-white p-2 rounded-xl cursor-pointer"
             onClick={onClose}

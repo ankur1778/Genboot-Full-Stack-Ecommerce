@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MotionPath from "../Components/loader";
 import ToastMessage from "../utils/ToastMessage";
 import { CategoriesMessages } from "../utils/statusMessages";
-import { GetAllProducts } from "../AdminComponent/ActionsAdmin/Allproducts/productAction";
+import { GetAllProducts } from "../AdminComponent/Redux/ActionsAdmin/Allproducts/productAction";
 import CustomCarousel from "../Components/Carousel";
 import ProductCarousel from "../Components/ProductCarousel";
 import UseAnimationFrame from "../Animations/AnimationAbout";
@@ -87,13 +87,12 @@ const Home = () => {
         )}
       </div>
       <ProductCarousel products={products} />
-      <div className="grid grid-cols-2 mt-10 px-8">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2 mt-10 px-8">
         <div className="bg-HomeBackgroundImage1 rounded-md opacity-75 bg-cover bg-center bg-no-repeat h-full flex justify-center items-center">
           <h1 className="font-bold text-5xl text-center mt-80 text-white">
             Summer Of '25
           </h1>
         </div>
-
         <div className="grid grid-cols-2 mr-6 h-[550px]">
           <div className="bg-HomeBackgroundImage2 opacity-75 bg-cover bg-center bg-no-repeat h-[275px] flex justify-center items-center">
             <h1 className="font-bold text-3xl mb-10 text-center text-white">
@@ -125,8 +124,6 @@ const Home = () => {
             alt="Everyday Collection"
           />
         </div>
-
-        {/* Text */}
         <div className="flex flex-col w-full sm:w-2/3 p-4">
           <h1 className="text-3xl sm:text-4xl font-bold mt-5 text-gray-800">
             Everyday Collection 2021
@@ -148,7 +145,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-3">
+      <div className="grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3">
         <div className="mt-5 bg-white  max-w-xs ml-20 border border-gray-200 rounded-lg shadow-2xl dark:bg-gray-800 dark:border-gray-700">
           <img className="rounded-lg h-80 p-5" src={Image} alt="" />
           <div class="p-5">
@@ -161,7 +158,7 @@ const Home = () => {
               Shoes matter in making a first impression to the strangers we have
               to meet everyday....
             </p>
-            <Link to="/about" className="font-serif text-2xl">
+            <Link to="/about" className="font-serif text-2xl hover:text-blue-800">
               Read more →{" "}
             </Link>
           </div>
@@ -178,7 +175,7 @@ const Home = () => {
               Challange- our Fashion weekend 2021 at the historuc Zofin Palace
               in Pargue...
             </p>
-            <Link to="/about" className="font-serif text-2xl">
+            <Link to="/about" className="font-serif text-2xl hover:text-blue-800">
               Read more →{" "}
             </Link>
           </div>
@@ -195,7 +192,7 @@ const Home = () => {
               ordered some of the prettiest spring dresses and wanted to share
               some of...
             </p>
-            <Link to="/about" className="font-serif text-2xl">
+            <Link to="/about" className="font-serif text-2xl hover:text-blue-800">
               Read more →{" "}
             </Link>
           </div>

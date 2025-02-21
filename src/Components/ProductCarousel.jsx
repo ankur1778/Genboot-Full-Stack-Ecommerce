@@ -15,7 +15,7 @@ const ProductCarousel = ({ products }) => {
     >
       <div className="hs-carousel w-full overflow-hidden bg-white rounded-lg">
         <div className="min-h-72 -mx-1">
-          <div className="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap opacity-100 transition-transform duration-700">
+          <div className="hs-carousel-body grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 opacity-100 transition-transform duration-700">
             {products && products.length > 0 ? (
               products.map((product) => (
                 <div key={product._id} className="hs-carousel-slide px-1">
@@ -46,17 +46,6 @@ const ProductCarousel = ({ products }) => {
           </div>
         </div>
       </div>
-      <button
-        type="button"
-        className="hs-carousel-prev hs-carousel-disabled:opacity-50 hs-carousel-disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 focus:outline-none focus:bg-gray-800/10 rounded-s-lg dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
-      >
-      </button>
-      <button
-        type="button"
-        className="hs-carousel-next hs-carousel-disabled:opacity-50 hs-carousel-disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-[46px] h-full text-gray-800 hover:bg-gray-800/10 focus:outline-none focus:bg-gray-800/10 rounded-e-lg dark:text-white dark:hover:bg-white/10 dark:focus:bg-white/10"
-      >
-      </button>
-      <div className="hs-carousel-pagination flex justify-center absolute bottom-3 start-0 end-0 space-x-2"></div>
     </div>
   );
 };

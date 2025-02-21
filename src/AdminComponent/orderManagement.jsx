@@ -47,8 +47,8 @@ const OrderManagement = () => {
   };
 
   return (
-    <div className="bg-gray-50 min-h-screen py-10 px-4 md:px-16">
-      <div className="bg-white flex justify-between items-center shadow-xl rounded-lg p-6 mb-6 border border-gray-200">
+    <div className="bg-gray-300 min-h-screen py-10 px-4 md:px-16">
+      <div className="bg-white flex justify-between items-center shadow-lg rounded-lg p-6 mb-6 ">
         <div className="flex items-center">
           <img
             className="h-14 w-14"
@@ -61,8 +61,8 @@ const OrderManagement = () => {
         </div>
       </div>
 
-      <div className="bg-white shadow-xl rounded-lg p-6 border border-gray-200">
-        <div className="overflow-x-auto">
+      <div className="bg-white shadow-lg rounded-lg p-6 border border-gray-200">
+        <div className="overflow-x-auto shadow-lg rounded-md">
           <table className="w-full text-sm text-gray-700">
             <thead className="bg-gray-300 text-gray-800 uppercase">
               <tr>

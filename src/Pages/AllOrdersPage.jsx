@@ -23,6 +23,8 @@ const AllOrdersPage = () => {
       dispatch(orderCancellation(cancelOrderId)).catch(() => {
         setShowToast(OrderMessage.NOT_FOUND);
       });
+    dispatch(getUserOrder());
+      setOpenCancelOrderModal(false);
     }
   };
   const handleOpenCancelOrderModal = (orderId) => {

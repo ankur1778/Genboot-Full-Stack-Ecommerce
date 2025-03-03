@@ -54,11 +54,11 @@ const ProductManagement = () => {
   const cellClass = "px-3 py-4 text-sm";
 
   return (
-    <div className="bg-gray-50 min-h-screen py-10 px-4 md:px-16">
-      <div className="bg-white flex flex-col md:flex-row justify-between my-4 shadow-md items-center rounded-md p-4">
+    <div className="bg-gray-300 min-h-screen py-10 px-4 md:px-16">
+      <div className="bg-white flex flex-col md:flex-row justify-between my-4 shadow-lg items-center rounded-md p-4">
         <div className="flex items-center">
           <img className="h-16 w-16 md:h-20 md:w-20" src={image} alt="" />
-          <h4 className="font-semibold text-xl md:text-3xl ml-4">
+          <h4 className="font-semibold text-xl md:text-3xl">
             Products Management
           </h4>
         </div>
@@ -67,7 +67,7 @@ const ProductManagement = () => {
         </div>
       </div>
 
-      <div className="border-2 border-gray-200 shadow-md rounded-md p-4 md:p-6 bg-white">
+      <div className=" shadow-lg rounded-md p-4 md:p-6 bg-white">
         <input
           type="text"
           onChange={searchHandler}
@@ -75,7 +75,7 @@ const ProductManagement = () => {
           className="w-full border-2 h-10 md:h-12 rounded-lg px-2 mb-3"
         />
 
-        <div className="relative overflow-x-auto">
+        <div className="relative overflow-x-auto shadow-lg rounded-md">
           <table className="w-full text-sm text-left text-gray-500">
             <thead className="bg-gray-300 text-gray-800 uppercase">
               <tr>
@@ -112,7 +112,7 @@ const ProductManagement = () => {
                       );
                     })}
                     <td className={cellClass}>
-                      <button onClick={() => handleOpenEditModal(product)}>
+                      <button className="bg-blue-500 p-2 shadow-md hover:bg-blue-600 rounded-md" onClick={() => handleOpenEditModal(product)}>
                         <img src={EditImage} alt="Edit" />
                       </button>
                     </td>

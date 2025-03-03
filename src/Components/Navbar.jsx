@@ -107,10 +107,10 @@ const Navbar = () => {
               </li>
               <li
                 className="flex items-center px-5 py-2.5 cursor-pointer hover:bg-gray-100"
-                // onClick={handleLogout}
               >
                 <LogoutIcon className="w-4 h-4 mr-2" />
-                Logout
+                <Link to='/logout'>Logout</Link>
+                
               </li>
             </ul>
           )}

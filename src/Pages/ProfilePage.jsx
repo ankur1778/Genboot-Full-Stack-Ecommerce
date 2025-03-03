@@ -91,17 +91,6 @@ const ProfilePage = () => {
                 </div>
 
                 <div className="mb-4 md:flex md:justify-between">
-                  <div className="mb-4 md:mr-2 md:mb-0">
-                    <label className="block mb-2 text-lg font-serif font-bold text-gray-700 dark:text-white">
-                      Password
-                    </label>
-                    <input
-                      className="w-full px-3 py-2 mb-3 text-sm leading-tight text-gray-700 dark:text-white border rounded shadow appearance-none focus:outline-none focus:shadow-outline"
-                      type="text"
-                      placeholder="Password"
-                      value={user.password || ''}
-                    />
-                  </div>
                   <div className="md:ml-2">
                     <label className="block mb-2 text-lg font-serif font-bold text-gray-700 dark:text-white">
                       Phone Number

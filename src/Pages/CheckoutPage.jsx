@@ -5,7 +5,7 @@ import { getUserCart } from "../Redux/Actions/CartAction/getCartAction";
 import * as Yup from "yup";
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { PostOrder } from "../Redux/Actions/OrderActions/postOrderAction";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MotionPath from "../Components/loader";
 import ToastMessage from "../utils/ToastMessage";
 import { OrderMessage, ProductMessages } from "../utils/statusMessages";
@@ -307,7 +307,8 @@ const CheckoutPage = () => {
                   disabled={isSubmitting}
                   className="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 rounded-md"
                 >
-                  Post Order
+                  <Link to="/payment-method">Choose Payment Option</Link>
+                  
                 </button>
               </Form>
             )}

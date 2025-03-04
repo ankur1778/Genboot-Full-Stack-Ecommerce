@@ -29,31 +29,37 @@ const SingleProductPage = () => {
   return (
     <>
       <Navbar />
-      <div className="bg-gray-100 dark:bg-gray-800 py-8 mt-8">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row -mx-4">
-            <div className="md:flex-1 px-4">
+      <div className="w-screen h-screen bg-gradient-to-r from-purple-200 to-blue-100 items-center ">
+        <div className=" justify-center items-center flex ">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 bg-white rounded-lg shadow-xl border border-gray-200 w-full max-w-4xl">
+            <div className="flex flex-col items-center">
               {isLoading ? (
                 <div className="flex justify-center">
                   <MotionPath />
                 </div>
               ) : isError ? (
-                <div style={{ color: "red" }}>Error loading product details.</div>
+                <div style={{ color: "red" }}>
+                  Error loading product details.
+                </div>
               ) : (
                 products && (
                   <div className=" rounded-lg bg-gray-300 dark:bg-gray-700 mb-4">
                     <img
-                      className="w-full h-80 p-2"
+                      className="lg:w-[400px] border-2 p-2 lg:h-[400px] w-[300px] h-[300px] rounded-lg"
                       src={products?.image}
                       alt={products?.name}
                     />
+                    <p className="text-gray-800 mt-4 text-center">
+                      <span className="font-semibold ">Product Id:</span>{" "}
+                      {products?.id}
+                    </p>
                   </div>
                 )
               )}
             </div>
             <div className="md:flex-1 px-4">
               {isLoading || isError ? (
-                <div></div> 
+                <div></div>
               ) : (
                 products && (
                   <>
@@ -63,14 +69,15 @@ const SingleProductPage = () => {
                     <div className="flex mb-4">
                       <div className="mr-4">
                         <span className="font-bold text-gray-700 dark:text-gray-300">
-                          Price:   ₹{products?.price} 
+                          Price: ₹{products?.price}
                         </span>
                       </div>
-                      
                     </div>
                     <div className="mr-4">
-                        <span className="font-bold text-gray-700 dark:text-gray-300">Category:  {products?.category?.name}</span>
-                      </div>
+                      <span className="font-bold text-gray-700 dark:text-gray-300">
+                        Category: {products?.category?.name}
+                      </span>
+                    </div>
                     <div className="mb-4 mr-4 mt-4">
                       <span className="font-bold text-gray-700 dark:text-gray-300">
                         Select Color:
@@ -86,7 +93,7 @@ const SingleProductPage = () => {
                       </p>
                     </div>
                     <div className="mt-6">
-                      <AddToCartButton productId={products?._id} />
+                      <AddToCartButton productId={products} />
                     </div>
                   </>
                 )

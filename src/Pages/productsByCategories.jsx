@@ -42,11 +42,10 @@ const ProductsByCategories = () => {
     },
   ];
 
-
   return (
     <>
       <Navbar />
-      <CustomCarousel slides={slides}/>
+      <CustomCarousel slides={slides} />
       {isLoading ? (
         <div>
           <MotionPath />
@@ -86,7 +85,7 @@ const ProductsByCategories = () => {
                     </div>
                   </Link>
                   <div className="mt-6 flex justify-between items-center">
-                    <AddToCartButton productId={product} />
+                  <AddToCartButton productId={product} />
                     <div>
                       <AddToWishlistButton product={product} />
                     </div>

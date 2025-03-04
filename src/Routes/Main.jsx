@@ -6,7 +6,7 @@ import Registration from "../Pages/Registration";
 import AllProducts from "../Pages/AllProducts";
 import About from "../Pages/About";
 import ProductsByCategories from "../Pages/productsByCategories";
-import { PrivateRoute } from "./PrivateRoute";
+import { AdminRoute, PrivateRoute } from "./PrivateRoute";
 import AdminDashboard from "../AdminComponent/AdminDashboard";
 import Cart from "../Pages/Cart";
 import SingleProductPage from "../Pages/SingleProductPage";
@@ -25,7 +25,7 @@ const Main = () => {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Registration />} />
-          <Route path="/logout" element={<Logout/>}/>
+          <Route path="/logout" element={<Logout />} />
           <Route path="/" element={<PrivateRoute Component={Home} />} />
           <Route
             path="/all-products"
@@ -39,7 +39,7 @@ const Main = () => {
           />
           <Route
             path="/admin-dashboard"
-            element={<PrivateRoute Component={AdminDashboard} />}
+            element={<AdminRoute Component={AdminDashboard} />}
           />
           <Route
             path="/product/:productId"
@@ -57,9 +57,18 @@ const Main = () => {
             path="/wishlists"
             element={<PrivateRoute Component={Wishlists} />}
           />
-          <Route path="/profile" element={<PrivateRoute Component={ProfilePage}/>}/>
-          <Route path="/payment-method" element={<PrivateRoute Component={Payment}/>}/>
-          <Route path="/payment-success" element={<PrivateRoute Component={PaymentsSuccess}/>}/>
+          <Route
+            path="/profile"
+            element={<PrivateRoute Component={ProfilePage} />}
+          />
+          <Route
+            path="/payment-method"
+            element={<PrivateRoute Component={Payment} />}
+          />
+          <Route
+            path="/payment-success"
+            element={<PrivateRoute Component={PaymentsSuccess} />}
+          />
         </Routes>
       </BrowserRouter>
     </div>

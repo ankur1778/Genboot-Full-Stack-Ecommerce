@@ -73,7 +73,10 @@ const Home = () => {
                     src={category?.image}
                     alt={category?.name}
                     className="h-40 rounded-2xl shadow-xl cursor-pointer w-full object-cover"
-                  />
+                  /> 
+                  <h1 className="flex justify-center font-semibold text-sm font-serif uppercase italic p-2">
+                    {category?.name}
+                  </h1>
                 </div>
               </Link>
             </div>
@@ -156,7 +159,10 @@ const Home = () => {
               Shoes matter in making a first impression to the strangers we have
               to meet everyday....
             </p>
-            <Link to="/about" className="font-serif text-2xl hover:text-blue-800">
+            <Link
+              to="/about"
+              className="font-serif text-2xl hover:text-blue-800"
+            >
               Read more →{" "}
             </Link>
           </div>
@@ -173,7 +179,10 @@ const Home = () => {
               Challange- our Fashion weekend 2021 at the historuc Zofin Palace
               in Pargue...
             </p>
-            <Link to="/about" className="font-serif text-2xl hover:text-blue-800">
+            <Link
+              to="/about"
+              className="font-serif text-2xl hover:text-blue-800"
+            >
               Read more →{" "}
             </Link>
           </div>
@@ -190,7 +199,10 @@ const Home = () => {
               ordered some of the prettiest spring dresses and wanted to share
               some of...
             </p>
-            <Link to="/about" className="font-serif text-2xl hover:text-blue-800">
+            <Link
+              to="/about"
+              className="font-serif text-2xl hover:text-blue-800"
+            >
               Read more →{" "}
             </Link>
           </div>

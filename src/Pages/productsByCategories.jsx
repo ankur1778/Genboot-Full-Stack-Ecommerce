@@ -67,7 +67,7 @@ const ProductsByCategories = () => {
                   key={product.id}
                   className="bg-white shadow-md rounded-lg px-10 py-10"
                 >
-                  <Link to={`/product/${product.id}`}>
+                  <Link to={`/product/${product._id}`}>
                     <div className="flex justify-center">
                       <img
                         src={product.image}

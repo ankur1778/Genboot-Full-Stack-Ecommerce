@@ -199,17 +199,19 @@ const Registration = () => {
     phNo: Yup.string().matches(/^[0-9]{10}$/, "Phone number must be 10 digits"),
     email: Yup.string().email("Invalid email address"),
     password: Yup.string().matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#/$%/^&/*])(?=.{8,})/,
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+      /^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/,
+      "Must Contain 8 Characters"
     ),
   });
 
-  const handleRegisteration = async (values, { setFieldError }) => {
+  const handleRegisteration = async (values) => {
     const result = await dispatch(RegisterUser(values));
+    console.log(values);
 
     if (result.success) {
       setToast({ message: AuthMessages.REGISTERED, type: "success" });
       navigate("/login");
+      
     } else {
       setToast({ message: AuthMessages.INVALID, type: "error" });
     }

@@ -14,7 +14,7 @@ const ProductCarousel = ({ products }) => {
       className="relative mt-10"
     >
       <div className="hs-carousel w-full overflow-hidden bg-white rounded-lg">
-        <div className="min-h-72 -mx-1">
+        <div className="h-96 -mx-1">
           <div className="hs-carousel-body grid sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 opacity-100 transition-transform duration-700">
             {products && products.length > 0 ? (
               products.map((product) => (

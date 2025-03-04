@@ -1,30 +1,12 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Navbar from "../Components/Navbar";
 import TeamMember from "../Images/team-2.jpg";
 import TeamMember1 from "../Images/team-3.jpg";
 import TeamMember2 from "../Images/team-4.jpg";
-import logo from "../Images/logo1.png";
-import PaymentMethod from "../Images/paymentfeature.png";
-import UseAnimationFrame from "../Animations/AnimationAbout";
 import HangoutImage from "../Images/hangouts-messenger-svgrepo-com.svg";
-import { useDispatch, useSelector } from "react-redux";
-import { getAllCategories } from "../Redux/Actions/CategoriesAction/categoryAction";
-import ToastMessage from "../utils/ToastMessage";
-import { CategoriesMessages } from "../utils/statusMessages";
-import MotionPath from "../Components/loader";
-import { Link } from "react-router-dom";
+import Footer from "../Components/Footer";
 
 const About = () => {
-  const dispatch = useDispatch();
-  const { loading, error, categories } = useSelector(
-    (state) => state.allCategories
-  );
-  useEffect(() => {
-    dispatch(getAllCategories());
-  }, [dispatch]);
-  if (error) {
-    return <ToastMessage message={CategoriesMessages.CANT_FETCH} />;
-  }
   return (
     <div>
       <Navbar />
@@ -123,41 +105,7 @@ const About = () => {
           (Developer)
         </h3>
       </div>
-      <div className="grid grid-cols-3 my-8  bg-slate-400">
-        <div className="px-24">
-          <img className="h-[150px] " src={logo} alt="Load" />
-          <h3 className=" items-center text-justify text-lg font-serif ">
-            The customer is at the heart of our unique business model, which
-            includes design.
-          </h3>
-          <img className="my-8" src={PaymentMethod} alt="load" />
-        </div>
-        <div className="my-8 px-28">
-          <h1 className="text-2xl font-semibold font-serif">Shopping</h1>
-          {loading ? (
-            <MotionPath />
-          ) : categories ? (
-            categories.map((category) => (
-              <div key={category?._id}>
-                <Link to={`/category/${category._id}`}>
-                  <div>
-                    <p className="text-lg font-serif py-2 hover:text-red-700 hover:scale-105">
-                      {category?.name}
-                    </p>
-                  </div>
-                </Link>
-              </div>
-            ))
-          ) : (
-            <div className="h-20 items-center flex justify-center">
-              <MotionPath />
-            </div>
-          )}
-        </div>
-        <div className="flex justify-center items-center mt-24">
-          <UseAnimationFrame />
-        </div>
-      </div>
+      <Footer />
     </div>
   );
 };

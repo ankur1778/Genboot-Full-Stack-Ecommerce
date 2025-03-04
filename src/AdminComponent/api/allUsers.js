@@ -20,3 +20,9 @@ export const deleteUser = (userId) =>
   sendRequest(`${BASE_PATH}/users/delete/${userId}`, {
     method: "DELETE",
   });
+
+export const disableUser = (userId, disabled) =>
+  sendRequest(`${BASE_PATH}/users/update/${userId}`, {
+    method: "PUT",
+    body: JSON.stringify({disabled}),
+  });

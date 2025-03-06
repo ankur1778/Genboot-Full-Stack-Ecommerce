@@ -44,7 +44,13 @@ const UserManagement = () => {
     return <ToastMessage message={AdminMessage.CANT_FETCH_USERS} />;
   }
 
-  const fields = ["name", "email", "phNo", "disabled"];
+  // const fields = ["name", "email", "phNo", "disabled"];
+  const fieldArray = [
+    { id: 1, fieldName: "name", heading: "User Name" },
+    { id: 2, fieldName: "email", heading: "Email" },
+    { id: 3, fieldName: "phNo", heading: "Phone No" },
+    { id: 4, fieldName: "disabled", heading: "Disabled" },
+  ];
   const cellClass = "px-3 py-4 text-sm";
 
   const handleOpenEditModal = (user) => {
@@ -65,9 +71,7 @@ const UserManagement = () => {
       <div className="bg-white flex flex-col md:flex-row justify-between my-4 shadow-lg items-center rounded-md p-4">
         <div className="flex items-center">
           <img className="h-16 w-16 md:h-20 md:w-20" src={image} alt="Users" />
-          <h4 className="font-semibold text-xl md:text-3xl">
-            User Management
-          </h4>
+          <h4 className="font-semibold text-xl md:text-3xl">User Management</h4>
         </div>
         <div>
           <button
@@ -91,14 +95,18 @@ const UserManagement = () => {
           <table className="w-full text-sm text-left text-gray-500">
             <thead className="text-sm text-gray-700 uppercase bg-gray-300">
               <tr>
-                {fields.map((field, index) => (
+                {fieldArray.map((hd) => (
                   <th
-                    key={index}
-                    className="px-3 py-3 cursor-pointer"
-                    onClick={() => handleSort(field)}
+                    key={hd.id}
+                    className={`${cellClass} cursor-pointer`}
+                    onClick={() => handleSort(hd.fieldName)}
                   >
-                    {field.split(".")[0]}{" "}
-                    {sort === field ? (sortOrder === "asc" ? "🔼" : "🔽") : ""}
+                    {hd.heading}{" "}
+                    {sort === hd.fieldName
+                      ? sortOrder === "asc"
+                        ? "🔼"
+                        : "🔽"
+                      : ""}
                   </th>
                 ))}
                 <th className={cellClass}>ACTION</th>
@@ -106,29 +114,28 @@ const UserManagement = () => {
             </thead>
             <tbody>
               {isLoading ? (
-                <tr>
-                  <td colSpan={fields.length + 1} className="text-center py-4">
-                    <MotionPath />
-                  </td>
-                </tr>
+                <MotionPath />
               ) : (
                 users?.map((user) => (
                   <tr
                     key={user._id}
                     className="hover:bg-gray-100 transition border-b"
                   >
-                    {fields.map((field, index) => {
-                      const value = field
+                    {fieldArray.map((el) => {
+                      const value = el.fieldName
                         .split(".")
                         .reduce((a, key) => a?.[key], user);
                       return (
-                        <td key={index} className={cellClass}>
+                        <td key={el.id} className={cellClass}>
                           {value !== undefined ? String(value) : "N/A"}
                         </td>
                       );
                     })}
                     <td className={cellClass}>
-                      <button className="bg-blue-500 p-2 shadow-md hover:bg-blue-600 rounded-md" onClick={() => handleOpenEditModal(user)}>
+                      <button
+                        className="bg-blue-500 p-2 shadow-md hover:bg-blue-600 rounded-md"
+                        onClick={() => handleOpenEditModal(user)}
+                      >
                         <img src={EditImage} alt="Edit" />
                       </button>
                     </td>

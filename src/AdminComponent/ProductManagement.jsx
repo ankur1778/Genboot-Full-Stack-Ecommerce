@@ -16,6 +16,7 @@ const ProductManagement = () => {
   const { products, totalProducts, isError, isLoading } = useSelector(
     (state) => state.getAllProducts
   );
+
   const [search, setSearch] = useState("");
   const [isAddProductModalOpen, setAddProductModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -54,13 +55,19 @@ const ProductManagement = () => {
     dispatch(
       GetAllProducts(itemsPerPage, currentPage, search, `${sort}:${sortOrder}`)
     );
-  }, [dispatch, currentPage, search, sort, sortOrder]);
+  }, [dispatch, itemsPerPage, currentPage, search, sort, sortOrder]);
 
   if (isError) {
     return <ToastMessage message={ProductMessages.NOT_FETCH} />;
   }
 
-  const fields = ["name", "category.name", "price", "countInStock"];
+  const fieldArray = [
+    { id: 1, fieldName: "name", heading: "Product Name" },
+    { id: 2, fieldName: "category.name", heading: "Category" },
+    { id: 3, fieldName: "price", heading: "Price" },
+    { id: 4, fieldName: "countInStock", heading: "Count In Stock" },
+  ];
+
   const cellClass = "px-3 py-4 text-sm";
 
   return (
@@ -92,14 +99,14 @@ const ProductManagement = () => {
           <table className="w-full text-sm text-left text-gray-500">
             <thead className="bg-gray-300 text-gray-800 uppercase">
               <tr>
-                {fields.map((field, index) => (
+                {fieldArray.map((hd) => (
                   <th
-                    key={index}
-                    className="px-3 py-3 cursor-pointer"
-                    onClick={() => handleSort(field)}
+                    key={hd.id}
+                    className={`${cellClass} cursor-pointer`}
+                    onClick={() => handleSort(hd.fieldName)}
                   >
-                    {field.split(".")[0]}
-                    {sort === field ? (sortOrder === "asc" ? "🔼" : "🔽") : ""}
+                    {hd.heading}
+                    {sort === hd.fieldName ? (sortOrder === "asc" ? " 🔼" : " 🔽") : ""}
                   </th>
                 ))}
                 <th className={cellClass}>ACTION</th>
@@ -111,10 +118,14 @@ const ProductManagement = () => {
               ) : (
                 products?.map((product) => (
                   <tr key={product._id} className="border-b hover:bg-gray-100 transition">
-                    {fields.map((field, index) => {
-                      const value = field.split(".").reduce((a, key) => a?.[key], product);
+                    {fieldArray.map((el) => {
+                      const value = el.fieldName
+                        .split(".")
+                        .reduce((a, key) => (a ? a[key] : ""), product);
                       return (
-                        <td key={index} className={cellClass}>{value}</td>
+                        <td key={el.id} className={cellClass}>
+                          {value}
+                        </td>
                       );
                     })}
                     <td className={cellClass}>
@@ -131,18 +142,18 @@ const ProductManagement = () => {
             </tbody>
           </table>
         </div>
+
         <Pagination
           totalItems={totalProducts}
           itemsPerPage={itemsPerPage}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
         />
+
         {selectedProduct && (
           <EditProductModal product={selectedProduct} onClose={handleCloseModal} />
         )}
-        {isAddProductModalOpen && (
-          <AddProductModal onClose={handleCloseModal} />
-        )}
+        {isAddProductModalOpen && <AddProductModal onClose={handleCloseModal} />}
       </div>
     </div>
   );

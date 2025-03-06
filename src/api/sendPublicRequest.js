@@ -72,3 +72,49 @@ export async function sendRequest(path, opts = {}) {
     return false;
   }
 }
+
+export async function sendFormDataRequest(path, opts = {}) {
+  const token = Cookies.get("token");
+
+  if (!token) {
+    throw new Error(<ToastMessage message={TokenMessages.NOT_FOUND} />);
+  }
+
+  let decodedToken;
+  try {
+    decodedToken = jwtdecode(token);
+  } catch (error) {
+    <ToastMessage message={TokenMessages.INVALID} />;
+    return false;
+  }
+
+  const roleId = decodedToken?.roleId;
+  if (!roleId) {
+    <ToastMessage message={RoleMessages.MISSING} />;
+    return false;
+  }
+
+  const headers = {
+    Authorization: `Bearer ${token}`,
+    ...opts.headers,
+  };
+
+  try {
+    const response = await fetch(`${getRootUrl()}${path}`, {
+      method: opts.method || "POST",
+      body: opts.body,
+      headers,
+      credentials: "same-origin",
+    });
+
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Request failed: ${response.status} - ${errorMessage}`);
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    return false;
+  }
+}

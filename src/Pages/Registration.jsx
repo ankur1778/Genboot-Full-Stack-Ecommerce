@@ -27,8 +27,6 @@ const Registration = () => {
 
   const handleRegisteration = async (values) => {
     const result = await dispatch(RegisterUser(values));
-    console.log(values);
-
     if (result.success) {
       setToast({ message: AuthMessages.REGISTERED, type: "success" });
       navigate("/login");

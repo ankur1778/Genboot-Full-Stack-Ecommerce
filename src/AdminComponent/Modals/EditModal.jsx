@@ -78,17 +78,25 @@ function EditUserModal({ user, onClose }) {
             className="mt-1 block w-full border border-gray-300 rounded-md p-2"
           />
         </div>
-
-        <div className="mt-4">
-          <label className="block font-semibold">Disable User:</label>
-          <select
-            className="w-full border-2 rounded-lg px-2 py-1"
-            value={disabled}
-            onChange={(e) => setDisabled(e.target.value )}
-          >
-            <option value="true">true</option>
-            <option value="false">false</option>
-          </select>
+        <div className="flex items-center justify-between mt-4">
+          <span className="text-sm font-medium text-gray-700">
+            Disable User:
+          </span>
+          <label className="relative inline-flex items-center cursor-pointer">
+            <input
+              type="checkbox"
+              checked={disabled}
+              onChange={() => setDisabled(!disabled)}
+              className="sr-only peer"
+            />
+            <div className="w-10 h-4 bg-gray-300 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-blue-300 rounded-full peer peer-checked:bg-blue-600 transition-colors duration-300">
+              <div
+                className={`w-5 h-4 bg-white rounded-full shadow-sm transform transition-transform duration-300 ${
+                  disabled ? "translate-x-6" : "translate-x-1"
+                }`}
+              ></div>
+            </div>
+          </label>
         </div>
 
         <div className="flex justify-end mt-4">

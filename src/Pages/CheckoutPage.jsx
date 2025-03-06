@@ -66,7 +66,7 @@ const CheckoutPage = () => {
       const order = await dispatch(PostOrder(orderData));
       if (order?.success) {
         setToast({ message: OrderMessage.PLACED, type: "success" });
-        navigate("/your-orders");
+        navigate("/payment-method");
       }
     } catch (error) {
       setToast({ message: OrderMessage.NOT_PLACED, type: "error" });

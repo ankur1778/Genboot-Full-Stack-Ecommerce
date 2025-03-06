@@ -10,10 +10,12 @@ function EditUserModal({ user, onClose }) {
   const [userName, setUserName] = useState(user?.name || "");
   const [phNo, setPhNo] = useState(user?.phNo || "");
   const [email, setEmail] = useState(user?.email || "");
+  const [disabled, setDisabled] = useState(user?.disabled);
 
   const handleSave = async () => {
-    const updatedUser = { name: userName, phNo, email };
+    const updatedUser = { name: userName, phNo, email, disabled };
     const success = await dispatch(updateUserDetails(user._id, updatedUser));
+
     if (success) {
       await dispatch(UserAction(10, 1, "", "name:asc"));
       onClose();
@@ -75,6 +77,18 @@ function EditUserModal({ user, onClose }) {
             placeholder="Edit Email Id"
             className="mt-1 block w-full border border-gray-300 rounded-md p-2"
           />
+        </div>
+
+        <div className="mt-4">
+          <label className="block font-semibold">Disable User:</label>
+          <select
+            className="w-full border-2 rounded-lg px-2 py-1"
+            value={disabled}
+            onChange={(e) => setDisabled(e.target.value )}
+          >
+            <option value="true">true</option>
+            <option value="false">false</option>
+          </select>
         </div>
 
         <div className="flex justify-end mt-4">

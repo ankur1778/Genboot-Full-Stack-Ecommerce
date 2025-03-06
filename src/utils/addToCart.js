@@ -11,7 +11,7 @@ const AddToCartButton = ({ productId }) => {
   const [toast, setToast] = useState({ message: "", type: "" });
 
   const handleAddToCart = () => {
-    dispatch(addItemToCart(productId));
+    dispatch(addItemToCart(productId));   
     setIsAdded(true);
     setIsAdded(true);
     setToast({ message: CartMessages.ADDED, type: "success" });

@@ -42,11 +42,10 @@ const ProductsByCategories = () => {
     },
   ];
 
-
   return (
     <>
       <Navbar />
-      <CustomCarousel slides={slides}/>
+      <CustomCarousel slides={slides} />
       {isLoading ? (
         <div>
           <MotionPath />
@@ -67,7 +66,7 @@ const ProductsByCategories = () => {
                   key={product.id}
                   className="bg-white shadow-md rounded-lg px-10 py-10"
                 >
-                  <Link to={`/product/${product.id}`}>
+                  <Link to={`/product/${product._id}`}>
                     <div className="flex justify-center">
                       <img
                         src={product.image}
@@ -86,7 +85,7 @@ const ProductsByCategories = () => {
                     </div>
                   </Link>
                   <div className="mt-6 flex justify-between items-center">
-                    <AddToCartButton productId={product} />
+                  <AddToCartButton productId={product} />
                     <div>
                       <AddToWishlistButton product={product} />
                     </div>

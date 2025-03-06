@@ -71,7 +71,7 @@ const Wishlists = () => {
                           className="w-4 fill-current inline cursor-pointer"
                           src={remove}
                           alt=""
-                          onClick={handleRemoveItem}
+                          onClick={()=>handleRemoveItem(product )}
                         />
                         Remove
                       </div>

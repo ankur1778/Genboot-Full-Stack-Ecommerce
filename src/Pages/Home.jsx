@@ -10,13 +10,11 @@ import { CategoriesMessages } from "../utils/statusMessages";
 import { GetAllProducts } from "../AdminComponent/Redux/ActionsAdmin/Allproducts/productAction";
 import CustomCarousel from "../Components/Carousel";
 import ProductCarousel from "../Components/ProductCarousel";
-import UseAnimationFrame from "../Animations/AnimationAbout";
-import logo from "../Images/logo1.png";
-import PaymentMethod from "../Images/paymentfeature.png";
 import Image from "../Images/CategoryImage1.png";
 import Image2 from "../Images/CategoryImage2.png";
 import Image3 from "../Images/CategoryImage3.png";
 import Image4 from "../Images/CategoryImage4.png";
+import Footer from "../Components/Footer";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -75,7 +73,10 @@ const Home = () => {
                     src={category?.image}
                     alt={category?.name}
                     className="h-40 rounded-2xl shadow-xl cursor-pointer w-full object-cover"
-                  />
+                  /> 
+                  <h1 className="flex justify-center font-semibold text-sm font-serif uppercase italic p-2">
+                    {category?.name}
+                  </h1>
                 </div>
               </Link>
             </div>
@@ -158,7 +159,10 @@ const Home = () => {
               Shoes matter in making a first impression to the strangers we have
               to meet everyday....
             </p>
-            <Link to="/about" className="font-serif text-2xl hover:text-blue-800">
+            <Link
+              to="/about"
+              className="font-serif text-2xl hover:text-blue-800"
+            >
               Read more →{" "}
             </Link>
           </div>
@@ -175,7 +179,10 @@ const Home = () => {
               Challange- our Fashion weekend 2021 at the historuc Zofin Palace
               in Pargue...
             </p>
-            <Link to="/about" className="font-serif text-2xl hover:text-blue-800">
+            <Link
+              to="/about"
+              className="font-serif text-2xl hover:text-blue-800"
+            >
               Read more →{" "}
             </Link>
           </div>
@@ -192,47 +199,16 @@ const Home = () => {
               ordered some of the prettiest spring dresses and wanted to share
               some of...
             </p>
-            <Link to="/about" className="font-serif text-2xl hover:text-blue-800">
+            <Link
+              to="/about"
+              className="font-serif text-2xl hover:text-blue-800"
+            >
               Read more →{" "}
             </Link>
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-3 my-8  bg-slate-400 rounded-lg">
-        <div className="px-24">
-          <img className="h-[150px] " src={logo} alt="Load" />
-          <h3 className=" items-center text-justify text-lg font-serif ">
-            The customer is at the heart of our unique business model, which
-            includes design.
-          </h3>
-          <img className="my-8" src={PaymentMethod} alt="load" />
-        </div>
-        <div className="my-8 px-28">
-          <h1 className="text-2xl font-semibold font-serif">Shopping</h1>
-          {loading ? (
-            <MotionPath />
-          ) : categories ? (
-            categories.map((category) => (
-              <div key={category?._id}>
-                <Link to={`/category/${category._id}`}>
-                  <div>
-                    <p className="text-lg font-serif py-2 hover:text-red-700 hover:scale-105">
-                      {category?.name}
-                    </p>
-                  </div>
-                </Link>
-              </div>
-            ))
-          ) : (
-            <div className="h-20 items-center flex justify-center">
-              <MotionPath />
-            </div>
-          )}
-        </div>
-        <div className="flex justify-center items-center mt-24">
-          <UseAnimationFrame />
-        </div>
-      </div>
+      <Footer />
     </>
   );
 };

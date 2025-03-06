@@ -19,6 +19,8 @@ export const RoleMessages = {
 export const ProductMessages = {
   NOT_FOUND: "Can't found the product",
   NOT_FETCH: "Can't fetch products",
+  ADDED: "Product Added Successfully",
+  FAILED: "Failed to add product",
 };
 
 export const WishListMessage = {

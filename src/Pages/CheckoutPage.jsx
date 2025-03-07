@@ -121,7 +121,7 @@ const CheckoutPage = () => {
                   </div>
 
                   <p className="text-gray-900 text-lg font-semibold">
-                    ₹{item.product.price}
+                    ₹{item?.product?.price.toFixed(2)}
                   </p>
                 </div>
               ))
